@@ -1,4 +1,4 @@
-package com.madhav.sportstrackr
+package com.madhav.sportstrackr.features
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.madhav.sportstrackr.ui.theme.SportsTrackrTheme
+import com.madhav.sportstrackr.core.theme.SportsTrackrTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

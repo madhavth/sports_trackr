@@ -1,4 +1,4 @@
-package com.madhav.sportstrackr.ui.theme
+package com.madhav.sportstrackr.core.theme
 
 import androidx.compose.ui.graphics.Color
 
