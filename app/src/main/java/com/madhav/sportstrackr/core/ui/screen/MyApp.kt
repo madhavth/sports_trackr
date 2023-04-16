@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.madhav.sportstrackr.core.constants.Constants
+import com.madhav.sportstrackr.features.splash.presentation.page.SplashScreen
 
 @Composable
 fun MyApp() {
@@ -20,7 +21,7 @@ fun MyApp() {
        }
 
         composable(Constants.ROUTE.SPLASH_SCREEN) {
-            Text("this is the splash screen")
+            SplashScreen()
         }
     }
 }
