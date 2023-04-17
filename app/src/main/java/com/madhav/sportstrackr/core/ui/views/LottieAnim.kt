@@ -10,14 +10,14 @@ import com.airbnb.lottie.compose.*
 import com.madhav.sportstrackr.R
 
 @Composable
-fun LottieAnim(@RawRes resId: Int, modifier: Modifier = Modifier) {
+fun LottieAnim(@RawRes resId: Int, modifier: Modifier = Modifier, iterations: Int = LottieConstants.IterateForever) {
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(resId)
     )
 
     val progress by animateLottieCompositionAsState(
         composition,
-        iterations = LottieConstants.IterateForever,
+        iterations = iterations,
         isPlaying = true,
         speed = 1f,
         restartOnPlay = false

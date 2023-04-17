@@ -12,6 +12,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.madhav.sportstrackr.R
 
 @Composable
 fun ErrorView(
@@ -28,11 +29,10 @@ fun ErrorView(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    message,
-                    style = errorMessageStyle,
-                    textAlign = TextAlign.Center
-                )
+                LottieAnim(resId = R.raw.something_went_wrong, iterations = 1,
+                modifier = Modifier.fillMaxWidth()
+                    .height(300.dp)
+                    )
                 Button(
                     onClick = onRetry,
                 ) {
