@@ -1,7 +1,10 @@
 package com.madhav.sportstrackr.core.ui.screen
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -17,7 +20,12 @@ fun MyApp() {
         startDestination = Constants.ROUTE.MAIN_SCREEN
     ) {
        composable(Constants.ROUTE.MAIN_SCREEN) {
-           MainScreen()
+           Scaffold(
+               backgroundColor = Color.White,
+           ) {
+               MainScreen(it)
+           }
+
        }
 
         composable(Constants.ROUTE.SPLASH_SCREEN) {

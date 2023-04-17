@@ -99,4 +99,9 @@ dependencies {
     // compose foundation
     implementation "androidx.compose.foundation:foundation:$compose_version"
 
+    // lottie animation
+    implementation "com.airbnb.android:lottie-compose:4.0.0"
+
+
+
 }
