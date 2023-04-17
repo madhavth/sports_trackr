@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.madhav.sportstrackr.R
+import kotlinx.coroutines.delay
 
 @Composable
 fun ErrorView(
@@ -30,14 +31,13 @@ fun ErrorView(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 LottieAnim(resId = R.raw.something_went_wrong, iterations = 1,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(300.dp)
                     )
-                Button(
-                    onClick = onRetry,
-                ) {
-                    Text("Retry")
-                }
+                MyButton(text = "Retry", onClick = {
+                    delay(3000)
+                })
             }
         }
 }

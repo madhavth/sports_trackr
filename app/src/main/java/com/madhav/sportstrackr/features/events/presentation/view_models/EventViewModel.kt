@@ -11,6 +11,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventViewModel @Inject constructor():ViewModel() {
-    private val _teamSportsEvent = MutableStateFlow<MyResponse<SportsEvents>>(MyResponse.Error("No Data"))
+    private val _teamSportsEvent = MutableStateFlow<MyResponse<SportsEvents>>(MyResponse.Loading)
     val teamSportsEvents = _teamSportsEvent.asStateFlow()
 }
