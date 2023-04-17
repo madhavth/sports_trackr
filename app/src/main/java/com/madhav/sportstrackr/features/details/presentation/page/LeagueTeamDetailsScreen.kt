@@ -16,7 +16,7 @@ import com.madhav.sportstrackr.features.details.presentation.views.SportsTeamSec
 import com.madhav.sportstrackr.features.details.presentation.views.TeamDescription
 
 @Composable
-fun LeagueTeamDetailsScreen(
+fun LeagueTeamDetailsLoadedScreen(
     team: LeagueTeam,
     isFavorite: Boolean,
     onFavoriteToggle: (Boolean) -> Unit
@@ -60,7 +60,7 @@ fun LeagueTeamDetailsScreen(
 @Preview(showSystemUi = true)
 @Composable
 fun LeagueTeamScreenPreview() {
-    LeagueTeamDetailsScreen(team = LeagueTeam(
+    LeagueTeamDetailsLoadedScreen(team = LeagueTeam(
         idTeam = "133604",
         idSoccerXML = "null",
         idAPIfootball = "null",

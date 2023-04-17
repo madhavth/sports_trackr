@@ -10,6 +10,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.madhav.sportstrackr.core.models.Screen
 import com.madhav.sportstrackr.core.ui.views.MyBottomNavigation
+import com.madhav.sportstrackr.features.details.presentation.page.DetailsScreen
+import com.madhav.sportstrackr.features.events.presentation.page.EventScreen
 import com.madhav.sportstrackr.features.events.presentation.page.PastFutureEventScreen
 import com.madhav.sportstrackr.features.profile.presentation.page.ProfileScreen
 import com.madhav.sportstrackr.features.search.presentation.page.SearchScreen
@@ -35,8 +37,8 @@ fun MainScreen() {
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 when (Screen.items[it]) {
-                    Screen.Details -> ProfileScreen()
-                    Screen.Events -> ProfileScreen()
+                    Screen.Details -> DetailsScreen()
+                    Screen.Events -> EventScreen()
                     Screen.Profile -> ProfileScreen()
                     Screen.Search -> SearchScreen()
                 }
