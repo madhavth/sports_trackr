@@ -1,6 +1,7 @@
 package com.madhav.sportstrackr.core.ui.screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
@@ -32,11 +33,13 @@ fun MainScreen() {
             state = pagerState,
             modifier = Modifier.weight(0.8f),
         ) {
-            when (Screen.items[it]) {
-                Screen.Details -> ProfileScreen()
-                Screen.Events -> ProfileScreen()
-                Screen.Profile -> ProfileScreen()
-                Screen.Search -> SearchScreen()
+            Box(modifier = Modifier.fillMaxSize()) {
+                when (Screen.items[it]) {
+                    Screen.Details -> ProfileScreen()
+                    Screen.Events -> ProfileScreen()
+                    Screen.Profile -> ProfileScreen()
+                    Screen.Search -> SearchScreen()
+                }
             }
         }
 

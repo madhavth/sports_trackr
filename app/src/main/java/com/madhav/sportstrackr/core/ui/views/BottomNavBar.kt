@@ -24,7 +24,7 @@ fun MyBottomNavigation(
     modifier: Modifier = Modifier
 ) {
     BottomNavigation(
-        modifier = modifier.fillMaxWidth().height(80.dp),
+        modifier = modifier.fillMaxWidth().height(70.dp),
         backgroundColor = MaterialTheme.colors.primary,
         contentColor = MaterialTheme.colors.onPrimary
     ) {
@@ -45,7 +45,9 @@ fun MyBottomNavigation(
                     },
                     selected = selectedIndex == index,
                     onClick = { onSelectedIndexChanged(index) },
-                    alwaysShowLabel = false
+                    alwaysShowLabel = false,
+                    selectedContentColor = MaterialTheme.colors.secondary,
+                    unselectedContentColor = MaterialTheme.colors.onPrimary
                 )
             }
         }
