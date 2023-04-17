@@ -12,13 +12,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.madhav.sportstrackr.core.models.TeamScore
 import com.madhav.sportstrackr.features.events.domain.entities.PastEvent
-import com.madhav.sportstrackr.features.events.domain.entities.UpCompingEvent
+import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 import com.madhav.sportstrackr.features.events.presentation.views.PastEventView
 import com.madhav.sportstrackr.features.events.presentation.views.UpcomingEventView
 
 @Composable
 fun PastFutureEventScreen(
-    upcomingEvents: List<UpCompingEvent>,
+    upcomingEvents: List<UpComingEvent>,
     pastEvents: List<PastEvent>,
     modifier: Modifier = Modifier
 ) {
@@ -64,36 +64,33 @@ fun PastFutureEventScreen(
 fun EventScreenPreview() {
     PastFutureEventScreen(
         listOf(
-            UpCompingEvent("1", "Chelsea", "Arsenal", "2021-05-05"),
-            UpCompingEvent("2", "Chelsea", "Arsenal", "2021-05-05"),
-            UpCompingEvent("3", "Chelsea", "Arsenal", "2021-05-05"),
-            UpCompingEvent("4", "Chelsea", "Arsenal", "2021-05-05"),
-            UpCompingEvent("5", "Chelsea", "Arsenal", "2021-05-05"),
+            UpComingEvent("1", "Chelsea", "Arsenal", "2021-05-05"),
+            UpComingEvent("2", "Chelsea", "Arsenal", "2021-05-05"),
+            UpComingEvent("3", "Chelsea", "Arsenal", "2021-05-05"),
+            UpComingEvent("4", "Chelsea", "Arsenal", "2021-05-05"),
+            UpComingEvent("5", "Chelsea", "Arsenal", "2021-05-05"),
         ),
         listOf(
             PastEvent(
                 "12345", "EPL", "2021-05-05",
-                homeScore = TeamScore("Chelsea", 12),
-                awayScore = TeamScore("Arsenal", 2),
+                homeScore = TeamScore("Chelsea", "12"),
+                awayScore = TeamScore("Arsenal", "2"),
                 time = "12:00"
             ),
 
             PastEvent(
                 "12345", "EPL", "2021-05-05",
-                homeScore = TeamScore("Chelsea", 12),
-                awayScore = TeamScore("Arsenal", 2),
+                homeScore = TeamScore("Chelsea", "12"),
+                awayScore = TeamScore("Arsenal", "2"),
                 time = "12:00"
             ),
 
             PastEvent(
                 "12345", "EPL", "2021-05-05",
-                homeScore = TeamScore("Chelsea", 12),
-                awayScore = TeamScore("Arsenal", 2),
+                homeScore = TeamScore("Chelsea", "12"),
+                awayScore = TeamScore("Arsenal", "2"),
                 time = "12:00"
             ),
-
             ),
-
-
         )
 }

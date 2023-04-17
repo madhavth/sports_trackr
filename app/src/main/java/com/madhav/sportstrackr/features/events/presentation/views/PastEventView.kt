@@ -41,7 +41,7 @@ fun PastEventView(event: PastEvent, modifier: Modifier = Modifier) {
                         style = MaterialTheme.typography.h6,
                     )
                     Text(
-                        text = event.homeScore.score.toString(),
+                        text = event.homeScore.score,
                         style = MaterialTheme.typography.h4,
                         fontWeight = FontWeight.Bold,
                     )
@@ -79,7 +79,7 @@ fun PastEventPreview() {
         name = "Test Event",
         date = "2021-01-01",
         time = "12:00",
-        homeScore = TeamScore("Home", 1),
-        awayScore = TeamScore("Away", 0)
+        homeScore = TeamScore("Home", "1"),
+        awayScore = TeamScore("Away", "0")
     ))
 }

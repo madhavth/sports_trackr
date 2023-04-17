@@ -1,6 +1,6 @@
 package com.madhav.sportstrackr.features.events.domain.entities
 
-data class UpCompingEvent(
+data class UpComingEvent(
     val id: String,
     val homeTeam: String,
     val awayTeam: String,

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.madhav.sportstrackr">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".core.app.MyApplication"
         android:allowBackup="true"

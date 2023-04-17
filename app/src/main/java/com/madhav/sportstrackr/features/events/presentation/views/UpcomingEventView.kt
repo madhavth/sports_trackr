@@ -1,6 +1,5 @@
 package com.madhav.sportstrackr.features.events.presentation.views
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,11 +13,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.madhav.sportstrackr.features.events.domain.entities.UpCompingEvent
+import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 
 @Composable
 fun UpcomingEventView(
-    upComingEvent: UpCompingEvent,
+    upComingEvent: UpComingEvent,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -64,7 +63,7 @@ fun UpcomingEventView(
 @Composable
 fun UpcomingEventPreview() {
     UpcomingEventView(
-        upComingEvent = UpCompingEvent(
+        upComingEvent = UpComingEvent(
             homeTeam = "Manchester United",
             awayTeam = "Liverpool",
             date = "2021-08-08",

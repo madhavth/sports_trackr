@@ -1,6 +1,9 @@
 package com.madhav.sportstrackr.core.di.modules
 
 import com.madhav.sportstrackr.core.di.qualifiers.BaseUrl
+import com.madhav.sportstrackr.features.events.data.repositories.EventRepositoryImpl
+import com.madhav.sportstrackr.features.events.data.services.EventAPI
+import com.madhav.sportstrackr.features.events.domain.repositories.EventRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +18,7 @@ class AppModule {
 
     @BaseUrl
     @Provides
-    fun provideBaseUrl() = "https://www.thesportsdb.com/api/v1/json/50130162"
+    fun provideBaseUrl() = "https://www.thesportsdb.com/api/v1/json/50130162/"
 
     @Provides
     fun provideRetrofitInstance(@BaseUrl baseUrl: String): Retrofit = Retrofit.Builder()
@@ -23,5 +26,9 @@ class AppModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    @Provides
+    fun provideEventAPI(retrofit: Retrofit): EventAPI = retrofit.create(EventAPI::class.java)
 
+    @Provides
+    fun provideEventsRepository(eventRepositoryImpl: EventRepositoryImpl): EventRepository = eventRepositoryImpl
 }
