@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,12 +31,16 @@ fun SearchView(
 
     Box(
         modifier = modifier
-            .background(Color.White, RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(16.dp))
             .padding(horizontal = 12.dp, vertical = 8.dp)
     ) {
         // Search input field
         OutlinedTextField(
             value = query,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.Gray,
+                unfocusedBorderColor = Color.DarkGray
+            ),
             onValueChange = { query = it },
             label = { Text(hint) },
             leadingIcon = null,
@@ -66,7 +71,7 @@ fun SearchView(
     }
 }
 
-@Preview(showSystemUi = true)
+@Preview(showBackground = true)
 @Composable
 fun SearchPreview() {
     SearchView(hint = "enter a name", onSearch = {})
