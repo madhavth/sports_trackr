@@ -1,5 +1,7 @@
 package com.madhav.sportstrackr.features.details.domain.entities
 
+import com.madhav.sportstrackr.core.models.SocialMediaInfo
+
 data class LeagueTeam(
     val idTeam: String,
     val idSoccerXML: String,

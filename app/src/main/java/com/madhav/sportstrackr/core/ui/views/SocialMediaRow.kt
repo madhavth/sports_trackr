@@ -3,21 +3,15 @@ package com.madhav.sportstrackr.core.ui.views
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import com.madhav.sportstrackr.R
-import com.madhav.sportstrackr.features.details.domain.entities.SocialMediaInfo
+import com.madhav.sportstrackr.core.models.SocialMediaInfo
 
 @Composable
 fun SocialMediaRow(socialMediaInfo: SocialMediaInfo) {

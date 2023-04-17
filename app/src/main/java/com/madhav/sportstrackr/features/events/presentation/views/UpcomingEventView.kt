@@ -24,7 +24,7 @@ fun UpcomingEventView(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(vertical = 8.dp)
             .clip(RoundedCornerShape(16.dp))
             .clickable(onClick = { /* Handle click event */ })
             .border(
@@ -67,7 +67,8 @@ fun UpcomingEventPreview() {
         upComingEvent = UpCompingEvent(
             homeTeam = "Manchester United",
             awayTeam = "Liverpool",
-            date = "2021-08-08"
+            date = "2021-08-08",
+            id = "123"
         )
     )
 }

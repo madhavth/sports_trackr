@@ -1,4 +1,4 @@
-package com.madhav.sportstrackr.features.details.domain.entities
+package com.madhav.sportstrackr.core.models
 
 data class SocialMediaInfo(
     val website: String,
