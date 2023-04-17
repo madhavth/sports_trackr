@@ -4,16 +4,22 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
+
 
 @Composable
 fun UpcomingEventView(
@@ -36,25 +42,53 @@ fun UpcomingEventView(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(
-                text = upComingEvent.homeTeam,
-                style = MaterialTheme.typography.h6,
-            )
-            Text(
-                text = "vs",
-                style = MaterialTheme.typography.body1,
-                color = Color.Gray,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-            Text(
-                text = upComingEvent.awayTeam,
-                style = MaterialTheme.typography.h6,
-            )
+
+            Row(modifier= Modifier.fillMaxSize()) {
+                Text(
+                    text = upComingEvent.homeTeam,
+                    style = MaterialTheme.typography.h6.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier.weight(0.45f)
+                )
+                Text(
+                    text = stringResource(R.string.vs),
+                    style = MaterialTheme.typography.caption.copy(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    color = Color.Gray,
+                    modifier = Modifier
+                        .padding(vertical = 8.dp)
+                        .weight(0.1f),
+                )
+                Text(
+                    text = upComingEvent.awayTeam,
+                    style = MaterialTheme.typography.h6.copy(
+                        textAlign = TextAlign.End,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier.weight(0.45f)
+                )
+            }
+
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = upComingEvent.date,
-                style = MaterialTheme.typography.caption,
-            )
+            Row(modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+                ) {
+                Text(
+                    text = upComingEvent.date,
+                    style = MaterialTheme.typography.body2,
+                )
+                
+                IconButton(onClick = {  },) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_calendar),
+                        contentDescription = stringResource(R.string.add_calendar),
+                    )
+                }
+            }
         }
     }
 }
