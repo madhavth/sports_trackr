@@ -6,7 +6,10 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.madhav.sportstrackr.core.models.Screen
+import com.madhav.sportstrackr.core.ui.viewmodels.LoginViewModel
+import com.madhav.sportstrackr.core.ui.views.SignInPromptView
 import com.madhav.sportstrackr.features.details.presentation.page.DetailsScreen
 import com.madhav.sportstrackr.features.events.presentation.page.EventScreen
 import com.madhav.sportstrackr.features.profile.presentation.page.ProfileScreen
@@ -22,19 +25,42 @@ fun MainScreen(selectedIndex: Int, padding: PaddingValues) {
         pagerState.animateScrollToPage(selectedIndex)
     })
 
-    Column(modifier = Modifier.fillMaxSize().padding(padding)) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(padding)) {
         HorizontalPager(
             pageCount = Screen.items.size,
             userScrollEnabled = false,
             state = pagerState,
             modifier = Modifier.weight(0.8f),
         ) {
+            val loginViewModel: LoginViewModel = hiltViewModel()
+            val user = loginViewModel.currentUser.collectAsState().value
+
             Box(modifier = Modifier.fillMaxSize()) {
                 when (Screen.items[it]) {
-                    Screen.Details -> DetailsScreen()
-                    Screen.Events -> EventScreen()
-                    Screen.Profile -> ProfileScreen()
-                    Screen.Search -> SearchScreen()
+                    Screen.Details -> {
+                        if(user!= null) {
+                            DetailsScreen()
+                        }
+                        else {
+                            SignInPromptView(info = "Sign in to view your favorite teams")
+                        }
+                    }
+                    Screen.Events -> {
+                        if(user!= null) {
+                            EventScreen()
+                        }
+                        else {
+                            SignInPromptView(info = "Sign in to add/view your favorite teams next/recent matches")
+                        }
+                    }
+                    Screen.Profile -> {
+                        ProfileScreen()
+                    }
+                    Screen.Search -> {
+                        SearchScreen()
+                    }
                 }
             }
         }
