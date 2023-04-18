@@ -3,6 +3,7 @@ package com.madhav.sportstrackr.features.search_add.presentation.views
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -16,16 +17,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 
 
 @Composable
 fun SearchView(
     hint: String,
-    onSearch: (query: String) -> Unit,
+    onSearch: suspend (query: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val scope = rememberCoroutineScope()
     var query by remember { mutableStateOf("") }
-    val submitSearch = { onSearch(query) }
+    val submitSearch = {
+        scope.launch {
+            onSearch(query)
+        }
+    }
 
     Box(
         modifier = modifier
@@ -44,7 +51,9 @@ fun SearchView(
             leadingIcon = null,
             trailingIcon = {
                 IconButton(
-                    onClick = submitSearch,
+                    onClick = {
+                        submitSearch()
+                    },
                     content = {
                         Icon(
                             imageVector = Icons.Filled.Search,
@@ -63,7 +72,7 @@ fun SearchView(
 
         // Invisible button that captures clicks and submits the search query
         TextButton(
-            onClick = submitSearch,
+            onClick = { submitSearch() },
             colors = ButtonDefaults.textButtonColors(contentColor = Color.Transparent)
         ) {}
     }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "320934226019",
+    "project_id": "sports-trackr",
+    "storage_bucket": "sports-trackr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320934226019:android:d31fcbeedcbc7a91aab056",
+        "android_client_info": {
+          "package_name": "com.madhav.sportstrackr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320934226019-fkhgd06223blildlm58kvp4jg3tt902j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJaDDJvgjRn2Pa6zarFKmx1gYmrvGz_NY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320934226019-fkhgd06223blildlm58kvp4jg3tt902j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
