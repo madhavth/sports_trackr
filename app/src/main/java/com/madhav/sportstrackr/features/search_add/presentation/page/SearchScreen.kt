@@ -38,7 +38,8 @@ fun SearchScreen(modifier: Modifier = Modifier) {
             },
             onErrorRetry = {
                 searchViewModel.searchTeam(searchViewModel.searchQuery)
-            }
+            },
+            loadingAnim = com.madhav.sportstrackr.R.raw.searching
         )
     }
 }

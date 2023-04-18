@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.core.ui.views
 
+import androidx.annotation.RawRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,14 +12,17 @@ import com.airbnb.lottie.compose.*
 import com.madhav.sportstrackr.R
 
 @Composable
-fun LoadingView(modifier: Modifier = Modifier) {
+fun LoadingView(
+    modifier: Modifier = Modifier,
+    @RawRes loadingAnim: Int = R.raw.loading,
+) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        LottieAnim(resId = R.raw.loading, modifier = Modifier.size(140.dp))
-        LottieAnim(resId = R.raw.loading_text, modifier = Modifier.size(140.dp))
+        LottieAnim(resId = loadingAnim, modifier = Modifier.size(140.dp))
+//        LottieAnim(resId = R.raw.loading_text, modifier = Modifier.size(140.dp))
     }
 }
 

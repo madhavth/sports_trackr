@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.core.ui.views
 
+import androidx.annotation.RawRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -14,7 +15,8 @@ fun <T> LazyNetworkResponseView(
     successView: @Composable (data: T) -> Unit,
     emptyCheckCondition: (data: List<T>) -> Boolean,
     emptyDataInfo: String = "No data found",
-    onErrorRetry: suspend () -> Unit
+    onErrorRetry: suspend () -> Unit,
+    @RawRes loadingAnim: Int= com.madhav.sportstrackr.R.raw.loading,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(8.dp),
@@ -31,7 +33,8 @@ fun <T> LazyNetworkResponseView(
                         modifier = Modifier
                             .padding(
                                 top = 120.dp
-                            )
+                            ),
+                        loadingAnim = loadingAnim
                     )
                 }
             }
