@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -15,12 +14,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.madhav.sportstrackr.R
-import com.madhav.sportstrackr.core.models.TeamScore
+import com.madhav.sportstrackr.core.data.models.TeamScore
 import com.madhav.sportstrackr.features.events.domain.entities.PastEvent
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 import com.madhav.sportstrackr.features.events.presentation.views.PastEventView
 import com.madhav.sportstrackr.features.events.presentation.views.UpcomingEventView
-import java.util.*
 
 @Composable
 fun PastFutureEventScreen(

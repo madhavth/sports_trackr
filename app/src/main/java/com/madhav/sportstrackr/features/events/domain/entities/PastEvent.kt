@@ -1,6 +1,6 @@
 package com.madhav.sportstrackr.features.events.domain.entities
 
-import com.madhav.sportstrackr.core.models.TeamScore
+import com.madhav.sportstrackr.core.data.models.TeamScore
 
 data class PastEvent(
     val id: String,

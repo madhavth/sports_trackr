@@ -6,15 +6,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.madhav.sportstrackr.core.helpers.DateHelper
-import com.madhav.sportstrackr.core.helpers.PermissionHelper
-import com.madhav.sportstrackr.core.models.MyResponse
+import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.features.events.domain.entities.PastEvent
 import com.madhav.sportstrackr.features.events.domain.entities.SportsEvents
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 import com.madhav.sportstrackr.features.events.domain.use_cases.EventUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

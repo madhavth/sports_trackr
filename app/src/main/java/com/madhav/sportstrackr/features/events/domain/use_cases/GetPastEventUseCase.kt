@@ -1,6 +1,6 @@
 package com.madhav.sportstrackr.features.events.domain.use_cases
 
-import com.madhav.sportstrackr.core.models.TeamScore
+import com.madhav.sportstrackr.core.data.models.TeamScore
 import com.madhav.sportstrackr.features.events.domain.entities.PastEvent
 import com.madhav.sportstrackr.features.events.domain.repositories.EventRepository
 import javax.inject.Inject

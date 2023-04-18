@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.madhav.sportstrackr.core.models.MyResponse
+import com.madhav.sportstrackr.core.data.models.MyResponse
 
 @Composable
 fun <T> LazyNetworkResponseView(

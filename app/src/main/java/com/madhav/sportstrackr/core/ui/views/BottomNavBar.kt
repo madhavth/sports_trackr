@@ -13,9 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.madhav.sportstrackr.R
-import com.madhav.sportstrackr.core.models.BottomNavigationItem
-import com.madhav.sportstrackr.core.models.Screen
+import com.madhav.sportstrackr.core.data.models.Screen
 
 @Composable
 fun MyBottomNavigation(

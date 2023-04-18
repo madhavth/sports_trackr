@@ -1,12 +1,7 @@
 package com.madhav.sportstrackr.core.ui.views
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import com.madhav.sportstrackr.core.models.MyResponse
-import com.madhav.sportstrackr.features.events.presentation.page.PastFutureEventScreen
+import com.madhav.sportstrackr.core.data.models.MyResponse
 
 @Composable
 fun <T> NetworkResponseView(

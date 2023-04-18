@@ -1,7 +1,7 @@
 package com.madhav.sportstrackr.features.details.data.repositories
 
 import com.madhav.sportstrackr.features.details.data.data_sources.remote.TeamDataSource
-import com.madhav.sportstrackr.core.models.TeamDetailsModel
+import com.madhav.sportstrackr.core.data.models.TeamDetailsModel
 import com.madhav.sportstrackr.features.details.domain.repositories.TeamRepository
 import javax.inject.Inject
 

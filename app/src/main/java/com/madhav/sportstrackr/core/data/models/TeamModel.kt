@@ -1,4 +1,4 @@
-package com.madhav.sportstrackr.core.models
+package com.madhav.sportstrackr.core.data.models
 
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 

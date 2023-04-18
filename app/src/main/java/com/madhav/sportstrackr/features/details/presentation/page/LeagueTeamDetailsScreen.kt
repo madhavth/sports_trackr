@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.madhav.sportstrackr.core.ui.views.FavoriteButton
 import com.madhav.sportstrackr.core.ui.views.SocialMediaRow
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
-import com.madhav.sportstrackr.core.models.SocialMediaInfo
+import com.madhav.sportstrackr.core.data.models.SocialMediaInfo
 import com.madhav.sportstrackr.features.details.presentation.views.LeagueInformationView
 import com.madhav.sportstrackr.features.details.presentation.views.SportsTeamSection
 import com.madhav.sportstrackr.features.details.presentation.views.TeamDescription

@@ -1,7 +1,7 @@
 package com.madhav.sportstrackr.features.details.domain.use_cases
 
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
-import com.madhav.sportstrackr.core.models.toLeagueTeamEntity
+import com.madhav.sportstrackr.core.data.models.toLeagueTeamEntity
 import com.madhav.sportstrackr.features.details.domain.repositories.TeamRepository
 import javax.inject.Inject
 

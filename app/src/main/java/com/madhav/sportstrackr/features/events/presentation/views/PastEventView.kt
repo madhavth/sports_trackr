@@ -1,6 +1,5 @@
 package com.madhav.sportstrackr.features.events.presentation.views
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,14 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.madhav.sportstrackr.core.models.TeamScore
-import com.madhav.sportstrackr.core.theme.EventCardColor
+import com.madhav.sportstrackr.core.data.models.TeamScore
 import com.madhav.sportstrackr.features.events.domain.entities.PastEvent
 
 @Composable

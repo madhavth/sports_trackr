@@ -3,7 +3,7 @@ package com.madhav.sportstrackr.features.details.presentation.view_models
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.madhav.sportstrackr.core.models.MyResponse
+import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 import com.madhav.sportstrackr.features.details.domain.use_cases.TeamUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel

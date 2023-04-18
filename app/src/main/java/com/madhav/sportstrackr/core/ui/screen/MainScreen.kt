@@ -7,7 +7,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.madhav.sportstrackr.core.models.Screen
+import com.madhav.sportstrackr.core.data.models.Screen
 import com.madhav.sportstrackr.core.ui.viewmodels.LoginViewModel
 import com.madhav.sportstrackr.core.ui.views.SignInPromptView
 import com.madhav.sportstrackr.features.details.presentation.page.DetailsScreen

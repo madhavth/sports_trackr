@@ -1,6 +1,6 @@
 package com.madhav.sportstrackr.features.search_add.domain.entities
 
-import com.madhav.sportstrackr.core.models.League
+import com.madhav.sportstrackr.core.data.models.League
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 
 sealed class SearchResult {
