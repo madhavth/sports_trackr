@@ -1,10 +1,7 @@
 package com.madhav.sportstrackr.core.ui.screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.*
@@ -20,16 +17,15 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MainScreen(padding: PaddingValues) {
+fun MainScreen(selectedIndex: Int, padding: PaddingValues) {
 
     val pagerState = rememberPagerState()
-    var selectedIndex by remember { mutableStateOf(0) }
 
     LaunchedEffect(key1 = selectedIndex, block = {
         pagerState.animateScrollToPage(selectedIndex)
     })
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().padding(padding)) {
         HorizontalPager(
             pageCount = Screen.items.size,
             userScrollEnabled = false,
@@ -45,13 +41,5 @@ fun MainScreen(padding: PaddingValues) {
                 }
             }
         }
-
-        MyBottomNavigation(
-            selectedIndex = selectedIndex,
-            onSelectedIndexChanged =
-            {
-                selectedIndex = it
-            },
-        )
     }
 }

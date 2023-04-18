@@ -1,15 +1,19 @@
 package com.madhav.sportstrackr.features.events.presentation.views
 
+import android.app.Activity
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -17,8 +21,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.madhav.sportstrackr.R
+import com.madhav.sportstrackr.core.helpers.PermissionHelper
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
+import com.madhav.sportstrackr.features.events.presentation.view_models.EventViewModel
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -26,6 +35,11 @@ fun UpcomingEventView(
     upComingEvent: UpComingEvent,
     modifier: Modifier = Modifier
 ) {
+    val eventViewModel = hiltViewModel<EventViewModel>()
+    val context = LocalContext.current as Activity
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -43,7 +57,7 @@ fun UpcomingEventView(
             modifier = Modifier.padding(16.dp)
         ) {
 
-            Row(modifier= Modifier.fillMaxSize()) {
+            Row(modifier = Modifier.fillMaxSize()) {
                 Text(
                     text = upComingEvent.homeTeam,
                     style = MaterialTheme.typography.h6.copy(
@@ -73,16 +87,28 @@ fun UpcomingEventView(
             }
 
             Spacer(modifier = Modifier.height(8.dp))
-            Row(modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
-                ) {
+            ) {
                 Text(
                     text = upComingEvent.date,
                     style = MaterialTheme.typography.body2,
                 )
-                
-                IconButton(onClick = {  },) {
+
+                IconButton(
+                    onClick = {
+                        // check permission
+                        eventViewModel.addEventToCalendar(upComingEvent, context)
+                        scope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar(
+                                context.resources.getString(R.string.event_added_calendar),
+                                actionLabel =context.resources.getString(R.string.ok),
+                            )
+                        }
+                    },
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_calendar),
                         contentDescription = stringResource(R.string.add_calendar),

@@ -1,10 +1,13 @@
 package com.madhav.sportstrackr.features.events.presentation.view_models
 
+import android.app.Activity
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.madhav.sportstrackr.core.helpers.DateHelper
+import com.madhav.sportstrackr.core.helpers.PermissionHelper
 import com.madhav.sportstrackr.core.models.MyResponse
-import com.madhav.sportstrackr.features.events.data.models.PastEventsModel
 import com.madhav.sportstrackr.features.events.domain.entities.PastEvent
 import com.madhav.sportstrackr.features.events.domain.entities.SportsEvents
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
@@ -19,10 +22,14 @@ import javax.inject.Inject
 @HiltViewModel
 class EventViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
+    private val app: Application,
     private val eventUseCases: EventUseCases
-) : ViewModel() {
+) : AndroidViewModel(app) {
     private val _teamSportsEvent = MutableStateFlow<MyResponse<SportsEvents>>(MyResponse.Loading)
     val teamSportsEvents = _teamSportsEvent.asStateFlow()
+
+    private val _snackBarMessage: MutableStateFlow<String> = MutableStateFlow("")
+    val snackBarMessage = _snackBarMessage.asStateFlow()
 
     init {
         CoroutineExceptionHandler(handler = { _, throwable ->
@@ -33,7 +40,7 @@ class EventViewModel @Inject constructor(
         getTeamSportsEvents("133604")
     }
 
-    fun getTeamSportsEvents(teamId: String) {
+    private fun getTeamSportsEvents(teamId: String) {
         viewModelScope.launch {
             try {
                 val upcomingEvents: List<UpComingEvent> =
@@ -49,4 +56,13 @@ class EventViewModel @Inject constructor(
             }
         }
     }
+
+    fun addEventToCalendar(upComingEvent: UpComingEvent, context: Activity) {
+        DateHelper.openCalendar(
+            event = upComingEvent,
+            context = context,
+        )
+    }
+
+
 }

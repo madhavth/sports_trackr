@@ -4,4 +4,6 @@
     <string name="past_events">PAST EVENTS</string>
     <string name="vs">vs</string>
     <string name="add_calendar">Add to calendar</string>
+    <string name="event_added_calendar">Event has been added to calendar</string>
+    <string name="ok">ok</string>
 </resources>

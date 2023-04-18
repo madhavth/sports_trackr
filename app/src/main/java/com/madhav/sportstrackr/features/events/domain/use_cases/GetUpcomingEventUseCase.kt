@@ -11,7 +11,7 @@ class GetUpcomingEventUseCase @Inject constructor(
         return repository.getUpcomingEvents(teamId).events.map {
             UpComingEvent(
                 id = it.idEvent,
-                date = it.dateEvent,
+                date = it.strTimestamp,
                 homeTeam = it.strHomeTeam,
                 awayTeam = it.strAwayTeam
             )
