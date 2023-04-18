@@ -6,6 +6,8 @@ import com.madhav.sportstrackr.features.details.domain.repositories.TeamReposito
 import com.madhav.sportstrackr.features.events.data.repositories.EventRepositoryImpl
 import com.madhav.sportstrackr.features.events.data.services.EventAPI
 import com.madhav.sportstrackr.features.events.domain.repositories.EventRepository
+import com.madhav.sportstrackr.features.favorite.data.repositories.FavoriteRepositoryImpl
+import com.madhav.sportstrackr.features.favorite.domain.repositories.FavoriteRepository
 import com.madhav.sportstrackr.features.search_add.data.repositories.SearchRepositoryImpl
 import com.madhav.sportstrackr.features.search_add.data.services.SearchTeamAPI
 import com.madhav.sportstrackr.features.search_add.domain.repositories.SearchRepository
@@ -36,4 +38,6 @@ class RepositoryModule {
     @Provides
     fun provideSearchTeamRepository(searchTeamRepositoryImpl: SearchRepositoryImpl): SearchRepository = searchTeamRepositoryImpl
 
+    @Provides
+    fun provideFavoriteRepository(favoriteRepositoryImpl: FavoriteRepositoryImpl): FavoriteRepository = favoriteRepositoryImpl
 }

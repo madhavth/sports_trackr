@@ -1,4 +1,4 @@
-package com.madhav.sportstrackr.core.domain.entity
+package com.madhav.sportstrackr.features.favorite.domain.entities
 
 data class FavoriteTeam(
     val id: String,
