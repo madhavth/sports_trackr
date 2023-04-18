@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,7 +22,7 @@ fun MyApp() {
         startDestination = Constants.ROUTE.MAIN_SCREEN
     ) {
        composable(Constants.ROUTE.MAIN_SCREEN) {
-           var selectedIndex by remember { mutableStateOf(0) }
+           var selectedIndex by rememberSaveable { mutableStateOf(0) }
 
            Scaffold(
                backgroundColor = Color.White,

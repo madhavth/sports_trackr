@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.provider.CalendarContract
 import androidx.core.content.ContextCompat.startActivity
+import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,8 +24,8 @@ object DateHelper {
         val intent = Intent(Intent.ACTION_INSERT)
         intent.data = CalendarContract.Events.CONTENT_URI
 
-        val title = "${event.homeTeam} vs ${event.awayTeam}"
-        val description = "Game"
+        val title = event.homeTeam + context.getString(R.string.vs_) + event.awayTeam
+        val description = context.getString(R.string.game)
 
         val date  = convertStringToDate(event.date)
 

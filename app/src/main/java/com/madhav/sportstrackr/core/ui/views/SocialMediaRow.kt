@@ -3,12 +3,15 @@ package com.madhav.sportstrackr.core.ui.views
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.*
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.core.models.SocialMediaInfo
@@ -30,7 +33,14 @@ fun SocialMediaRow(socialMediaInfo: SocialMediaInfo) {
 }
 
 fun openUrl(url: String, context: Context) {
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+    var webpage = Uri.parse(url)
+
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        webpage = Uri.parse("http://$url")
+    }
+
+    val intent = Intent(Intent.ACTION_VIEW, webpage)
     ContextCompat.startActivity(context, intent, null)
 }
 
