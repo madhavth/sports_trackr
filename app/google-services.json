@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "320934226019-fkhgd06223blildlm58kvp4jg3tt902j.apps.googleusercontent.com",
+          "client_id": "320934226019-vo1263dd2uqevcanvijde5l3885p6nki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.madhav.sportstrackr",
+            "certificate_hash": "6a8764a22e18a63a59b27106ad1ff28f40c925ad"
+          }
+        },
+        {
+          "client_id": "320934226019-6tp9ui81mk0bh51fo9pvgpo84e53hlko.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "320934226019-fkhgd06223blildlm58kvp4jg3tt902j.apps.googleusercontent.com",
+              "client_id": "320934226019-6tp9ui81mk0bh51fo9pvgpo84e53hlko.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

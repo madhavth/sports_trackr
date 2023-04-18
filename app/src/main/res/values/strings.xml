@@ -8,4 +8,6 @@
     <string name="ok">ok</string>
     <string name="game">Game</string>
     <string name="vs_">\" vs \"</string>
+    <string name="sign_in_google">Sign in with Google</string>
+    <string name="failed_signin">Google sign in failed</string>
 </resources>

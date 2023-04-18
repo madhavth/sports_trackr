@@ -115,4 +115,12 @@ dependencies {
     // crashlytics
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    //google sign-in
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+
+    // timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
 }
