@@ -79,6 +79,7 @@ fun TeamModel.toLeagueTeamEntity() : LeagueTeam {
             website = it.strWebsite ?: ""
         ),
         strCountry = it.strCountry,
-        strDescriptionEN = it.strDescriptionEN
+        strDescriptionEN = it.strDescriptionEN,
+        teamBadge = it.strTeamBadge
     )
 }

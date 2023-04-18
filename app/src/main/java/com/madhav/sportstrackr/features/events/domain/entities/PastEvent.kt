@@ -8,5 +8,6 @@ data class PastEvent(
     val date: String,
     val time: String,
     val homeScore: TeamScore,
-    val awayScore: TeamScore
+    val awayScore: TeamScore,
+    val bannerImage: String = ""
 )

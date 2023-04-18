@@ -23,7 +23,6 @@ fun SearchScreen(modifier: Modifier = Modifier) {
         })
 
         val teamsState = searchViewModel.teamSearchResult.collectAsState()
-
         LazyNetworkResponseView(
             state = teamsState.value,
             modifier = Modifier.fillMaxSize(),

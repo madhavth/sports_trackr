@@ -24,4 +24,5 @@ data class LeagueTeam(
     val socialMediaInfo: SocialMediaInfo,
     val strCountry: String,
     val strDescriptionEN: String?,
+    val teamBadge: String = ""
 )

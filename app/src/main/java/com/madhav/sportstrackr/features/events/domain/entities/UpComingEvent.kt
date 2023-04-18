@@ -5,5 +5,6 @@ data class UpComingEvent(
     val homeTeam: String,
     val awayTeam: String,
     val date: String,
+    val bannerImage: String = ""
 //    val thumbUrl: String
 )

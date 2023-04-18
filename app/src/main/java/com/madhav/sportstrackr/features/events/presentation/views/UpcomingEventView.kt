@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.core.helpers.PermissionHelper
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
@@ -87,6 +89,15 @@ fun UpcomingEventView(
             }
 
             Spacer(modifier = Modifier.height(8.dp))
+
+            AsyncImage(model = ImageRequest.Builder(LocalContext.current)
+                .data(upComingEvent.bannerImage)
+                .crossfade(true).build(),
+                contentDescription = upComingEvent.bannerImage,
+            modifier = Modifier.fillMaxWidth().height(200.dp)
+                )
+
+            Spacer(modifier = Modifier.height(8.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -127,7 +138,8 @@ fun UpcomingEventPreview() {
             homeTeam = "Manchester United",
             awayTeam = "Liverpool",
             date = "2021-08-08",
-            id = "123"
+            id = "123",
+            bannerImage = "https://www.thesportsdb.com/images/media/event/thumb/8x2x2v1600000000.jpg"
         )
     )
 }

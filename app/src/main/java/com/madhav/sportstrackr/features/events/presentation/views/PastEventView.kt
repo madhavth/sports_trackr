@@ -13,9 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.madhav.sportstrackr.core.models.TeamScore
 import com.madhav.sportstrackr.core.theme.EventCardColor
 import com.madhav.sportstrackr.features.events.domain.entities.PastEvent
@@ -30,10 +34,12 @@ fun PastEventView(event: PastEvent, modifier: Modifier = Modifier) {
             .clip(RoundedCornerShape(16.dp))
             .clickable {
 
-            }.border(width= 2.dp,
-            shape= RoundedCornerShape(16.dp),
+            }
+            .border(
+                width = 2.dp,
+                shape = RoundedCornerShape(16.dp),
                 color = Color(0xFFE0E0E0)
-                ),
+            ),
         elevation = 8.dp
     ) {
         Column(
@@ -72,6 +78,19 @@ fun PastEventView(event: PastEvent, modifier: Modifier = Modifier) {
 
             }
             Spacer(modifier = Modifier.height(8.dp))
+
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(event.bannerImage)
+                    .crossfade(true).build(),
+                contentDescription = event.bannerImage,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
             Text(
                 text = event.date,
                 style = MaterialTheme.typography.caption,
@@ -85,12 +104,14 @@ fun PastEventView(event: PastEvent, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun PastEventPreview() {
-    PastEventView(PastEvent(
-        id = "1",
-        name = "Test Event",
-        date = "2021-01-01",
-        time = "12:00",
-        homeScore = TeamScore("Home", "1"),
-        awayScore = TeamScore("Away", "0")
-    ))
+    PastEventView(
+        PastEvent(
+            id = "1",
+            name = "Test Event",
+            date = "2021-01-01",
+            time = "12:00",
+            homeScore = TeamScore("Home", "1"),
+            awayScore = TeamScore("Away", "0")
+        )
+    )
 }

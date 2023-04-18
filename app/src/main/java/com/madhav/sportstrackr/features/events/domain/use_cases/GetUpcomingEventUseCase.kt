@@ -13,7 +13,8 @@ class GetUpcomingEventUseCase @Inject constructor(
                 id = it.idEvent,
                 date = it.strTimestamp,
                 homeTeam = it.strHomeTeam,
-                awayTeam = it.strAwayTeam
+                awayTeam = it.strAwayTeam,
+                bannerImage = it.strThumb + "/preview",
             )
         }
     }

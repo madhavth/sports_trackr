@@ -23,8 +23,9 @@ class GetPastEventUseCase @Inject constructor(
                 ),
                 id = it.idEvent,
                 name = it.strFilename,
-                date = it.dateEvent
-            )
+                date = it.dateEvent,
+                bannerImage = it.strThumb + "/preview",
+                )
         }
     }
 }
