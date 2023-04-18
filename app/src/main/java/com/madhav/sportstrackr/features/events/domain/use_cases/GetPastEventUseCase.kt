@@ -25,6 +25,6 @@ class GetPastEventUseCase @Inject constructor(
                 name = it.strFilename,
                 date = it.dateEvent
             )
-        }.toList()
+        }
     }
 }

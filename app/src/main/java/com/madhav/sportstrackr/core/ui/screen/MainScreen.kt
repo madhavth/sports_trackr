@@ -7,13 +7,10 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.madhav.sportstrackr.core.models.Screen
-import com.madhav.sportstrackr.core.ui.views.MyBottomNavigation
 import com.madhav.sportstrackr.features.details.presentation.page.DetailsScreen
 import com.madhav.sportstrackr.features.events.presentation.page.EventScreen
-import com.madhav.sportstrackr.features.events.presentation.page.PastFutureEventScreen
 import com.madhav.sportstrackr.features.profile.presentation.page.ProfileScreen
-import com.madhav.sportstrackr.features.search.presentation.page.SearchScreen
-import kotlinx.coroutines.launch
+import com.madhav.sportstrackr.features.search_add.presentation.page.SearchScreen
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

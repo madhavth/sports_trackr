@@ -1,21 +1,20 @@
-package com.madhav.sportstrackr.features.search.presentation.views
+package com.madhav.sportstrackr.features.search_add.presentation.views
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.madhav.sportstrackr.features.search.domain.entities.Sport
+import coil.compose.AsyncImage
+import com.madhav.sportstrackr.features.search_add.domain.entities.Sport
 
 @Composable
-fun SportItem(
+fun SportItemView(
     sport: Sport,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
@@ -23,9 +22,9 @@ fun SportItem(
             .padding(vertical = 8.dp, horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(id = sport.icon),
-            contentDescription = null,
+        AsyncImage(
+            model = sport.imgUrl,
+            contentDescription = sport.name,
             modifier = Modifier.size(48.dp)
         )
         Spacer(modifier = Modifier.width(16.dp))
@@ -36,5 +35,10 @@ fun SportItem(
 @Preview
 @Composable
 fun SportsItemPreview() {
-    SportItem(sport = Sport("Soccer", icon= com.madhav.sportstrackr.R.drawable.ic_launcher_foreground))
+    SportItemView(
+        sport = Sport(
+            "Soccer",
+            imgUrl = "test.com"
+        ),
+    )
 }

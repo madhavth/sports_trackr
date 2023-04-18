@@ -1,4 +1,4 @@
-package com.madhav.sportstrackr.features.search.presentation.views
+package com.madhav.sportstrackr.features.search_add.presentation.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -13,10 +13,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.madhav.sportstrackr.R
-import com.madhav.sportstrackr.features.search.domain.entities.Country
+import com.madhav.sportstrackr.features.search_add.domain.entities.Country
 
 @Composable
-fun CountryCard(
+fun CountryCardView(
     country: Country,
     onCountrySelected: (country: Country) -> Unit,
     modifier: Modifier = Modifier
@@ -33,16 +33,10 @@ fun CountryCard(
                 .clickable { onCountrySelected(country) }
                 .padding(16.dp)
         ) {
-            Image(
-                painter = painterResource(id = country.flag),
-                contentDescription = null,
-                modifier = Modifier.size(56.dp)
-            )
             Column(
                 modifier = Modifier.padding(start = 16.dp)
             ) {
                 Text(text = country.name, fontWeight = FontWeight.Bold)
-                Text(text = country.region)
             }
         }
     }
@@ -51,10 +45,8 @@ fun CountryCard(
 @Preview
 @Composable
 fun CountryCardPreview() {
-    CountryCard(
+    CountryCardView(
         country = Country(name = "United States"
-            , region = "Americas"
-            , flag = R.drawable.ic_launcher_foreground
         ),
         onCountrySelected = {   /* handle country selection */ }
     )

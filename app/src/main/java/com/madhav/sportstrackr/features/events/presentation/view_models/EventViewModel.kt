@@ -14,6 +14,7 @@ import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 import com.madhav.sportstrackr.features.events.domain.use_cases.EventUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -26,6 +27,9 @@ class EventViewModel @Inject constructor(
     private val eventUseCases: EventUseCases
 ) : AndroidViewModel(app) {
     private val _teamSportsEvent = MutableStateFlow<MyResponse<SportsEvents>>(MyResponse.Loading)
+
+    private var teamId: String = "133604"
+
     val teamSportsEvents = _teamSportsEvent.asStateFlow()
 
     private val _snackBarMessage: MutableStateFlow<String> = MutableStateFlow("")
@@ -37,23 +41,23 @@ class EventViewModel @Inject constructor(
             throwable.printStackTrace()
         })
 
-        getTeamSportsEvents("133604")
+        viewModelScope.launch {
+            getTeamSportsEvents()
+        }
     }
 
-    private fun getTeamSportsEvents(teamId: String) {
-        viewModelScope.launch {
-            try {
-                val upcomingEvents: List<UpComingEvent> =
-                    eventUseCases.getUpcomingEventUseCase.execute(teamId)
-                val pastEvents: List<PastEvent> = eventUseCases.getPastEventUseCase.execute(teamId)
+    suspend fun getTeamSportsEvents() {
+        try {
+            val upcomingEvents: List<UpComingEvent> =
+                eventUseCases.getUpcomingEventUseCase.execute(teamId)
+            val pastEvents: List<PastEvent> = eventUseCases.getPastEventUseCase.execute(teamId)
 
-                _teamSportsEvent.value =
-                    MyResponse.Success(SportsEvents(upcomingEvents, pastEvents))
+            _teamSportsEvent.value =
+                MyResponse.Success(SportsEvents(upcomingEvents, pastEvents))
 
-            } catch (e: Exception) {
-                _teamSportsEvent.value = MyResponse.Error("Something went wrong")
-                e.printStackTrace()
-            }
+        } catch (e: Exception) {
+            _teamSportsEvent.value = MyResponse.Error("Something went wrong")
+            e.printStackTrace()
         }
     }
 
@@ -64,5 +68,5 @@ class EventViewModel @Inject constructor(
         )
     }
 
-
 }
+

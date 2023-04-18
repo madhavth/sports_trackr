@@ -1,6 +1,6 @@
 package com.madhav.sportstrackr.features.details.data.services
 
-import com.madhav.sportstrackr.features.details.data.models.TeamDetailsModel
+import com.madhav.sportstrackr.core.models.TeamDetailsModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

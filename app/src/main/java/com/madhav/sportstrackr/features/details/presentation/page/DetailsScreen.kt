@@ -9,26 +9,30 @@ import com.madhav.sportstrackr.core.ui.views.NetworkResponseView
 import com.madhav.sportstrackr.features.details.presentation.view_models.DetailsViewModel
 
 @Composable
-fun DetailsScreen()
-{
+fun DetailsScreen() {
     val detailsViewModel = hiltViewModel<DetailsViewModel>()
     val detailsState = detailsViewModel.teamDetailsState.collectAsState()
 
-    NetworkResponseView(state = detailsState.value, successView = { data ->
-        LeagueTeamDetailsLoadedScreen(
-            team = data,
-            isFavorite = detailsViewModel.isFavorite,
-            onFavoriteToggle = {
-                detailsViewModel.toggleFavorite(data)
-            }
-        )
-    })
+    NetworkResponseView(state = detailsState.value,
+
+        successView = { data ->
+            LeagueTeamDetailsLoadedScreen(
+                team = data,
+                isFavorite = detailsViewModel.isFavorite,
+                onFavoriteToggle = {
+                    detailsViewModel.toggleFavorite(data)
+                }
+            )
+        },
+        onRetry = {
+            detailsViewModel.getTeamDetails()
+        }
+    )
 
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DetailsScreenPreview()
-{
+fun DetailsScreenPreview() {
     DetailsScreen()
 }

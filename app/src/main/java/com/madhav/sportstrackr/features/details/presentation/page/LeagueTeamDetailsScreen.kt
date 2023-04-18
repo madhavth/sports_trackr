@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.madhav.sportstrackr.core.ui.views.FavoriteButton
 import com.madhav.sportstrackr.core.ui.views.SocialMediaRow
-import com.madhav.sportstrackr.features.details.domain.entities.LeagueTeam
+import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 import com.madhav.sportstrackr.core.models.SocialMediaInfo
 import com.madhav.sportstrackr.features.details.presentation.views.LeagueInformationView
 import com.madhav.sportstrackr.features.details.presentation.views.SportsTeamSection
@@ -46,7 +46,7 @@ fun LeagueTeamDetailsLoadedScreen(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        TeamDescription(description = team.strDescriptionEN)
+        TeamDescription(description = team.strDescriptionEN?: "")
 
         // League information section
 
@@ -66,7 +66,6 @@ fun LeagueTeamScreenPreview() {
         idAPIfootball = "null",
         intLoved = "null",
         strTeam = "Arsenal",
-        strTeamShort = "Arsenal",
         strAlternate = "null",
         intFormedYear = "1886",
         strSport = "Soccer",

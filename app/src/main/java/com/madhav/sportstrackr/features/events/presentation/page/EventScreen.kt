@@ -19,7 +19,11 @@ fun EventScreen(modifier: Modifier = Modifier) {
             upcomingEvents = data.upcoming,
             pastEvents = data.past
         )
-    })
+    },
+    onRetry = {
+        eventViewModel.getTeamSportsEvents()
+    }
+        )
 }
 
 @Preview

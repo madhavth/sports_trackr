@@ -9,9 +9,14 @@ import com.madhav.sportstrackr.core.models.MyResponse
 import com.madhav.sportstrackr.features.events.presentation.page.PastFutureEventScreen
 
 @Composable
-fun <T> NetworkResponseView(state: MyResponse<T>, successView: @Composable (T) -> Unit) {
+fun <T> NetworkResponseView(
+    state: MyResponse<T>, successView: @Composable (T) -> Unit,
+    onRetry: suspend () -> Unit = {}
+) {
     when (state) {
-        is MyResponse.Error -> ErrorView(message = state.error)
+        is MyResponse.Error -> ErrorView(message = state.error, onRetry = {
+            onRetry()
+        })
         is MyResponse.Loading -> LoadingView()
         is MyResponse.Success -> SuccessView<T>(state.data, successView)
     }

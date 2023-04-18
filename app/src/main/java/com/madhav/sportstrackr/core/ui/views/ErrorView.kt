@@ -18,7 +18,8 @@ import kotlinx.coroutines.delay
 @Composable
 fun ErrorView(
     message: String,
-    onRetry: () -> Unit = {},
+    modifier: Modifier = Modifier,
+    onRetry: suspend () -> Unit = {},
     errorMessageStyle: TextStyle = MaterialTheme.typography.body2,
 ) {
         Box(
@@ -26,7 +27,7 @@ fun ErrorView(
                 .padding(horizontal = 16.dp)
         ) {
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -36,7 +37,7 @@ fun ErrorView(
                     .height(300.dp)
                     )
                 MyButton(text = "Retry", onClick = {
-                    delay(3000)
+                    onRetry()
                 })
             }
         }

@@ -11,9 +11,9 @@ import com.airbnb.lottie.compose.*
 import com.madhav.sportstrackr.R
 
 @Composable
-fun LoadingView() {
+fun LoadingView(modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

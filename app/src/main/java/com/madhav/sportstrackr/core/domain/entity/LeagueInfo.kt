@@ -1,4 +1,4 @@
-package com.madhav.sportstrackr.features.details.domain.entities
+package com.madhav.sportstrackr.core.domain.entity
 
 data class LeagueInfo(
     val name: String,
