@@ -10,7 +10,7 @@ data class PlayerInfo(
     val dateOfBirth: String,
     val playerNumber: String,
     val playerSigning: String,
-    val description: String,
+    val description: String?,
     val socialMediaInfo: SocialMediaInfo,
     val agent: String
 )

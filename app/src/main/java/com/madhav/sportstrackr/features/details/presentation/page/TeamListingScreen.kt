@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -20,13 +21,13 @@ import com.madhav.sportstrackr.core.ui.viewmodels.MainViewModel
 import com.madhav.sportstrackr.core.ui.views.LoadingView
 import com.madhav.sportstrackr.core.ui.views.NoTeamAddedView
 import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
+import com.madhav.sportstrackr.features.search_add.presentation.view_models.PlayerSearchViewModel
 
 @Composable
 fun TeamListingScreen(modifier: Modifier = Modifier) {
     val favoriteViewModel: FavoriteViewModel = hiltViewModel()
     val favoriteTeams = favoriteViewModel.favoriteTeams.collectAsState(initial = null)
     val mainViewModel: MainViewModel = hiltViewModel()
-
     val navController = rememberNavController()
 
     NavHost(
@@ -48,7 +49,7 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
                             style = MaterialTheme.typography.body1.copy(
                                 fontWeight = FontWeight.Bold
                             ),
-                            modifier = Modifier.padding(vertical = 16.dp, horizontal =16.dp)
+                            modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
                         )
 
                         TeamListView(
@@ -63,7 +64,7 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
                             onToggleFavorite = {
                                 favoriteViewModel.removeFavorite(it)
                             },
-                            searchIconClicked =  {
+                            searchIconClicked = {
                                 navController.navigate(MyConstants.DETAILS_ROUTE.PLAYER_SEARCH + "/${it.id}/${it.name}")
                             }
                         )
@@ -83,7 +84,10 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
                     navController.navigateUp()
                 },
                 teamId = teamId,
-                favoriteViewModel = favoriteViewModel
+                favoriteViewModel = favoriteViewModel,
+                onClickedSearch = { teamName ->
+                    navController.navigate(MyConstants.DETAILS_ROUTE.PLAYER_SEARCH + "/${teamId}/${teamName}")
+                }
             )
         }
 
@@ -91,12 +95,26 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
             val teamId = it.arguments?.getString("arg")
             val teamName = it.arguments?.getString("teamName")
 
+            val playersSearchViewModel: PlayerSearchViewModel = hiltViewModel()
+
+            LaunchedEffect(key1 = true, block = {
+                playersSearchViewModel.setTeamId(teamId)
+                playersSearchViewModel.setTeamName(teamName)
+                playersSearchViewModel.performSearch("")
+            })
+
+            val playersList = playersSearchViewModel.teamPlayers.collectAsState()
+
             PlayerSearchScreen(
                 backPressed = {
                     navController.navigateUp()
                 },
                 teamId = teamId,
-                teamName = teamName
+                teamName = teamName,
+                playersList = playersList.value,
+                performSearch = { query ->
+                    playersSearchViewModel.performSearch(query)
+                }
             )
         }
 

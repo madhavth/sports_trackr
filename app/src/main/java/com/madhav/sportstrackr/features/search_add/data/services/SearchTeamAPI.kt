@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.features.search_add.data.services
 
+import com.madhav.sportstrackr.core.data.models.PlayersModel
 import com.madhav.sportstrackr.core.data.models.TeamDetailsModel
 import com.madhav.sportstrackr.features.search_add.data.models.SportsModel
 import retrofit2.http.GET
@@ -12,4 +13,7 @@ interface SearchTeamAPI {
 
     @GET("all_sports.php")
     suspend fun getSports(): SportsModel
+
+    @GET("searchplayers.php")
+    suspend fun getAllPlayers(@Query("t") teamName: String, @Query("p") playerName: String): PlayersModel
 }

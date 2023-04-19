@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.features.search_add.data.repositories
 
+import com.madhav.sportstrackr.core.data.models.PlayersModel
 import com.madhav.sportstrackr.core.data.models.TeamDetailsModel
 import com.madhav.sportstrackr.features.search_add.data.data_sources.remote.SearchDataSource
 import com.madhav.sportstrackr.features.search_add.data.models.SportsModel
@@ -15,5 +16,9 @@ class SearchRepositoryImpl @Inject constructor(
 
     override suspend fun getSports(): SportsModel {
         return searchDataSource.getSports()
+    }
+
+    override suspend fun getAllPlayers(teamName: String, playerName:String): PlayersModel {
+        return searchDataSource.getAllPlayers(teamName, playerName)
     }
 }
