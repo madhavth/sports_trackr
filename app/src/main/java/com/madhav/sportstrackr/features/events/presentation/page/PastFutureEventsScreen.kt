@@ -45,6 +45,23 @@ fun PastFutureEventScreen(
             }
 
 
+            if(upcomingEvents.isEmpty()) {
+                item {
+                    Text(
+                        stringResource(R.string.no_upcoming_events),
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                        ),
+                        modifier = Modifier
+                            .padding(bottom = 32.dp,
+                            top = 32.dp
+                                )
+                            .fillMaxWidth()
+                    )
+                }
+            }
 
             items(
                 upcomingEvents.size, key = { index -> upcomingEvents[index].id },
@@ -65,6 +82,24 @@ fun PastFutureEventScreen(
                         .padding(bottom = 24.dp, top= 24.dp)
                         .fillMaxWidth()
                 )
+            }
+
+            if(pastEvents.isEmpty()) {
+                item {
+                    Text(
+                        stringResource(R.string.no_past_events),
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                        ),
+                        modifier = Modifier
+                            .padding(bottom = 32.dp,
+                                top = 32.dp
+                            )
+                            .fillMaxWidth()
+                    )
+                }
             }
 
             items(pastEvents.size, key = { index -> pastEvents[index].id }) {

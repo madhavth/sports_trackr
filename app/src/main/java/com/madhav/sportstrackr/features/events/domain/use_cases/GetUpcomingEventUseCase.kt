@@ -8,7 +8,7 @@ class GetUpcomingEventUseCase @Inject constructor(
     private val repository: EventRepository
 ){
     suspend fun execute(teamId: String): List<UpComingEvent> {
-        return repository.getUpcomingEvents(teamId).events.map {
+        return repository.getUpcomingEvents(teamId).events?.map {
             UpComingEvent(
                 id = it.idEvent,
                 date = it.strTimestamp,
@@ -16,6 +16,6 @@ class GetUpcomingEventUseCase @Inject constructor(
                 awayTeam = it.strAwayTeam,
                 bannerImage = it.strThumb + "/preview",
             )
-        }
+        } ?: listOf()
     }
 }

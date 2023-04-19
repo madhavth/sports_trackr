@@ -10,7 +10,7 @@ class GetPastEventUseCase @Inject constructor(
     private val repository: EventRepository
 ) {
     suspend fun execute(teamId: String): List<PastEvent> {
-        return repository.getPastEvents(teamId).results.map {
+        return repository.getPastEvents(teamId).results?.map {
             PastEvent(
                 homeScore = TeamScore(
                     score = it.intHomeScore,
@@ -26,6 +26,6 @@ class GetPastEventUseCase @Inject constructor(
                 date = it.dateEvent,
                 bannerImage = it.strThumb + "/preview",
                 )
-        }
+        } ?: listOf()
     }
 }
