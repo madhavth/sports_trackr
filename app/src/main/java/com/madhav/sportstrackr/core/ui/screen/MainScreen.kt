@@ -4,7 +4,9 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -16,8 +18,6 @@ import com.madhav.sportstrackr.features.details.presentation.page.TeamListingScr
 import com.madhav.sportstrackr.features.events.presentation.page.EventScreen
 import com.madhav.sportstrackr.features.profile.presentation.page.ProfileScreen
 import com.madhav.sportstrackr.features.search_add.presentation.page.SearchScreen
-import com.madhav.sportstrackr.features.search_add.presentation.page.TeamSearchScreen
-import com.madhav.sportstrackr.features.search_add.presentation.view_models.TeamSearchViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

@@ -46,7 +46,7 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
                 }
                 else {
                     NoTeamAddedView(modifier = modifier.fillMaxSize()) {
-                        mainViewModel.setSelectedIndex(2)
+                        mainViewModel.navigateToAddTeam()
                     }
                 }
             }
@@ -54,7 +54,6 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
 
         composable(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/{arg}") {
             val teamId = it.arguments?.getString("arg")
-
             DetailsScreen(
                 backPressed =  {
                     navController.navigateUp()

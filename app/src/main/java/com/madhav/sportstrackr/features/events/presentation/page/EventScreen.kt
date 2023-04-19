@@ -65,7 +65,7 @@ fun EventScreen(modifier: Modifier = Modifier) {
         FavoriteAvatarList(
             favoriteTeams = favoriteTeams.value,
             onAddClicked =  {
-                mainViewModel.setSelectedIndex(2)
+                mainViewModel.navigateToAddTeam()
             },
             onClicked = { team ->
                 scope.launch {
@@ -102,7 +102,7 @@ fun EventScreen(modifier: Modifier = Modifier) {
                 )
             } else {
                 NoTeamAddedView(modifier = modifier.fillMaxSize()) {
-                    mainViewModel.setSelectedIndex(2)
+                    mainViewModel.navigateToAddTeam()
                 }
             }
         }

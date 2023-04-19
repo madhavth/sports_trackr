@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.madhav.sportstrackr.R
+import com.madhav.sportstrackr.core.ui.views.BackButton
 import com.madhav.sportstrackr.core.ui.views.NetworkResponseView
 import com.madhav.sportstrackr.features.details.presentation.view_models.DetailsViewModel
 import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
@@ -28,17 +29,8 @@ fun DetailsScreen(backPressed: ()-> Unit = {}, teamId: String?, favoriteViewMode
     })
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Row() {
-            IconButton(onClick = {
-                // navigate back to previous screen
-                backPressed()
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_back),
-                    contentDescription = "back button"
-                )
-            }
-        }
+
+        BackButton(backPressed = backPressed)
 
         NetworkResponseView(state = detailsState.value,
             successView = { data ->

@@ -73,5 +73,4 @@ class TeamSearchViewModel @Inject constructor(
             e.printStackTrace()
         }
     }
-
 }

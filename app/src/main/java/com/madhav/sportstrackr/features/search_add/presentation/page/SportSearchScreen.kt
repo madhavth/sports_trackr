@@ -12,6 +12,7 @@ import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
+import com.madhav.sportstrackr.core.ui.views.BackButton
 import com.madhav.sportstrackr.core.ui.views.LazyNetworkResponseView
 import com.madhav.sportstrackr.features.search_add.domain.entities.Sport
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.SportsSearchViewModel
@@ -19,7 +20,10 @@ import com.madhav.sportstrackr.features.search_add.presentation.views.SearchView
 import com.madhav.sportstrackr.features.search_add.presentation.views.SportItemView
 
 @Composable
-fun SportsSearchScreen(teamsState: MyResponse<List<Sport>>, modifier: Modifier = Modifier) {
+fun SportsSearchScreen(
+    teamsState: MyResponse<List<Sport>>, modifier: Modifier = Modifier,
+    onBackPressed: () -> Unit
+) {
     val searchViewModel = hiltViewModel<SportsSearchViewModel>()
 
     LaunchedEffect(key1 = true, block = {
@@ -29,9 +33,11 @@ fun SportsSearchScreen(teamsState: MyResponse<List<Sport>>, modifier: Modifier =
     Column(modifier = Modifier.fillMaxSize()) {
         SearchView(hint = "search sports here", onQueryChanged = {
             searchViewModel.performSearch(it)
-        }, onSearch =  {
+        }, onSearch = {
             searchViewModel.performSearch(it)
         })
+
+        BackButton(backPressed = onBackPressed)
 
         LazyNetworkResponseView(
             state = teamsState,
@@ -54,5 +60,23 @@ fun SportsSearchScreen(teamsState: MyResponse<List<Sport>>, modifier: Modifier =
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun SportsSearchScreenPreview() {
-    TeamSearchScreen(MyResponse.Loading)
+    SportsSearchScreen(
+        teamsState = MyResponse.Success(
+            listOf(
+                Sport(
+                    name = "Football",
+                    imgUrl = "https://www.thesportsdb.com/images/media/sport/txsupu1448818353.jpg"
+                ),
+                Sport(
+                    name = "Basketball",
+                    imgUrl = "https://www.thesportsdb.com/images/media/sport/txsupu1448818353.jpg"
+                ),
+                Sport(
+                    name = "Cricket",
+                    imgUrl = "https://www.thesportsdb.com/images/media/sport/txsupu1448818353.jpg"
+                ),
+            )
+        ),
+        onBackPressed = {}
+    )
 }
