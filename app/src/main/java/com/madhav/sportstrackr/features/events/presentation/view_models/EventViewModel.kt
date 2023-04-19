@@ -44,6 +44,7 @@ class EventViewModel @Inject constructor(
     }
 
     suspend fun getTeamSportsEvents() {
+        return
         try {
             if(_teamId.value == null) return
 

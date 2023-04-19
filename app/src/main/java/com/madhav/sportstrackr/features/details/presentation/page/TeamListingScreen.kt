@@ -1,9 +1,15 @@
 package com.madhav.sportstrackr.features.details.presentation.page
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph
 import androidx.navigation.compose.NavHost
@@ -19,7 +25,7 @@ import com.madhav.sportstrackr.features.favorite.presentation.view_models.Favori
 @Composable
 fun TeamListingScreen(modifier: Modifier = Modifier) {
     val favoriteViewModel: FavoriteViewModel = hiltViewModel()
-    val favoriteTeams = favoriteViewModel.favoriteTeams.collectAsState(initial =null)
+    val favoriteTeams = favoriteViewModel.favoriteTeams.collectAsState(initial = null)
     val mainViewModel: MainViewModel = hiltViewModel()
 
     val navController = rememberNavController()
@@ -30,21 +36,33 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
     ) {
         composable(MyConstants.DETAILS_ROUTE.TEAM_LIST) {
 
-            if(favoriteTeams.value == null) {
+            if (favoriteTeams.value == null) {
                 LoadingView()
-            }
+            } else {
+                if (favoriteTeams.value!!.isNotEmpty()) {
 
-            else {
-                if(favoriteTeams.value!!.isNotEmpty()) {
-                    TeamListView(modifier = modifier, teams = favoriteTeams.value!!, onClick = {
-                        navController.navigate(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/${it.id}") {
-                            navArgument("arg") {
-                                defaultValue = it.id
+                    Column() {
+                        Text(
+                            text = "FAVORITE TEAMS",
+                            style = MaterialTheme.typography.body1.copy(
+                                fontWeight = FontWeight.Bold
+                            ),
+                            modifier = Modifier.padding(vertical = 16.dp, horizontal =16.dp)
+                        )
+
+                        TeamListView(modifier = modifier, teams = favoriteTeams.value!!, onClick = {
+                            navController.navigate(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/${it.id}") {
+                                navArgument("arg") {
+                                    defaultValue = it.id
+                                }
                             }
+                        },
+                        onToggleFavorite = {
+                            favoriteViewModel.removeFavorite(it)
                         }
-                    })
-                }
-                else {
+                            )
+                    }
+                } else {
                     NoTeamAddedView(modifier = modifier.fillMaxSize()) {
                         mainViewModel.navigateToAddTeam()
                     }
@@ -55,7 +73,7 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
         composable(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/{arg}") {
             val teamId = it.arguments?.getString("arg")
             DetailsScreen(
-                backPressed =  {
+                backPressed = {
                     navController.navigateUp()
                 },
                 teamId = teamId,
