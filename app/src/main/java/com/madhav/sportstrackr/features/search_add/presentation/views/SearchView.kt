@@ -26,7 +26,8 @@ import kotlinx.coroutines.launch
 fun SearchView(
     hint: String,
     onSearch: suspend (query: String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onQueryChanged: (query: String) -> Unit = { },
 ) {
     val scope = rememberCoroutineScope()
     var query by rememberSaveable { mutableStateOf("") }
@@ -51,23 +52,25 @@ fun SearchView(
                 focusedBorderColor = Color.Gray,
                 unfocusedBorderColor = Color.DarkGray
             ),
-            onValueChange = { query = it },
+            onValueChange = {
+                query = it
+                onQueryChanged(it)
+            },
             label = { Text(hint) },
             leadingIcon = null,
             trailingIcon = {
                 IconButton(
                     onClick = {
-                        if(showClearText) {
+                        if (showClearText) {
                             query = ""
-                        }
-                        else {
+                        } else {
                             submitSearch()
                         }
                     },
                     content = {
                         Icon(
-                            imageVector =if(showClearText)  Icons.Filled.Clear else Icons.Filled.Search,
-                            contentDescription = if(showClearText) "Clear" else  "Search",
+                            imageVector = if (showClearText) Icons.Filled.Clear else Icons.Filled.Search,
+                            contentDescription = if (showClearText) "Clear" else "Search",
                             tint = Color.Gray
                         )
                     }

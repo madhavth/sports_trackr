@@ -4,6 +4,7 @@ import javax.inject.Inject
 
 
 class SearchUseCases @Inject constructor(
-    val searchTeamUseCase: SearchTeamUseCase
+    val searchTeamUseCase: SearchTeamUseCase,
+    val sportsUseCase: FetchSportsUseCase
 ){
 }

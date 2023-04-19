@@ -31,7 +31,7 @@ fun CircleAvatarWithRemoveButton(
             onClicked = onClicked,
             isSelected = isSelected
         )
-        if (showRemoveButton)
+        if (false)
             IconButton(
                 onClick = onRemoveClicked,
                 modifier = Modifier

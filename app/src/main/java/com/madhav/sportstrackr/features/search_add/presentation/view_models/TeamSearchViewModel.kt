@@ -1,10 +1,13 @@
 package com.madhav.sportstrackr.features.search_add.presentation.view_models
 
+import androidx.compose.runtime.MutableState
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 import com.madhav.sportstrackr.core.data.models.MyResponse
+import com.madhav.sportstrackr.features.search_add.domain.entities.SearchResult
+import com.madhav.sportstrackr.features.search_add.domain.entities.Sport
 import com.madhav.sportstrackr.features.search_add.domain.use_cases.SearchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -13,7 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(
+class TeamSearchViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val searchUseCases: SearchUseCases
 ) : ViewModel() {
@@ -28,12 +31,13 @@ class SearchViewModel @Inject constructor(
         )
     )
     val teamSearchResult: StateFlow<MyResponse<List<LeagueTeam>>> = _teamSearchResults
+
     private var job: Job = Job()
     private var searchScope = CoroutineScope(Dispatchers.IO + job)
 
     init {
         viewModelScope.launch {
-        searchTeam("Arsenal")
+        performSearch("Arsenal")
         }
     }
 
@@ -44,7 +48,7 @@ class SearchViewModel @Inject constructor(
     }
 
     // add a 1sec bounce to the search
-    suspend fun searchTeam(query: String) {
+    suspend fun performSearch(query: String) {
         cancelAndInitSearchScope()
         _searchQuery = query
 

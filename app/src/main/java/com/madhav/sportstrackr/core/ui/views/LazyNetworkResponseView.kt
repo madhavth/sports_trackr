@@ -3,20 +3,22 @@ package com.madhav.sportstrackr.core.ui.views
 import androidx.annotation.RawRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.madhav.sportstrackr.core.data.models.MyResponse
 
 @Composable
 fun <T> LazyNetworkResponseView(
     state: MyResponse<List<T>>,
-    modifier:Modifier = Modifier,
+    modifier: Modifier = Modifier,
     successView: @Composable (data: T) -> Unit,
     emptyCheckCondition: (data: List<T>) -> Boolean,
     emptyDataInfo: String = "No data found",
     onErrorRetry: suspend () -> Unit,
-    @RawRes loadingAnim: Int= com.madhav.sportstrackr.R.raw.loading,
+    @RawRes loadingAnim: Int = com.madhav.sportstrackr.R.raw.loading,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(8.dp),
@@ -61,4 +63,16 @@ fun <T> LazyNetworkResponseView(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun LazyNetworkResponseViewPreview() {
+    LazyNetworkResponseView<String>(state = MyResponse.Success(listOf("a", "b", "c")),
+        successView = {
+            Text(text = it)
+        },
+        emptyCheckCondition = { it -> it.isEmpty() },
+        onErrorRetry = {}
+    )
 }

@@ -7,4 +7,6 @@ class SearchDataSource @Inject constructor(
     private val searchTeamAPI: SearchTeamAPI
 ) {
     suspend fun searchTeams(query: String) = searchTeamAPI.searchTeamByName(query)
+
+    suspend fun getSports() = searchTeamAPI.getSports()
 }

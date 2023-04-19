@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.features.search_add.presentation.views
 
+import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,11 +16,13 @@ import com.madhav.sportstrackr.features.search_add.domain.entities.Sport
 fun SportItemView(
     sport: Sport,
     modifier: Modifier = Modifier,
+    onClick: (Sport) -> Unit = {}
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 16.dp),
+            .padding(vertical = 8.dp, horizontal = 16.dp)
+            .clickable { onClick(sport) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
