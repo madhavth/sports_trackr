@@ -13,11 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.madhav.sportstrackr.R
 
 @Composable
 fun CircleAvatarWithRemoveButton(
@@ -26,11 +23,13 @@ fun CircleAvatarWithRemoveButton(
     onRemoveClicked: () -> Unit,
     onClicked: () -> Unit = {},
     showRemoveButton: Boolean = true,
+    isSelected: Boolean,
 ) {
     Box(modifier = modifier) {
         CircleAvatar(
             image = image,
-            onClicked = onClicked
+            onClicked = onClicked,
+            isSelected = isSelected
         )
         if (showRemoveButton)
             IconButton(
@@ -56,6 +55,7 @@ fun CircleAvatarWithRemoveButton(
 fun CircleAvatarAddButtonPreview() {
     CircleAvatarWithRemoveButton(
         image = "",
-        onRemoveClicked = { /*TODO*/ }
+        onRemoveClicked = { /*TODO*/ },
+        isSelected = true
     )
 }

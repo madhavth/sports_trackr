@@ -24,8 +24,10 @@ class EventViewModel @Inject constructor(
 ) : AndroidViewModel(app) {
     private val _teamSportsEvent = MutableStateFlow<MyResponse<SportsEvents>>(MyResponse.Loading)
 
-    private var _teamId: String? = null
-    val teamId get() = _teamId
+    private var _teamId: MutableStateFlow<String?> = MutableStateFlow(null)
+    val teamIdState = _teamId.asStateFlow()
+
+    val teamId get() = _teamId.value
 
     val teamSportsEvents = _teamSportsEvent.asStateFlow()
 
@@ -37,19 +39,19 @@ class EventViewModel @Inject constructor(
     }
 
     suspend fun getTeamSportsEvents(teamId: String) {
-        this._teamId = teamId
+        _teamId.value = teamId
         getTeamSportsEvents()
     }
 
     suspend fun getTeamSportsEvents() {
         try {
-            if(_teamId == null) return
+            if(_teamId.value == null) return
 
             _teamSportsEvent.value = MyResponse.Loading
 
             val upcomingEvents: List<UpComingEvent> =
-                eventUseCases.getUpcomingEventUseCase.execute(_teamId!!)
-            val pastEvents: List<PastEvent> = eventUseCases.getPastEventUseCase.execute(_teamId!!)
+                eventUseCases.getUpcomingEventUseCase.execute(_teamId.value!!)
+            val pastEvents: List<PastEvent> = eventUseCases.getPastEventUseCase.execute(_teamId.value!!)
 
             _teamSportsEvent.value =
                 MyResponse.Success(SportsEvents(upcomingEvents, pastEvents))

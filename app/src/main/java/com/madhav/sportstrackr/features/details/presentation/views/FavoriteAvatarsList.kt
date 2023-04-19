@@ -15,7 +15,8 @@ fun FavoriteAvatarList(
     favoriteTeams: List<FavoriteTeam>? = listOf(),
     onRemoveClicked: (FavoriteTeam) -> Unit = {},
     onClicked: (FavoriteTeam) -> Unit = {},
-    onAddClicked: () -> Unit = {}
+    onAddClicked: () -> Unit = {},
+    selectedTeamId: String? = null
 ) {
     LazyRow(
         modifier = Modifier
@@ -30,6 +31,7 @@ fun FavoriteAvatarList(
                 onClicked = {  onAddClicked()  },
                 modifier = Modifier.padding(horizontal = 8.dp),
                 showRemoveButton = false,
+                isSelected = false
             )
         }
 
@@ -38,9 +40,10 @@ fun FavoriteAvatarList(
                 val item = favoriteTeams[it]
                 CircleAvatarWithRemoveButton(
                     image = item.thumbUrl + "/tiny",
+                    modifier = Modifier.padding(horizontal = 8.dp),
                     onRemoveClicked = { onRemoveClicked(item) },
                     onClicked = { onClicked(item) },
-                    modifier = Modifier.padding(horizontal = 8.dp)
+                    isSelected = selectedTeamId == item.id
                 )
             }
         }

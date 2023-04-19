@@ -24,9 +24,10 @@ class DetailsViewModel @Inject constructor(
     private val teamUseCases: TeamUseCases,
     private val userRepository: UserRepository
 ) : ViewModel() {
-    private var _teamId: String?= null
+    private var _teamId: MutableStateFlow<String?> = MutableStateFlow(null)
+    val teamIdState get() = _teamId.asStateFlow()
 
-    val teamId get() = _teamId
+    val teamId get() = _teamId.value
 
     private val _teamDetailsState = MutableStateFlow<MyResponse<LeagueTeam>>(MyResponse.Loading)
     val teamDetailsState = _teamDetailsState.asStateFlow()
@@ -36,7 +37,7 @@ class DetailsViewModel @Inject constructor(
             userRepository.currentUser.collect {
                 if(it != null) {
                     _teamDetailsState.value = MyResponse.Loading
-                    _teamId = null
+                    _teamId.value = null
                 }
             }
         }
@@ -45,7 +46,7 @@ class DetailsViewModel @Inject constructor(
             userRepository.userId.collect {
                 if(it != null) {
                     _teamDetailsState.value = MyResponse.Loading
-                    _teamId = null
+                    _teamId.value = null
                 }
             }
         }
@@ -55,13 +56,13 @@ class DetailsViewModel @Inject constructor(
     suspend fun getTeamDetails(teamId: String?) {
         if(teamId == null) return
 
-        if(teamId == _teamId) return
+        if(teamId == _teamId.value) return
 
-        _teamId = teamId
+        _teamId.value = teamId
         _teamDetailsState.value = MyResponse.Loading
         _teamDetailsState.value = MyResponse.Success(
             teamUseCases.getTeamUseCase
-                .execute(_teamId!!)
+                .execute(_teamId.value!!)
         )
     }
 

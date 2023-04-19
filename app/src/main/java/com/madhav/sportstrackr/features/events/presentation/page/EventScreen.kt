@@ -32,6 +32,8 @@ fun EventScreen(modifier: Modifier = Modifier) {
 
     val sportsState = eventViewModel.teamSportsEvents.collectAsState()
     val favoriteTeams = favoriteViewModel.favoriteTeams.collectAsState(initial = null)
+    val selectedTeamId = eventViewModel.teamIdState.collectAsState(initial = null)
+
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = favoriteTeams.value) {
@@ -72,7 +74,8 @@ fun EventScreen(modifier: Modifier = Modifier) {
             },
             onRemoveClicked = { team ->
                 favoriteViewModel.removeFavorite(team.id)
-            }
+            },
+            selectedTeamId = selectedTeamId.value
         )
         Spacer(
             modifier = Modifier
