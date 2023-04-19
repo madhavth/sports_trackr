@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavGraph
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -41,7 +40,9 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
             } else {
                 if (favoriteTeams.value!!.isNotEmpty()) {
 
-                    Column() {
+                    Column(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
                         Text(
                             text = "FAVORITE TEAMS",
                             style = MaterialTheme.typography.body1.copy(
@@ -50,17 +51,22 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
                             modifier = Modifier.padding(vertical = 16.dp, horizontal =16.dp)
                         )
 
-                        TeamListView(modifier = modifier, teams = favoriteTeams.value!!, onClick = {
-                            navController.navigate(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/${it.id}") {
-                                navArgument("arg") {
-                                    defaultValue = it.id
+                        TeamListView(
+                            modifier = modifier, teams = favoriteTeams.value!!,
+                            onClick = {
+                                navController.navigate(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/${it.id}") {
+                                    navArgument("arg") {
+                                        defaultValue = it.id
+                                    }
                                 }
+                            },
+                            onToggleFavorite = {
+                                favoriteViewModel.removeFavorite(it)
+                            },
+                            searchIconClicked =  {
+                                navController.navigate(MyConstants.DETAILS_ROUTE.PLAYER_SEARCH + "/${it.id}/${it.name}")
                             }
-                        },
-                        onToggleFavorite = {
-                            favoriteViewModel.removeFavorite(it)
-                        }
-                            )
+                        )
                     }
                 } else {
                     NoTeamAddedView(modifier = modifier.fillMaxSize()) {
@@ -78,6 +84,19 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
                 },
                 teamId = teamId,
                 favoriteViewModel = favoriteViewModel
+            )
+        }
+
+        composable(MyConstants.DETAILS_ROUTE.PLAYER_SEARCH + "/{arg}/{teamName}") {
+            val teamId = it.arguments?.getString("arg")
+            val teamName = it.arguments?.getString("teamName")
+
+            PlayerSearchScreen(
+                backPressed = {
+                    navController.navigateUp()
+                },
+                teamId = teamId,
+                teamName = teamName
             )
         }
 

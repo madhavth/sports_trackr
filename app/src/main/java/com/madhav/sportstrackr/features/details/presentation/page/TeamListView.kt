@@ -2,30 +2,27 @@ package com.madhav.sportstrackr.features.details.presentation.page
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.madhav.sportstrackr.core.ui.viewmodels.MainViewModel
 import com.madhav.sportstrackr.core.ui.views.FavoriteButton
+import com.madhav.sportstrackr.core.ui.views.SearchIcon
 import com.madhav.sportstrackr.features.favorite.domain.entities.FavoriteTeam
 
 @Composable
 fun TeamListView(
     modifier: Modifier = Modifier, teams: List<FavoriteTeam>,
     onClick: (FavoriteTeam) -> Unit = {},
-    onToggleFavorite: (String) -> Unit = {}
+    onToggleFavorite: (String) -> Unit = {},
+    searchIconClicked: (FavoriteTeam) -> Unit
 ) {
     LazyVerticalGrid(
         modifier = modifier
@@ -43,10 +40,12 @@ fun TeamListView(
 
         items(teams.size) { index ->
             val team = teams[index]
-            TeamRow(team = team, onClick = onClick,
+            TeamRow(
+                team = team, onClick = onClick,
                 onToggleFavorite = {
                     onToggleFavorite(team.id)
-                }
+                },
+                searchIconClicked = searchIconClicked
             )
         }
     }
@@ -56,7 +55,8 @@ fun TeamListView(
 fun TeamRow(
     team: FavoriteTeam, onClick: (FavoriteTeam) -> Unit = {},
     isFavorite: Boolean = true,
-    onToggleFavorite: (Boolean) -> Unit = {}
+    onToggleFavorite: (Boolean) -> Unit = {},
+    searchIconClicked: (FavoriteTeam) -> Unit = {}
 ) {
     Card(
         modifier = Modifier
@@ -72,9 +72,14 @@ fun TeamRow(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
-                horizontalArrangement = Arrangement.End,
+                horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                SearchIcon(onClick =
+                {
+                    searchIconClicked(team)
+                }
+                )
                 FavoriteButton(isFavorite = isFavorite, onToggleFavorite = onToggleFavorite)
             }
             AsyncImage(

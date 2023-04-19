@@ -9,6 +9,7 @@ object MyConstants {
     object DETAILS_ROUTE {
         const val TEAM_DETAILS = "team_details"
         const val TEAM_LIST = "team_list"
+        const val PLAYER_SEARCH = "player_search"
     }
 
     object SEARCH_ROUTE {
