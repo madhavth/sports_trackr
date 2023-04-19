@@ -40,7 +40,9 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
                     })
                 }
                 else {
-                    NoTeamAddedView(modifier = modifier.fillMaxSize(), mainViewModel)
+                    NoTeamAddedView(modifier = modifier.fillMaxSize()) {
+                        mainViewModel.setSelectedIndex(2)
+                    }
                 }
             }
         }

@@ -13,7 +13,7 @@ import com.madhav.sportstrackr.core.ui.viewmodels.MainViewModel
 @Composable
 fun NoTeamAddedView(
     modifier: Modifier = Modifier,
-    mainViewModel: MainViewModel = hiltViewModel()
+    onNavigateClicked: () -> Unit = {}
 ) {
     // compose column to show no team added
     Column(
@@ -21,12 +21,11 @@ fun NoTeamAddedView(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val selectedIndex = mainViewModel.selectedIndex.collectAsState()
 
         Text(text = "No Team Added")
         Spacer(modifier = Modifier.height(16.dp))
-        MyButton(text = "Add Team Here ${selectedIndex.value}", onClick = {
-            mainViewModel.setSelectedIndex(2)
+        MyButton(text = "Add Team Here", onClick = {
+            onNavigateClicked()
         })
 
     }
