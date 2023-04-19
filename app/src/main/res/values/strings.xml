@@ -10,4 +10,6 @@
     <string name="vs_">\" vs \"</string>
     <string name="sign_in_google">Sign in with Google</string>
     <string name="failed_signin">Google sign in failed</string>
+    <string name="sign_in_to_view_teams">Sign in to view your favorite teams</string>
+    <string name="sign_in_to_view_recent_matches">Sign in to add/view your favorite teams next/recent matches</string>
 </resources>

@@ -6,19 +6,22 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.core.data.models.Screen
 import com.madhav.sportstrackr.core.ui.viewmodels.LoginViewModel
 import com.madhav.sportstrackr.core.ui.views.SignInPromptView
 import com.madhav.sportstrackr.features.details.presentation.page.DetailsScreen
+import com.madhav.sportstrackr.features.details.presentation.page.TeamListingScreen
 import com.madhav.sportstrackr.features.events.presentation.page.EventScreen
+import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 import com.madhav.sportstrackr.features.profile.presentation.page.ProfileScreen
 import com.madhav.sportstrackr.features.search_add.presentation.page.SearchScreen
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainScreen(selectedIndex: Int, padding: PaddingValues) {
-
     val pagerState = rememberPagerState()
 
     LaunchedEffect(key1 = selectedIndex, block = {
@@ -41,10 +44,10 @@ fun MainScreen(selectedIndex: Int, padding: PaddingValues) {
                 when (Screen.items[it]) {
                     Screen.Details -> {
                         if(user!= null) {
-                            DetailsScreen()
+                            TeamListingScreen()
                         }
                         else {
-                            SignInPromptView(info = "Sign in to view your favorite teams")
+                            SignInPromptView(info = stringResource(R.string.sign_in_to_view_teams))
                         }
                     }
                     Screen.Events -> {
@@ -52,7 +55,7 @@ fun MainScreen(selectedIndex: Int, padding: PaddingValues) {
                             EventScreen()
                         }
                         else {
-                            SignInPromptView(info = "Sign in to add/view your favorite teams next/recent matches")
+                            SignInPromptView(info = stringResource(R.string.sign_in_to_view_recent_matches))
                         }
                     }
                     Screen.Profile -> {
