@@ -18,6 +18,7 @@ import com.madhav.sportstrackr.features.events.presentation.page.EventScreen
 import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 import com.madhav.sportstrackr.features.profile.presentation.page.ProfileScreen
 import com.madhav.sportstrackr.features.search_add.presentation.page.SearchScreen
+import com.madhav.sportstrackr.features.search_add.presentation.view_models.SearchViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -62,7 +63,9 @@ fun MainScreen(selectedIndex: Int, padding: PaddingValues) {
                         ProfileScreen()
                     }
                     Screen.Search -> {
-                        SearchScreen()
+                        val searchViewModel = hiltViewModel<SearchViewModel>()
+                        val teamsState = searchViewModel.teamSearchResult.collectAsState()
+                        SearchScreen(teamsState.value)
                     }
                 }
             }

@@ -9,6 +9,7 @@ import androidx.navigation.NavGraph
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.madhav.sportstrackr.core.constants.MyConstants
 import com.madhav.sportstrackr.core.ui.viewmodels.MainViewModel
 import com.madhav.sportstrackr.core.ui.views.LoadingView
@@ -36,7 +37,11 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
             else {
                 if(favoriteTeams.value!!.isNotEmpty()) {
                     TeamListView(modifier = modifier, teams = favoriteTeams.value!!, onClick = {
-                        navController.navigate(MyConstants.DETAILS_ROUTE.TEAM_DETAILS)
+                        navController.navigate(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/${it.id}") {
+                            navArgument("arg") {
+                                defaultValue = it.id
+                            }
+                        }
                     })
                 }
                 else {
@@ -47,11 +52,14 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
             }
         }
 
-        composable(MyConstants.DETAILS_ROUTE.TEAM_DETAILS) {
+        composable(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/{arg}") {
+            val teamId = it.arguments?.getString("arg")
+
             DetailsScreen(
                 backPressed =  {
                     navController.navigateUp()
-                }
+                },
+                teamId = teamId
             )
         }
 

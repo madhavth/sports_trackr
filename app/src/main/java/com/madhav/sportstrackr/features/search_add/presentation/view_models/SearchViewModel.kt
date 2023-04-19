@@ -2,6 +2,7 @@ package com.madhav.sportstrackr.features.search_add.presentation.view_models
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.features.search_add.domain.use_cases.SearchUseCases
@@ -31,6 +32,9 @@ class SearchViewModel @Inject constructor(
     private var searchScope = CoroutineScope(Dispatchers.IO + job)
 
     init {
+        viewModelScope.launch {
+        searchTeam("Arsenal")
+        }
     }
 
     private fun cancelAndInitSearchScope() {

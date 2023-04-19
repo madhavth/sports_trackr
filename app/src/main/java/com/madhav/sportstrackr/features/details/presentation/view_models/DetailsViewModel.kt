@@ -20,19 +20,12 @@ class DetailsViewModel @Inject constructor(
     private val teamUseCases: TeamUseCases,
     private val favoriteTeamUseCases: FavoritesUseCases
 ) : ViewModel() {
-    private var _teamId: String? = "133604"
+    private var _teamId: String?= null
 
     val teamId get() = _teamId
 
     private val _teamDetailsState = MutableStateFlow<MyResponse<LeagueTeam>>(MyResponse.Loading)
     val teamDetailsState = _teamDetailsState.asStateFlow()
-
-
-    init {
-        viewModelScope.launch {
-            getTeamDetails("133604")
-        }
-    }
 
     suspend fun getTeamDetails(teamId: String?) {
         if(teamId == null) return

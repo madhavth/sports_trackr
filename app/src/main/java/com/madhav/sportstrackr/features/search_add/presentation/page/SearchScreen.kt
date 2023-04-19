@@ -1,39 +1,45 @@
 package com.madhav.sportstrackr.features.search_add.presentation.page
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.madhav.sportstrackr.core.ui.viewmodels.LoginViewModel
+import com.madhav.sportstrackr.core.data.models.MyResponse
+import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 import com.madhav.sportstrackr.core.ui.views.*
+import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.SearchViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.views.SearchView
 
 @Composable
-fun SearchScreen(modifier: Modifier = Modifier) {
+fun SearchScreen(teamsState: MyResponse<List<LeagueTeam>>, modifier: Modifier = Modifier) {
     val searchViewModel = hiltViewModel<SearchViewModel>()
-    val loginViewModel = hiltViewModel<LoginViewModel>()
+    val favoriteViewModel: FavoriteViewModel = hiltViewModel()
 
     Column(modifier = Modifier.fillMaxSize()) {
         SearchView(hint = "search here", onSearch = {
             searchViewModel.searchTeam(it)
         })
 
-        val teamsState = searchViewModel.teamSearchResult.collectAsState()
         LazyNetworkResponseView(
-            state = teamsState.value,
+            state = teamsState,
             modifier = Modifier.fillMaxSize(),
-            successView = {
-                          leagueTeam ->
-                TeamOverView(leagueTeam = leagueTeam)
+            successView = { leagueTeam ->
+                val isFavorite =
+                    favoriteViewModel.checkIfFavoriteTeam(leagueTeam.idTeam).collectAsState(
+                        initial = false
+                    )
+
+                TeamOverView(leagueTeam = leagueTeam, isFavorite = isFavorite.value,
+                    onToggleFavorite = {
+                        favoriteViewModel.toggleFavorite(isFavorite.value, leagueTeam)
+                    }
+                )
             },
             emptyDataInfo = "No team found",
-            emptyCheckCondition = {
-                                  data ->
+            emptyCheckCondition = { data ->
                 data.isEmpty() && searchViewModel.searchQuery.isNotEmpty()
             },
             onErrorRetry = {
@@ -47,5 +53,5 @@ fun SearchScreen(modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun SearchScreenPreview() {
-    SearchScreen()
+    SearchScreen(MyResponse.Loading)
 }

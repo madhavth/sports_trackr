@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -18,9 +19,13 @@ import com.madhav.sportstrackr.features.details.presentation.view_models.Details
 import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 
 @Composable
-fun DetailsScreen(backPressed: ()-> Unit = {}) {
+fun DetailsScreen(backPressed: ()-> Unit = {}, teamId: String?) {
     val detailsViewModel = hiltViewModel<DetailsViewModel>()
     val detailsState = detailsViewModel.teamDetailsState.collectAsState()
+
+    LaunchedEffect(key1 = true, block = {
+        detailsViewModel.getTeamDetails(teamId)
+    })
 
     Column(modifier = Modifier.fillMaxSize()) {
         Row() {
@@ -59,5 +64,5 @@ fun DetailsScreen(backPressed: ()-> Unit = {}) {
 @Preview(showBackground = true)
 @Composable
 fun DetailsScreenPreview() {
-    DetailsScreen()
+    DetailsScreen(teamId = "123454")
 }
