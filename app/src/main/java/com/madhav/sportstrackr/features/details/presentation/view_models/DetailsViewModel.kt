@@ -13,6 +13,7 @@ import com.madhav.sportstrackr.features.favorite.domain.use_cases.FavoritesUseCa
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,6 +40,16 @@ class DetailsViewModel @Inject constructor(
                 }
             }
         }
+
+        viewModelScope.launch {
+            userRepository.userId.collect {
+                if(it != null) {
+                    _teamDetailsState.value = MyResponse.Loading
+                    _teamId = null
+                }
+            }
+        }
+
     }
 
     suspend fun getTeamDetails(teamId: String?) {

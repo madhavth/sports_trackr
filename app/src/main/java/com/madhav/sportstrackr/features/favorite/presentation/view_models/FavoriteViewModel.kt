@@ -14,12 +14,10 @@ import com.madhav.sportstrackr.features.favorite.data.repositories.UserRepositor
 import com.madhav.sportstrackr.features.favorite.domain.entities.FavoriteTeam
 import com.madhav.sportstrackr.features.favorite.domain.use_cases.FavoritesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class)
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     val savedStateHandle: SavedStateHandle,
@@ -32,29 +30,50 @@ class FavoriteViewModel @Inject constructor(
 
     private val currentUser = userRepository.currentUser
 
-    private val favoriteTeamsFlow: Flow<List<FavoriteTeam>> =
-        currentUser
-            .flatMapConcat {
-                if(it?.id== null) {
-                    flowOf(emptyList())
-                }
-                else {
-                    favoritesUseCases.getFavoritesUseCase.execute(it.id!!)
-                }
-            }
+    private var coroutineScope: CoroutineScope? = null
+    private var job = Job()
 
-    init {
-        viewModelScope.launch {
+    private lateinit var favoriteTeamsFlow: Flow<List<FavoriteTeam>>
+
+    private fun initNewCoroutineScope() {
+        job.cancel()
+        job = Job()
+        coroutineScope = CoroutineScope(Dispatchers.IO + job)
+    }
+
+    private fun initFavoriteTeamFlow() {
+        favoriteTeamsFlow = currentUser.value?.id?.let {
+            favoritesUseCases.getFavoritesUseCase.execute(
+                it
+            )
+        } ?: flowOf(emptyList())
+    }
+
+    private fun startCollectingFavorites() {
+        initNewCoroutineScope()
+        initFavoriteTeamFlow()
+        coroutineScope?.launch {
             favoriteTeamsFlow.collect {
                 _favoriteTeams.value = it
             }
+        }
+    }
 
+    private fun onUserChanged() {
+        viewModelScope.launch {
             currentUser.collectLatest {
-                if(it?.id == null) {
+                if (it?.id == null) {
                     _favoriteTeams.value = emptyList()
+                } else {
+                    startCollectingFavorites()
                 }
             }
         }
+
+    }
+
+    init {
+        onUserChanged()
     }
 
     private fun removeFavoriteTeam(teamId: String) {
