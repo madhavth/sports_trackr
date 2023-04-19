@@ -3,6 +3,7 @@ package com.madhav.sportstrackr.features.search_add.presentation.page
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,6 +21,10 @@ import com.madhav.sportstrackr.features.search_add.presentation.views.SportItemV
 @Composable
 fun SportsSearchScreen(teamsState: MyResponse<List<Sport>>, modifier: Modifier = Modifier) {
     val searchViewModel = hiltViewModel<SportsSearchViewModel>()
+
+    LaunchedEffect(key1 = true, block = {
+        searchViewModel.getSports()
+    })
 
     Column(modifier = Modifier.fillMaxSize()) {
         SearchView(hint = "search sports here", onQueryChanged = {

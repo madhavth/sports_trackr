@@ -10,8 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.madhav.sportstrackr.core.constants.MyConstants
+import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.SportsSearchViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.TeamSearchViewModel
+import kotlinx.coroutines.flow.flow
 
 @Composable
 fun SearchScreen(modifier: Modifier = Modifier) {
@@ -19,7 +21,7 @@ fun SearchScreen(modifier: Modifier = Modifier) {
     val searchViewModel = hiltViewModel<TeamSearchViewModel>()
 
     NavHost(
-        navController = navController, startDestination = MyConstants.SEARCH_ROUTE.TEAM_SEARCH,
+        navController = navController, startDestination = MyConstants.SEARCH_ROUTE.SPORT_SEARCH,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(MyConstants.SEARCH_ROUTE.TEAM_SEARCH) {
@@ -29,7 +31,9 @@ fun SearchScreen(modifier: Modifier = Modifier) {
 
         composable(MyConstants.SEARCH_ROUTE.SPORT_SEARCH) {
             val sportsSearchViewModel = hiltViewModel<SportsSearchViewModel>()
-            val sportsState = sportsSearchViewModel.sportSearchResult.collectAsState()
+            val sportsState = sportsSearchViewModel.sportSearchResult.collectAsState(
+                initial = MyResponse.Loading
+            )
             SportsSearchScreen(sportsState.value)
         }
 

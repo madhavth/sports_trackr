@@ -7,39 +7,46 @@ import com.madhav.sportstrackr.features.search_add.domain.entities.Sport
 import com.madhav.sportstrackr.features.search_add.domain.use_cases.SearchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class SportsSearchViewModel @Inject constructor(
     private val searchUseCases: SearchUseCases
 ) : ViewModel() {
-    private var _searchQuery: String = ""
+    private var _searchQuery: MutableStateFlow<String> = MutableStateFlow("")
 
-    val searchQuery get() = _searchQuery
+    val searchQuery get() = _searchQuery.value
 
-    private val _sportsSearchResults = MutableStateFlow<MyResponse<List<Sport>>>(
+
+    private val _sportsFetchedResults = MutableStateFlow<MyResponse<List<Sport>>>(
         MyResponse.Loading
     )
 
-    val sportSearchResult: StateFlow<MyResponse<List<Sport>>> = _sportsSearchResults
+    private val _sportsSearchResult: MutableStateFlow<MyResponse<List<Sport>>> = MutableStateFlow(
+        MyResponse.Loading
+    )
+
+    val sportSearchResult: StateFlow<MyResponse<List<Sport>>> = _sportsSearchResult
+
 
     suspend fun getSports() {
-        _sportsSearchResults.value = MyResponse.Loading
+        _sportsFetchedResults.value = MyResponse.Loading
 
         val result = searchUseCases.sportsUseCase.execute()
-        _sportsSearchResults.value = MyResponse.Success(result)
+        _sportsFetchedResults.value = MyResponse.Success(result)
+        _sportsSearchResult.value = MyResponse.Success(result)
     }
 
-     fun performSearch(query: String) {
-        _searchQuery = query
-        if (query.length < 3) return
 
-        if(_sportsSearchResults.value is MyResponse.Success) {
-            val result = (_sportsSearchResults.value as MyResponse.Success).data
-            val filteredResult = result.filter { it.name.contains(query, true) }
-            _sportsSearchResults.value = MyResponse.Success(filteredResult)
+    fun performSearch(query: String) {
+        _searchQuery.value = query
+
+        if (_sportsFetchedResults.value is MyResponse.Success) {
+            val sports = (_sportsFetchedResults.value as MyResponse.Success).data
+            val filteredSports = sports.filter { it.name.contains(query, true) }
+            _sportsSearchResult.value = MyResponse.Success(filteredSports)
         }
 
     }

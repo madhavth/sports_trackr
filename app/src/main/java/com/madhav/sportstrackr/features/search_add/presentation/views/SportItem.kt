@@ -6,7 +6,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
@@ -18,20 +25,36 @@ fun SportItemView(
     modifier: Modifier = Modifier,
     onClick: (Sport) -> Unit = {}
 ) {
-    Row(
+    Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 16.dp)
-            .clickable { onClick(sport) },
-        verticalAlignment = Alignment.CenterVertically
+            .padding(vertical = 8.dp),
+        shape = RoundedCornerShape(8.dp),
+        elevation = 8.dp
     ) {
-        AsyncImage(
-            model = sport.imgUrl,
-            contentDescription = sport.name,
-            modifier = Modifier.size(48.dp)
-        )
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(text = sport.name, fontWeight = FontWeight.Bold)
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .clickable { onClick(sport) }
+            .padding(vertical = 8.dp, horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            AsyncImage(
+                model = sport.imgUrl,
+                contentDescription = sport.name,
+                modifier = Modifier.size(48.dp)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(text = sport.name, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f))
+
+            Icon(
+                imageVector = Icons.Filled.ArrowForward,
+                contentDescription = "Done"
+            )
+        }
     }
 }
 
