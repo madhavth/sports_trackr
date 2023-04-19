@@ -5,12 +5,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.madhav.sportstrackr.core.ui.viewmodels.LoginViewModel
+import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
 import com.madhav.sportstrackr.core.ui.views.SignInPromptView
 
 @Composable
 fun ProfileScreen() {
-    val loginViewModel= hiltViewModel<LoginViewModel>()
+    val loginViewModel= hiltViewModel<AuthViewModel>()
     val user = loginViewModel.currentUser.collectAsState().value
 
     if(user != null) {

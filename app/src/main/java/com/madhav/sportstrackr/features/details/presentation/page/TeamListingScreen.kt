@@ -59,7 +59,8 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
                 backPressed =  {
                     navController.navigateUp()
                 },
-                teamId = teamId
+                teamId = teamId,
+                favoriteViewModel = favoriteViewModel
             )
         }
 

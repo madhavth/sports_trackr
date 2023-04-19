@@ -6,9 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -17,7 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.madhav.sportstrackr.R
-import com.madhav.sportstrackr.core.ui.viewmodels.LoginViewModel
+import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
 import timber.log.Timber
 
 const val RC_SIGN_IN = 100
@@ -25,7 +23,7 @@ const val RC_SIGN_IN = 100
 @Composable
 fun GoogleSignInButton(onSignInComplete: (GoogleSignInAccount) -> Unit) {
     val context = LocalContext.current
-    val loginViewModel: LoginViewModel = hiltViewModel()
+    val loginViewModel: AuthViewModel = hiltViewModel()
 
     val activityResultLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()

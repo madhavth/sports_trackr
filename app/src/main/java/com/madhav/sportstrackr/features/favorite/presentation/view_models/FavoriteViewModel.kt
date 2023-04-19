@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 import com.madhav.sportstrackr.core.domain.entity.toFavoriteTeam
+import com.madhav.sportstrackr.core.domain.usecase.UserUseCases
+import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
 import com.madhav.sportstrackr.features.details.domain.use_cases.TeamUseCases
 import com.madhav.sportstrackr.features.favorite.data.repositories.UserRepository
 import com.madhav.sportstrackr.features.favorite.domain.entities.FavoriteTeam
@@ -24,20 +26,33 @@ class FavoriteViewModel @Inject constructor(
     private val favoritesUseCases: FavoritesUseCases,
     private val teamUseCase: TeamUseCases,
     private val userRepository: UserRepository
-) :ViewModel(){
+) : ViewModel() {
     private val _favoriteTeams: MutableStateFlow<List<FavoriteTeam>?> = MutableStateFlow(null)
     val favoriteTeams: StateFlow<List<FavoriteTeam>?> = _favoriteTeams
 
-    private val favoriteTeamsFlow: Flow<List<FavoriteTeam>> = userRepository.currentUser.filter {
-        it != null
-    }.flatMapConcat {
-        favoritesUseCases.getFavoritesUseCase.execute()
-    }
+    private val currentUser = userRepository.currentUser
+
+    private val favoriteTeamsFlow: Flow<List<FavoriteTeam>> =
+        currentUser
+            .flatMapConcat {
+                if(it?.id== null) {
+                    flowOf(emptyList())
+                }
+                else {
+                    favoritesUseCases.getFavoritesUseCase.execute(it.id!!)
+                }
+            }
 
     init {
         viewModelScope.launch {
-            favoriteTeamsFlow.collectLatest {
+            favoriteTeamsFlow.collect {
                 _favoriteTeams.value = it
+            }
+
+            currentUser.collectLatest {
+                if(it?.id == null) {
+                    _favoriteTeams.value = emptyList()
+                }
             }
         }
     }

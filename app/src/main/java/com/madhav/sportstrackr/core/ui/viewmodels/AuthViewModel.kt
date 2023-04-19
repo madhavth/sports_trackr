@@ -2,34 +2,28 @@ package com.madhav.sportstrackr.core.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
+import com.madhav.sportstrackr.core.domain.usecase.UserUseCases
 import com.madhav.sportstrackr.features.favorite.data.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import timber.log.Timber
 import javax.inject.Inject
 
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class AuthViewModel @Inject constructor(
     val app: Application,
-    private val userRepository: UserRepository
+    private val usersUseCases: UserUseCases
 ) : AndroidViewModel(app) {
     val currentUser: StateFlow<GoogleSignInAccount?>
-        get() = userRepository.currentUser
+        get() = usersUseCases.getCurrentUserUseCase.execute()
 
     fun setAccount(account: GoogleSignInAccount) {
-        userRepository.setAccount(account)
+        usersUseCases.setAccountUseCase.execute(account)
     }
 
     fun signOut() {
-        userRepository.signOut()
+        usersUseCases.signOutUseCase.execute()
     }
 
 }

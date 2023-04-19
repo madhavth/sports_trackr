@@ -20,7 +20,8 @@ import com.madhav.sportstrackr.core.data.models.SocialMediaInfo
 fun TeamOverView(
     leagueTeam: LeagueTeam, modifier: Modifier = Modifier,
     isFavorite: Boolean = false,
-    onToggleFavorite: (Boolean) -> Unit = {}
+    onToggleFavorite: (Boolean) -> Unit = {},
+    isLoggedIn: Boolean = false
 ) {
     Card(
         modifier = modifier
@@ -49,6 +50,7 @@ fun TeamOverView(
             Column(modifier = Modifier.weight(0.2f),
             horizontalAlignment = Alignment.End
                 ) {
+                if(isLoggedIn)
                 FavoriteButton(isFavorite = isFavorite, onToggleFavorite = {
                     onToggleFavorite(!isFavorite)
                 })
@@ -94,6 +96,7 @@ fun SportsTeamSectionPreview() {
             strKeywords = "",
             strManager = "",
             strRSS = ""
-        )
+        ),
+        isLoggedIn =  true
     )
 }

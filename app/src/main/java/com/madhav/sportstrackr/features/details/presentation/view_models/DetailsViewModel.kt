@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
+import com.madhav.sportstrackr.core.domain.usecase.UserUseCases
+import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
 import com.madhav.sportstrackr.features.details.domain.use_cases.TeamUseCases
+import com.madhav.sportstrackr.features.favorite.data.repositories.UserRepository
 import com.madhav.sportstrackr.features.favorite.domain.use_cases.FavoritesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +21,7 @@ import javax.inject.Inject
 class DetailsViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val teamUseCases: TeamUseCases,
-    private val favoriteTeamUseCases: FavoritesUseCases
+    private val userRepository: UserRepository
 ) : ViewModel() {
     private var _teamId: String?= null
 
@@ -26,6 +29,17 @@ class DetailsViewModel @Inject constructor(
 
     private val _teamDetailsState = MutableStateFlow<MyResponse<LeagueTeam>>(MyResponse.Loading)
     val teamDetailsState = _teamDetailsState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            userRepository.currentUser.collect {
+                if(it != null) {
+                    _teamDetailsState.value = MyResponse.Loading
+                    _teamId = null
+                }
+            }
+        }
+    }
 
     suspend fun getTeamDetails(teamId: String?) {
         if(teamId == null) return

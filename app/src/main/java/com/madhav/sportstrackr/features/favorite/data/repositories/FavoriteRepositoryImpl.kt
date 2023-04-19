@@ -17,8 +17,8 @@ class FavoriteRepositoryImpl @Inject constructor(
         return firebaseRemoteDataSource.removeFavoriteTeam(favoriteTeam)
     }
 
-    override fun getFavoriteTeams(): Flow<List<FavoriteTeam>> {
-        return firebaseRemoteDataSource.getFavoriteTeams()
+    override fun getFavoriteTeams(signedInAccount: String): Flow<List<FavoriteTeam>> {
+        return firebaseRemoteDataSource.getFavoriteTeams(signedInAccount)
     }
 
     override fun isFavoriteTeam(id: String): Flow<Boolean> {

@@ -19,7 +19,7 @@ import com.madhav.sportstrackr.features.details.presentation.view_models.Details
 import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 
 @Composable
-fun DetailsScreen(backPressed: ()-> Unit = {}, teamId: String?) {
+fun DetailsScreen(backPressed: ()-> Unit = {}, teamId: String?, favoriteViewModel: FavoriteViewModel) {
     val detailsViewModel = hiltViewModel<DetailsViewModel>()
     val detailsState = detailsViewModel.teamDetailsState.collectAsState()
 
@@ -42,7 +42,6 @@ fun DetailsScreen(backPressed: ()-> Unit = {}, teamId: String?) {
 
         NetworkResponseView(state = detailsState.value,
             successView = { data ->
-                val favoriteViewModel = hiltViewModel<FavoriteViewModel>()
                 val isFavorite =
                     favoriteViewModel.isFavoriteTeam(data.idTeam).collectAsState(initial = false)
 
@@ -64,5 +63,5 @@ fun DetailsScreen(backPressed: ()-> Unit = {}, teamId: String?) {
 @Preview(showBackground = true)
 @Composable
 fun DetailsScreenPreview() {
-    DetailsScreen(teamId = "123454")
+    DetailsScreen(teamId = "123454", favoriteViewModel = hiltViewModel())
 }

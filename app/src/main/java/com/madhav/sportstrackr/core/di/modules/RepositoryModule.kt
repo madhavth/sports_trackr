@@ -23,7 +23,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RepositoryModule {
+object RepositoryModule {
     @Provides
     fun provideEventAPI(retrofit: Retrofit): EventAPI = retrofit.create(EventAPI::class.java)
 
@@ -31,20 +31,25 @@ class RepositoryModule {
     fun provideTeamAPI(retrofit: Retrofit): TeamAPI = retrofit.create(TeamAPI::class.java)
 
     @Provides
-    fun provideSearchAPI(retrofit: Retrofit): SearchTeamAPI = retrofit.create(SearchTeamAPI::class.java)
+    fun provideSearchAPI(retrofit: Retrofit): SearchTeamAPI =
+        retrofit.create(SearchTeamAPI::class.java)
 
     @Provides
-    fun provideEventsRepository(eventRepositoryImpl: EventRepositoryImpl): EventRepository = eventRepositoryImpl
+    fun provideEventsRepository(eventRepositoryImpl: EventRepositoryImpl): EventRepository =
+        eventRepositoryImpl
 
     @Provides
-    fun provideTeamRepository(teamRepositoryImpl: TeamRepositoryImpl): TeamRepository = teamRepositoryImpl
+    fun provideTeamRepository(teamRepositoryImpl: TeamRepositoryImpl): TeamRepository =
+        teamRepositoryImpl
 
     @Provides
-    fun provideSearchTeamRepository(searchTeamRepositoryImpl: SearchRepositoryImpl): SearchRepository = searchTeamRepositoryImpl
+    fun provideSearchTeamRepository(searchTeamRepositoryImpl: SearchRepositoryImpl): SearchRepository =
+        searchTeamRepositoryImpl
 
     @Provides
     fun provideFavoriteRepository(favoriteRepositoryImpl: FavoriteRepositoryImpl): FavoriteRepository = favoriteRepositoryImpl
 
+    @Singleton
     @Provides
     fun providesUserRepository(@ApplicationContext context: Context)=  UserRepository(context)
 }

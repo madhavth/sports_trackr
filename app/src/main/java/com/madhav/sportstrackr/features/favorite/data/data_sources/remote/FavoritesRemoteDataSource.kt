@@ -3,6 +3,7 @@ package com.madhav.sportstrackr.features.favorite.data.data_sources.remote
 import android.content.Context
 import androidx.compose.runtime.rememberCoroutineScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,7 +32,7 @@ class FavoritesRemoteDataSource @Inject constructor(
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    fun getFavoriteTeams(): Flow<List<FavoriteTeam>> {
+    fun getFavoriteTeams(signedInAccount: String): Flow<List<FavoriteTeam>> {
         return callbackFlow {
             val listener =
                 EventListener<QuerySnapshot> { value, error ->
@@ -48,11 +49,8 @@ class FavoritesRemoteDataSource @Inject constructor(
                     this.channel.trySend(favoriteTeams)
                 }
 
-            val userId =
-                GoogleSignIn.getLastSignedInAccount(applicationContext)?.id ?: return@callbackFlow
-
             val favoriteTeamCollection = firebaseFirestore.collection(USERS)
-                .document(userId)
+                .document(signedInAccount)
                 .collection(FAVORITE_TEAM)
 
             favoriteTeamCollection.addSnapshotListener(listener)
