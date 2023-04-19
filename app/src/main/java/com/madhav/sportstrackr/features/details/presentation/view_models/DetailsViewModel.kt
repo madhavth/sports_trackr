@@ -55,6 +55,8 @@ class DetailsViewModel @Inject constructor(
     suspend fun getTeamDetails(teamId: String?) {
         if(teamId == null) return
 
+        if(teamId == _teamId) return
+
         _teamId = teamId
         _teamDetailsState.value = MyResponse.Loading
         _teamDetailsState.value = MyResponse.Success(
