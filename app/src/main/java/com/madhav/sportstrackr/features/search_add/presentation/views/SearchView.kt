@@ -9,8 +9,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -27,7 +29,10 @@ fun SearchView(
     modifier: Modifier = Modifier
 ) {
     val scope = rememberCoroutineScope()
-    var query by remember { mutableStateOf("") }
+    var query by rememberSaveable { mutableStateOf("") }
+
+    val showClearText = query.isNotEmpty()
+
     val submitSearch = {
         scope.launch {
             onSearch(query)
@@ -52,12 +57,17 @@ fun SearchView(
             trailingIcon = {
                 IconButton(
                     onClick = {
-                        submitSearch()
+                        if(showClearText) {
+                            query = ""
+                        }
+                        else {
+                            submitSearch()
+                        }
                     },
                     content = {
                         Icon(
-                            imageVector = Icons.Filled.Search,
-                            contentDescription = "Search",
+                            imageVector =if(showClearText)  Icons.Filled.Clear else Icons.Filled.Search,
+                            contentDescription = if(showClearText) "Clear" else  "Search",
                             tint = Color.Gray
                         )
                     }

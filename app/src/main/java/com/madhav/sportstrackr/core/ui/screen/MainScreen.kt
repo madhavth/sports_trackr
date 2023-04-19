@@ -24,7 +24,8 @@ fun MainScreen(selectedIndex: Int, padding: PaddingValues) {
     val pagerState = rememberPagerState()
 
     LaunchedEffect(key1 = selectedIndex, block = {
-        pagerState.animateScrollToPage(selectedIndex)
+//        pagerState.animateScrollToPage(selectedIndex)
+        pagerState.scrollToPage(selectedIndex)
     })
 
     Column(modifier = Modifier
