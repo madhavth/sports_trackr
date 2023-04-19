@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class FavoriteRepositoryImpl @Inject constructor(
-    private val firebaseRemoteDataSource: FavoritesRemoteDataSource
+    private val firebaseRemoteDataSource: FavoritesRemoteDataSource,
 ) : FavoriteRepository{
     override fun addFavoriteTeam(favoriteTeam: FavoriteTeam) {
         return firebaseRemoteDataSource.addFavoriteTeam(favoriteTeam)

@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.core.di.modules
 
+import com.google.firebase.auth.FirebaseAuth
 import com.madhav.sportstrackr.core.di.qualifiers.BaseUrl
 import com.madhav.sportstrackr.features.details.data.repositories.TeamRepositoryImpl
 import com.madhav.sportstrackr.features.details.data.services.TeamAPI

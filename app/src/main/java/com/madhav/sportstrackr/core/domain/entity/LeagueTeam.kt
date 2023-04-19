@@ -1,6 +1,7 @@
 package com.madhav.sportstrackr.core.domain.entity
 
 import com.madhav.sportstrackr.core.data.models.SocialMediaInfo
+import com.madhav.sportstrackr.features.favorite.domain.entities.FavoriteTeam
 
 data class LeagueTeam(
     val idTeam: String,
@@ -26,3 +27,14 @@ data class LeagueTeam(
     val strDescriptionEN: String?,
     val teamBadge: String = ""
 )
+
+
+fun LeagueTeam.toFavoriteTeam(): FavoriteTeam {
+    return FavoriteTeam(
+        id = idTeam,
+        name = strTeam,
+        bannerImage = strStadiumThumb?: "",
+        sports = strSport,
+        thumbUrl = teamBadge
+    )
+}

@@ -7,6 +7,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.madhav.sportstrackr.core.ui.views.NetworkResponseView
 import com.madhav.sportstrackr.features.details.presentation.view_models.DetailsViewModel
+import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 
 @Composable
 fun DetailsScreen() {
@@ -14,13 +15,15 @@ fun DetailsScreen() {
     val detailsState = detailsViewModel.teamDetailsState.collectAsState()
 
     NetworkResponseView(state = detailsState.value,
-
         successView = { data ->
+            val favoriteViewModel = hiltViewModel<FavoriteViewModel>()
+            val isFavorite = favoriteViewModel.isFavoriteTeam(data.idTeam).collectAsState(initial= false)
+
             LeagueTeamDetailsLoadedScreen(
                 team = data,
-                isFavorite = detailsViewModel.isFavorite,
+                isFavorite = isFavorite.value,
                 onFavoriteToggle = {
-                    detailsViewModel.toggleFavorite(data)
+                    favoriteViewModel.toggleFavorite(!it, data)
                 }
             )
         },

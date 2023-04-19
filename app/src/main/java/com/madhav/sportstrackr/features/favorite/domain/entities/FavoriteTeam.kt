@@ -6,4 +6,6 @@ data class FavoriteTeam(
     val bannerImage: String = "",
     val thumbUrl: String,
     val sports: String,
-)
+) {
+    constructor(): this("", "", "", "", "")
+}

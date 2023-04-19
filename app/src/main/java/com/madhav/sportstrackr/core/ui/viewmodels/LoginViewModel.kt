@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.madhav.sportstrackr.features.favorite.data.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,28 +17,19 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(val app: Application) : AndroidViewModel(app) {
-    private val googleSignClient = GoogleSignIn.getClient(
-        app.applicationContext,
-        GoogleSignInOptions.DEFAULT_SIGN_IN
-    )
-
-    private val _currentUser = MutableStateFlow(
-        GoogleSignIn.getLastSignedInAccount(app.applicationContext)
-    )
+class LoginViewModel @Inject constructor(
+    val app: Application,
+    private val userRepository: UserRepository
+) : AndroidViewModel(app) {
     val currentUser: StateFlow<GoogleSignInAccount?>
-        get() = _currentUser
+        get() = userRepository.currentUser
 
-    private fun updateUser() {
-        _currentUser.value = GoogleSignIn.getLastSignedInAccount(app.applicationContext)
+    fun setAccount(account: GoogleSignInAccount) {
+        userRepository.setAccount(account)
     }
 
     fun signOut() {
-        googleSignClient.signOut()
-        updateUser()
+        userRepository.signOut()
     }
 
-    fun setAccount(account: GoogleSignInAccount) {
-        _currentUser.value = account
-    }
 }

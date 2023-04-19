@@ -22,7 +22,7 @@ fun MyApp() {
         startDestination = Constants.ROUTE.MAIN_SCREEN
     ) {
        composable(Constants.ROUTE.MAIN_SCREEN) {
-           var selectedIndex by rememberSaveable { mutableStateOf(0) }
+           var selectedIndex by rememberSaveable { mutableStateOf(1) }
 
            Scaffold(
                backgroundColor = Color.White,

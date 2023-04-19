@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.core.di.modules
 
+import android.content.Context
 import com.madhav.sportstrackr.features.details.data.repositories.TeamRepositoryImpl
 import com.madhav.sportstrackr.features.details.data.services.TeamAPI
 import com.madhav.sportstrackr.features.details.domain.repositories.TeamRepository
@@ -7,6 +8,7 @@ import com.madhav.sportstrackr.features.events.data.repositories.EventRepository
 import com.madhav.sportstrackr.features.events.data.services.EventAPI
 import com.madhav.sportstrackr.features.events.domain.repositories.EventRepository
 import com.madhav.sportstrackr.features.favorite.data.repositories.FavoriteRepositoryImpl
+import com.madhav.sportstrackr.features.favorite.data.repositories.UserRepository
 import com.madhav.sportstrackr.features.favorite.domain.repositories.FavoriteRepository
 import com.madhav.sportstrackr.features.search_add.data.repositories.SearchRepositoryImpl
 import com.madhav.sportstrackr.features.search_add.data.services.SearchTeamAPI
@@ -14,8 +16,10 @@ import com.madhav.sportstrackr.features.search_add.domain.repositories.SearchRep
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,4 +44,7 @@ class RepositoryModule {
 
     @Provides
     fun provideFavoriteRepository(favoriteRepositoryImpl: FavoriteRepositoryImpl): FavoriteRepository = favoriteRepositoryImpl
+
+    @Provides
+    fun providesUserRepository(@ApplicationContext context: Context)=  UserRepository(context)
 }

@@ -37,10 +37,6 @@ class DetailsViewModel @Inject constructor(
         )
     }
 
-    fun toggleFavorite(data: LeagueTeam) {
-
-    }
-
     val isFavorite
         get() = true
 
