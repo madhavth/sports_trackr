@@ -45,6 +45,8 @@ class EventViewModel @Inject constructor(
         try {
             if(_teamId == null) return
 
+            _teamSportsEvent.value = MyResponse.Loading
+
             val upcomingEvents: List<UpComingEvent> =
                 eventUseCases.getUpcomingEventUseCase.execute(_teamId!!)
             val pastEvents: List<PastEvent> = eventUseCases.getPastEventUseCase.execute(_teamId!!)

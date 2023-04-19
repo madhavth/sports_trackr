@@ -9,21 +9,26 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
 import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.core.theme.DarkGray
 
 @Composable
-fun CircleAvatar(image: Painter, modifier: Modifier = Modifier, size: Int= 64, description:String?= null) {
-    Image(
-        painter = image,
+fun CircleAvatar(image: String, modifier: Modifier = Modifier, size: Int= 64, description:String?= null,
+                 onClicked : () -> Unit = {}
+                 ) {
+    AsyncImage(
+        model = image,
         contentDescription = description,
         modifier = modifier
             .size(size.dp)
             .clip(CircleShape)
             .background(DarkGray)
+            .clickable { onClicked() }
     )
 }
 
@@ -32,7 +37,7 @@ fun CircleAvatar(image: Painter, modifier: Modifier = Modifier, size: Int= 64, d
 @Composable
 fun CircleAvatarPreview() {
     CircleAvatar(
-        image = painterResource(R.drawable.ic_launcher_foreground),
+        image = "",
         modifier = Modifier.padding(16.dp)
     )
 }

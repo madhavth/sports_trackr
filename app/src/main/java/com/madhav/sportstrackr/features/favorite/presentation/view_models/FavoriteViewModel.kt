@@ -102,4 +102,8 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
+    fun removeFavorite(teamId: String) {
+        removeFavoriteTeam(teamId)
+    }
+
 }
