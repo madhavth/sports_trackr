@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.madhav.sportstrackr.core.data.models.MyResponse
+import com.madhav.sportstrackr.features.search_add.presentation.views.StartSearchingView
 
 @Composable
 fun <T> LazyNetworkResponseView(
@@ -41,7 +42,12 @@ fun <T> LazyNetworkResponseView(
                 }
             }
             is MyResponse.Success -> {
-                if (emptyCheckCondition(state.data)) {
+                if(state.data.isEmpty() && state.isInitial) {
+                    item {
+                        StartSearchingView()
+                    }
+                }
+                else if (emptyCheckCondition(state.data)) {
                     item {
                         NotFoundView(info = emptyDataInfo)
                     }
