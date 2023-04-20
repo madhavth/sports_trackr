@@ -24,4 +24,7 @@ interface SearchTeamAPI {
 
     @GET("all_leagues.php")
     suspend fun getAllLeagues(@Query("s") sport: String,@Query("c") country: String): LeaguesModel
+
+    @GET("search_all_teams.php")
+    suspend fun getLeagueTeams(@Query("l") leagueName: String): TeamDetailsModel
 }

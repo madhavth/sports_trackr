@@ -10,7 +10,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.madhav.sportstrackr.core.constants.MyConstants
 import com.madhav.sportstrackr.core.data.models.MyResponse
+import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
 import com.madhav.sportstrackr.core.ui.viewmodels.MainViewModel
+import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.LeagueSearchViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.SportsSearchViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.TeamSearchViewModel
@@ -20,6 +22,8 @@ fun SearchScreen(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val teamSearchViewModel = hiltViewModel<TeamSearchViewModel>()
     val mainViewModel = hiltViewModel<MainViewModel>()
+    val favoriteViewModel = hiltViewModel<FavoriteViewModel>()
+    val authViewModel: AuthViewModel = hiltViewModel()
 
     NavHost(
         navController = navController, startDestination = MyConstants.SEARCH_ROUTE.TEAM_SEARCH,
@@ -36,6 +40,20 @@ fun SearchScreen(modifier: Modifier = Modifier) {
                 navigateRequest = { route ->
                     navController.navigate(route)
                 }
+            )
+        }
+
+        composable(MyConstants.SEARCH_ROUTE.LEAGUES_TEAM_SEARCH) {
+            val league = navController.previousBackStackEntry?.arguments?.getString("league")
+            val userState = authViewModel.currentUser.collectAsState()
+
+            LeagueTeamSearchScreen(
+                onBackPressed = {
+                    navController.navigateUp()
+                },
+                league = league,
+                favoriteViewModel = favoriteViewModel,
+                isLoggedIn = userState.value != null
             )
         }
 

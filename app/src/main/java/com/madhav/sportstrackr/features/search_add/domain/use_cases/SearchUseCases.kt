@@ -9,5 +9,6 @@ class SearchUseCases @Inject constructor(
     val searchPlayerUseCase: SearchPlayerUseCase,
     val searchCountriesUseCase: SearchCountriesUseCase,
     val leagueSearchUseCase: SearchLeaguesUseCase,
+    val leagueTeamsSearchUseCase: SearchLeagueTeamsUseCase,
 ){
 }

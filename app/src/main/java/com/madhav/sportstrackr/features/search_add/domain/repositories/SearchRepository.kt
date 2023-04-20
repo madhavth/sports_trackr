@@ -12,4 +12,5 @@ interface SearchRepository {
     suspend fun getAllPlayers(teamName: String, playerName: String): PlayersModel
     suspend fun getAllCountries(): CountriesModel
     suspend fun searchLeagues(sport: String, country: String): LeaguesModel
+    suspend fun getLeagueTeams(leagueName: String): TeamDetailsModel
 }

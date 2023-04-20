@@ -31,4 +31,8 @@ class SearchRepositoryImpl @Inject constructor(
     override suspend fun searchLeagues(sport: String, country: String): LeaguesModel {
         return searchDataSource.getAllLeagues(sport, country)
     }
+
+    override suspend fun getLeagueTeams(leagueName: String): TeamDetailsModel {
+        return searchDataSource.getLeagueTeams(leagueName)
+    }
 }
