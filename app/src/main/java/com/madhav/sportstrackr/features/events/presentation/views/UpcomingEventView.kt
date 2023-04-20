@@ -97,7 +97,8 @@ fun UpcomingEventView(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp),
-                desc = upComingEvent.bannerImage
+                desc = upComingEvent.bannerImage,
+                crossFade = true
             )
 
             Spacer(modifier = Modifier.height(8.dp))

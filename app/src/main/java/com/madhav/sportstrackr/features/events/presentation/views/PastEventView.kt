@@ -80,7 +80,8 @@ fun PastEventView(event: PastEvent, modifier: Modifier = Modifier) {
             NetworkImage(
                 url = event.bannerImage,
                 modifier = Modifier.fillMaxWidth().height(200.dp),
-                desc = event.bannerImage
+                desc = event.bannerImage,
+                crossFade =  true
             )
 
             Spacer(modifier = Modifier.height(8.dp))
