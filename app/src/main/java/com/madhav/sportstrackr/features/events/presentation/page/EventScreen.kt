@@ -48,22 +48,25 @@ fun EventScreen(modifier: Modifier = Modifier) {
     }
 
     Scaffold(
-        topBar =  {
+        topBar = {
+            if(favoriteTeams.value?.isEmpty() == false)
             TopAppBar() {
                 Text(
-                    text = "Schedules", style = TextStyle(
+                    text = "SCHEDULES", style = TextStyle(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.White,),
-                        modifier= Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
-                    )
+                        color = Color.White,
+                    ),
+                    modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
+                )
             }
         }
     ) {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(it)) {
-
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -71,21 +74,22 @@ fun EventScreen(modifier: Modifier = Modifier) {
                     .background(Color.DarkGray)
             )
 
-            FavoriteAvatarList(
-                favoriteTeams = favoriteTeams.value,
-                onAddClicked = {
-                    mainViewModel.navigateToAddTeam()
-                },
-                onClicked = { team ->
-                    scope.launch {
-                        eventViewModel.getTeamSportsEvents(team.id)
-                    }
-                },
-                onRemoveClicked = { team ->
-                    favoriteViewModel.removeFavorite(team.id)
-                },
-                selectedTeamId = selectedTeamId.value
-            )
+            if (favoriteTeams.value?.isNotEmpty() == true)
+                FavoriteAvatarList(
+                    favoriteTeams = favoriteTeams.value,
+                    onAddClicked = {
+                        mainViewModel.navigateToAddTeam()
+                    },
+                    onClicked = { team ->
+                        scope.launch {
+                            eventViewModel.getTeamSportsEvents(team.id)
+                        }
+                    },
+                    onRemoveClicked = { team ->
+                        favoriteViewModel.removeFavorite(team.id)
+                    },
+                    selectedTeamId = selectedTeamId.value
+                )
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()

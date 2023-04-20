@@ -2,9 +2,12 @@ package com.madhav.sportstrackr.features.events.presentation.page
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -45,7 +48,7 @@ fun PastFutureEventScreen(
             }
 
 
-            if(upcomingEvents.isEmpty()) {
+            if (upcomingEvents.isEmpty()) {
                 item {
                     Text(
                         stringResource(R.string.no_upcoming_events),
@@ -55,9 +58,10 @@ fun PastFutureEventScreen(
                             textAlign = TextAlign.Center,
                         ),
                         modifier = Modifier
-                            .padding(bottom = 32.dp,
-                            top = 32.dp
-                                )
+                            .padding(
+                                bottom = 32.dp,
+                                top = 32.dp
+                            )
                             .fillMaxWidth()
                     )
                 }
@@ -79,12 +83,12 @@ fun PastFutureEventScreen(
                         textDecoration = TextDecoration.Underline
                     ),
                     modifier = Modifier
-                        .padding(bottom = 24.dp, top= 24.dp)
+                        .padding(bottom = 24.dp, top = 24.dp)
                         .fillMaxWidth()
                 )
             }
 
-            if(pastEvents.isEmpty()) {
+            if (pastEvents.isEmpty()) {
                 item {
                     Text(
                         stringResource(R.string.no_past_events),
@@ -94,7 +98,8 @@ fun PastFutureEventScreen(
                             textAlign = TextAlign.Center,
                         ),
                         modifier = Modifier
-                            .padding(bottom = 32.dp,
+                            .padding(
+                                bottom = 32.dp,
                                 top = 32.dp
                             )
                             .fillMaxWidth()
