@@ -85,7 +85,12 @@ fun SearchScreen(modifier: Modifier = Modifier) {
                     navController.navigateUp()
                 },
                 country = country,
-                sports = sports
+                sports = sports,
+                onLeagueClicked = {
+                    league ->
+                    navController.navigate(MyConstants.SEARCH_ROUTE.LEAGUES_TEAM_SEARCH + "/${league.name}") {
+                    }
+                }
             )
 
         }

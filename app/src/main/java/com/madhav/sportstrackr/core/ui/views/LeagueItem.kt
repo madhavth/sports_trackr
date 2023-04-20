@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.madhav.sportstrackr.core.domain.entity.League
 
 @Composable
-fun LeagueItem(league: League, modifier: Modifier = Modifier) {
+fun LeagueItem(league: League, modifier: Modifier = Modifier, onPressed: (League)-> Unit = {}) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -29,7 +29,7 @@ fun LeagueItem(league: League, modifier: Modifier = Modifier) {
                 shape = RoundedCornerShape(16.dp)
             )
             .clickable {
-
+                onPressed(league)
             }
         , elevation = 8.dp
     ) {

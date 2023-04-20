@@ -13,6 +13,7 @@ fun LeagueSearchScreen(modifier: Modifier = Modifier,
                        onBackPressed: () -> Unit,
                        sports: String? = null,
                        country: String? = null,
+                       onLeagueClicked: (League) -> Unit
                        ) {
 
     val leagueSearchViewModel = hiltViewModel<LeagueSearchViewModel>()
@@ -22,7 +23,9 @@ fun LeagueSearchScreen(modifier: Modifier = Modifier,
         listState = leaguesListState.value,
         appBarTitle = "Search by league",
         successView = {
-                      LeagueItem(league = it)
+                      LeagueItem(league = it,
+                      onPressed = onLeagueClicked
+                          )
         },
         checkEmptyCondition = {
             it.isEmpty() && leagueSearchViewModel.searchQuery.isNotEmpty()
