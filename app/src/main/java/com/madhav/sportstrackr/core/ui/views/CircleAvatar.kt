@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.core.ui.views
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,50 +13,60 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.madhav.sportstrackr.core.theme.DarkGray
 
 sealed class ImageType(val value: String) {
     data class Network(val v: String) : ImageType(v)
     data class NameAvatar(val v: String) : ImageType(v)
+    data class Local(val v: String) : ImageType(v)
 }
 
 @Composable
 fun CircleAvatar(
     image: ImageType, modifier: Modifier = Modifier, size: Int = 64, description: String? = null,
     onClicked: () -> Unit = {},
-    isSelected: Boolean
+    isSelected: Boolean,
+    fontSize: Int = 24
 ) {
+    val imageModifier = modifier
+        .size(size.dp)
+        .background(
+            if (isSelected) MaterialTheme.colors.primary
+            else Color.Transparent, CircleShape
+        )
+        .padding(if (isSelected) 6.dp else 0.dp)
+        .clip(CircleShape)
+        .clickable { onClicked() }
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .size(size.dp)
-            .background(
-                if (isSelected) MaterialTheme.colors.primary
-                else Color.Transparent, CircleShape
-            )
-            .padding(if (isSelected) 6.dp else 0.dp)
-            .clip(CircleShape)
-            .clickable { onClicked() }
-    ) {
-        when (image) {
-            is ImageType.NameAvatar -> {
+
+    when (image) {
+        is ImageType.NameAvatar -> {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = imageModifier
+            ) {
                 Text(
                     text = image.value,
                     color = Color.White,
-                    fontSize = 24.sp
+                    fontSize = fontSize.sp
                 )
             }
-            is ImageType.Network -> {
-                AsyncImage(
-                    model = image.value, contentDescription = "profile image",
-                    modifier = Modifier.background(DarkGray)
-                )
-            }
+        }
+        is ImageType.Network -> {
+            AsyncImage(
+                modifier = imageModifier,
+                model = image.value, contentDescription = "profile image",
+            )
+        }
+        is ImageType.Local -> {
+            Image(painter = painterResource(id =
+            com.madhav.sportstrackr.R.drawable.ic_add
+            ),
+                contentDescription = image.value)
         }
     }
 }
@@ -81,4 +92,17 @@ fun CircleAvatarNamePreview() {
         modifier = Modifier.padding(16.dp),
         isSelected = true
     )
+
+
+}
+@Preview(showBackground = true)
+@Composable
+fun CircleAvatarLocalPreview() {
+    CircleAvatar(
+        image = ImageType.Local("MT"),
+        modifier = Modifier.padding(16.dp),
+        isSelected = true
+    )
+
+
 }

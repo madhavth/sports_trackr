@@ -46,7 +46,9 @@ fun MyProfileView(
                     userInfo.getInitials()
                 )
                 else ImageType.Network(userInfo.image),
-                isSelected = true
+                isSelected = true,
+                fontSize = 48,
+                size = 128
             )
 
             Spacer(modifier = Modifier.height(16.dp))

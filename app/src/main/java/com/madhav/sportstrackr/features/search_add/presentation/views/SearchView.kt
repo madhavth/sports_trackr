@@ -81,12 +81,6 @@ fun SearchView(
             keyboardActions = KeyboardActions(onSearch = { submitSearch() }),
             modifier = Modifier.fillMaxWidth()
         )
-
-        // Invisible button that captures clicks and submits the search query
-        TextButton(
-            onClick = { submitSearch() },
-            colors = ButtonDefaults.textButtonColors(contentColor = Color.Transparent)
-        ) {}
     }
 }
 
