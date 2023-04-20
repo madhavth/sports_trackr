@@ -29,7 +29,8 @@ fun DetailsScreen(
     teamId: String?,
     teamName: String?,
     favoriteViewModel: FavoriteViewModel,
-    onClickedSearch: (String) -> Unit
+    onClickedSearch: (String) -> Unit,
+    isLoggedIn: Boolean
 ) {
     val detailsViewModel = hiltViewModel<DetailsViewModel>()
     val detailsState = detailsViewModel.teamDetailsState.collectAsState()
@@ -87,8 +88,10 @@ fun DetailsScreen(
                         onFavoriteToggle = {
                             favoriteViewModel.toggleFavorite(!it, data)
                         },
-                        onClickSearch = onClickedSearch
+                        onClickSearch = onClickedSearch,
+                        isLoggedIn = isLoggedIn,
                     )
+
                 },
                 onRetry = {
                     detailsViewModel.getTeamDetails(detailsViewModel.teamId)
@@ -102,6 +105,7 @@ fun DetailsScreen(
 @Composable
 fun DetailsScreenPreview() {
     DetailsScreen(teamId = "123454", teamName = "", favoriteViewModel = hiltViewModel(),
-        onClickedSearch = {}
+        onClickedSearch = {},
+        isLoggedIn = true
     )
 }

@@ -129,7 +129,10 @@ fun TeamSearchScreen(
                         onToggleFavorite = {
                             favoriteViewModel.toggleFavorite(isFavorite.value, leagueTeam)
                         },
-                        isLoggedIn = user.value != null
+                        isLoggedIn = user.value != null,
+                        onClick = {
+                            navigateRequest(MyConstants.SEARCH_ROUTE.TEAM_DETAILS + "/${leagueTeam.idTeam}/${leagueTeam.strTeam}")
+                        }
                     )
                 },
                 emptyDataInfo = "No team found",

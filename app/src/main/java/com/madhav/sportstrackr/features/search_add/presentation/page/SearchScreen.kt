@@ -2,6 +2,7 @@ package com.madhav.sportstrackr.features.search_add.presentation.page
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -13,8 +14,12 @@ import com.madhav.sportstrackr.core.constants.MyConstants
 import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
 import com.madhav.sportstrackr.core.ui.viewmodels.MainViewModel
+import com.madhav.sportstrackr.features.details.presentation.page.DetailsScreen
+import com.madhav.sportstrackr.features.details.presentation.page.LeagueTeamDetailsLoadedScreen
+import com.madhav.sportstrackr.features.details.presentation.page.PlayerSearchScreen
 import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.LeagueSearchViewModel
+import com.madhav.sportstrackr.features.search_add.presentation.view_models.PlayerSearchViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.SportsSearchViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.TeamSearchViewModel
 
@@ -94,7 +99,52 @@ fun SearchScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        composable(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/{country}/{sports}") {
+        composable(MyConstants.SEARCH_ROUTE.TEAM_DETAILS + "/{id}/{name}") {
+            val name = it.arguments?.getString("name")
+            val id = it.arguments?.getString("id")
+
+            val userState = authViewModel.currentUser.collectAsState()
+
+            DetailsScreen(
+                teamId = id,
+                teamName = name,
+                favoriteViewModel = favoriteViewModel,
+                onClickedSearch = {
+                    navController.navigate(MyConstants.SEARCH_ROUTE.MY_PLAYERS_SEARCH + "/${id}/${name}")
+                },
+                isLoggedIn = userState.value != null
+            )
+        }
+
+        composable(MyConstants.SEARCH_ROUTE.MY_PLAYERS_SEARCH + "/{arg}/{teamName}") {
+            val teamId = it.arguments?.getString("arg")
+            val teamName = it.arguments?.getString("teamName")
+
+            val playersSearchViewModel: PlayerSearchViewModel = hiltViewModel()
+
+            LaunchedEffect(key1 = true, block = {
+                playersSearchViewModel.setTeamId(teamId)
+                playersSearchViewModel.setTeamName(teamName)
+                playersSearchViewModel.performSearch("")
+            })
+
+            val playersList = playersSearchViewModel.teamPlayers.collectAsState()
+
+            PlayerSearchScreen(
+                backPressed = {
+                    navController.navigateUp()
+                },
+                teamId = teamId,
+                teamName = teamName,
+                playersList = playersList.value,
+                performSearch = { query ->
+                    playersSearchViewModel.performSearch(query)
+                }
+            )
+        }
+
+
+            composable(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/{country}/{sports}") {
             val country = it.arguments?.getString("country")
             val sports = it.arguments?.getString("sports")
 

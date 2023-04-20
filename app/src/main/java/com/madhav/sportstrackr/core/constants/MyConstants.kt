@@ -13,6 +13,8 @@ object MyConstants {
     }
 
     object SEARCH_ROUTE {
+        const val TEAM_DETAILS = "my_team_details"
+        const val MY_PLAYERS_SEARCH = "my_players_search"
         const val LEAGUES_TEAM_SEARCH = "league_team_search"
         const val TEAM_SEARCH = "team_search"
         const val SPORT_SEARCH = "sport_search"

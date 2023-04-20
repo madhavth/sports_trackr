@@ -26,7 +26,8 @@ fun LeagueTeamDetailsLoadedScreen(
     team: LeagueTeam,
     isFavorite: Boolean,
     onFavoriteToggle: (Boolean) -> Unit,
-    onClickSearch: (String) -> Unit = {}
+    onClickSearch: (String) -> Unit = {},
+    isLoggedIn: Boolean
 ) {
     val scrollState = rememberScrollState()
 
@@ -37,6 +38,7 @@ fun LeagueTeamDetailsLoadedScreen(
             .verticalScroll(scrollState)
     ) {
         // Team name section
+        if(isLoggedIn)
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -97,5 +99,5 @@ fun LeagueTeamScreenPreview() {
     ),
         isFavorite = false, onFavoriteToggle = {
 
-        })
+        }, isLoggedIn =  true)
 }

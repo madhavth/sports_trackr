@@ -21,12 +21,16 @@ fun TeamOverView(
     leagueTeam: LeagueTeam, modifier: Modifier = Modifier,
     isFavorite: Boolean = false,
     onToggleFavorite: (Boolean) -> Unit = {},
-    isLoggedIn: Boolean = false
+    isLoggedIn: Boolean = false,
+    onClick: (LeagueTeam) -> Unit = {}
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp)
+            .clickable {
+                onClick(leagueTeam)
+            },
         shape = RoundedCornerShape(8.dp),
         elevation = 8.dp,
         backgroundColor = Color.White

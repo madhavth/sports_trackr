@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.madhav.sportstrackr.core.constants.MyConstants
+import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
 import com.madhav.sportstrackr.core.ui.viewmodels.MainViewModel
 import com.madhav.sportstrackr.core.ui.views.LoadingView
 import com.madhav.sportstrackr.core.ui.views.NoTeamAddedView
@@ -29,6 +30,7 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
     val favoriteTeams = favoriteViewModel.favoriteTeams.collectAsState(initial = null)
     val mainViewModel: MainViewModel = hiltViewModel()
     val navController = rememberNavController()
+    val authViewModel = hiltViewModel<AuthViewModel>()
 
     NavHost(
         navController = navController, startDestination = MyConstants.DETAILS_ROUTE.TEAM_LIST,
@@ -57,6 +59,7 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
         composable(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/{arg}/{teamName}") {
             val teamId = it.arguments?.getString("arg")
             val myTeamName = it.arguments?.getString("teamName")
+            val currentUser = authViewModel.currentUser.collectAsState()
 
             DetailsScreen(
                 backPressed = {
@@ -67,7 +70,8 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
                 favoriteViewModel = favoriteViewModel,
                 onClickedSearch = { teamName ->
                     navController.navigate(MyConstants.DETAILS_ROUTE.PLAYER_SEARCH + "/${teamId}/${teamName}")
-                }
+                },
+                isLoggedIn = currentUser.value != null
             )
         }
 

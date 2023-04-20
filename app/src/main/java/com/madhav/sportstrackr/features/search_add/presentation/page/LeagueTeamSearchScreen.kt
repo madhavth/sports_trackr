@@ -35,7 +35,10 @@ fun LeagueTeamSearchScreen(
                 onToggleFavorite = {
                     favoriteViewModel.toggleFavorite(isFavorite.value, leagueTeam)
                 },
-                isLoggedIn = isLoggedIn
+                isLoggedIn = isLoggedIn,
+                onClick =  {
+
+                }
             )
         },
         checkEmptyCondition = {
