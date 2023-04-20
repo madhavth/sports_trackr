@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.features.profile.presentation.page
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -14,11 +15,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.madhav.sportstrackr.core.domain.entity.MyUserInfo
+import com.madhav.sportstrackr.core.ui.views.CircleAvatar
+import com.madhav.sportstrackr.core.ui.views.ImageType
 
 @Composable
-fun MyProfileView(userInfo: MyUserInfo?, modifier: Modifier = Modifier,
-            logoutPressed: () -> Unit = {}
-                  ) {
+fun MyProfileView(
+    userInfo: MyUserInfo?, modifier: Modifier = Modifier,
+    logoutPressed: () -> Unit = {}
+) {
     if (userInfo == null) {
         return
     }
@@ -35,15 +39,16 @@ fun MyProfileView(userInfo: MyUserInfo?, modifier: Modifier = Modifier,
                 .padding(it),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AsyncImage(
-                model = userInfo.image,
-                contentDescription = "User Image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(120.dp)
-                    .padding(8.dp)
-                    .clip(shape = MaterialTheme.shapes.medium)
+            Spacer(modifier = Modifier.height(16.dp))
+
+            CircleAvatar(
+                image = if (userInfo.image.isEmpty()) ImageType.NameAvatar(
+                    userInfo.getInitials()
+                )
+                else ImageType.Network(userInfo.image),
+                isSelected = true
             )
+
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = userInfo.fullName, style = MaterialTheme.typography.h5)
             Spacer(modifier = Modifier.height(8.dp))

@@ -27,7 +27,7 @@ fun CircleAvatarWithRemoveButton(
 ) {
     Box(modifier = modifier) {
         CircleAvatar(
-            image = image,
+            image = ImageType.Network(image),
             onClicked = onClicked,
             isSelected = isSelected
         )

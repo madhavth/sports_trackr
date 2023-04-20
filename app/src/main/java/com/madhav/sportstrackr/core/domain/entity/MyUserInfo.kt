@@ -9,7 +9,11 @@ data class MyUserInfo(
     val lastName: String,
     val image: String,
     val email: String
-)
+) {
+    fun getInitials(): String {
+        return firstName[0].toString() + lastName[0].toString()
+    }
+}
 
 fun GoogleSignInAccount.toMyUserInfo(): MyUserInfo? {
     if (
