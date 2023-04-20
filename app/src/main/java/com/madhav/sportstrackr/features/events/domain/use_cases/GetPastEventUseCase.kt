@@ -25,6 +25,7 @@ class GetPastEventUseCase @Inject constructor(
                 name = it.strFilename,
                 date = it.dateEvent,
                 bannerImage = it.strThumb + "/preview",
+                league = it.strLeague
                 )
         } ?: listOf()
     }

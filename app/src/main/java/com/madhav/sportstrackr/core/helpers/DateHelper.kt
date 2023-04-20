@@ -3,7 +3,9 @@ package com.madhav.sportstrackr.core.helpers
 import android.content.Context
 import android.content.Intent
 import android.provider.CalendarContract
+import androidx.compose.ui.text.capitalize
 import androidx.core.content.ContextCompat.startActivity
+import com.google.type.DateTime
 import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 import java.text.SimpleDateFormat
@@ -48,8 +50,22 @@ object DateHelper {
         val dateTime = dateFormat.parse(dateTimeString)
         val dateFormatter = SimpleDateFormat("d'${getDaySuffix(dateTime.date)}' MMMM, yyyy", Locale.getDefault())
         val timeFormatter = SimpleDateFormat("h:mm a", Locale.getDefault())
-        return "${dateFormatter.format(dateTime)} @ ${timeFormatter.format(dateTime)}".toLowerCase().capitalize()
+        return "${dateFormatter.format(dateTime)} @ ${timeFormatter.format(dateTime)}".lowercase().capitalize()
     }
+
+    fun getFormattedDateTime(dateTimeString: String) : String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dateTime = dateFormat.parse(dateTimeString)
+        val dateFormatter = SimpleDateFormat("d'${getDaySuffix(dateTime.date)}' MMMM, yyyy", Locale.getDefault())
+        return "${dateTime?.let { dateFormatter.format(it) }}"
+    }
+
+
+    fun getDateTimeObject(dateTimeString: String): Date? {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault())
+        return dateFormat.parse(dateTimeString)
+    }
+
 
     fun getDaySuffix(day: Int): String {
         return when (day) {

@@ -132,6 +132,16 @@ fun UpcomingEventView(
                     )
                 }
             }
+            Row() {
+                // league text view bold
+                Text(
+                    text = upComingEvent.league,
+                    style = MaterialTheme.typography.body2.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
+                    ),
+                )
+            }
         }
     }
 }

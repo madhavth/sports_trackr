@@ -16,9 +16,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.madhav.sportstrackr.core.data.models.TeamScore
+import com.madhav.sportstrackr.core.helpers.DateHelper
 import com.madhav.sportstrackr.core.ui.views.NetworkImage
 import com.madhav.sportstrackr.features.events.domain.entities.PastEvent
 
@@ -87,9 +89,20 @@ fun PastEventView(event: PastEvent, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = event.date,
+                text = DateHelper.getFormattedDateTime(event.date),
                 style = MaterialTheme.typography.caption,
             )
+
+            Row() {
+                // league text view bold
+                Text(
+                    text = event.league,
+                    style = MaterialTheme.typography.body2.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
+                    ),
+                )
+            }
         }
     }
 

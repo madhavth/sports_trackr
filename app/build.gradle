@@ -13,6 +13,10 @@ kapt {
 }
 
 android {
+    signingConfigs {
+        release {
+        }
+    }
     compileSdk 33
 
     defaultConfig {

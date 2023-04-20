@@ -15,6 +15,7 @@ class GetUpcomingEventUseCase @Inject constructor(
                 homeTeam = it.strHomeTeam,
                 awayTeam = it.strAwayTeam,
                 bannerImage = it.strThumb + "/preview",
+                league = it.strLeague
             )
         } ?: listOf()
     }
