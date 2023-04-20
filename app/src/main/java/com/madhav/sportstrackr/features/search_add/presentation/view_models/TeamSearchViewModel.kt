@@ -48,12 +48,9 @@ class TeamSearchViewModel @Inject constructor(
     }
 
     // add a 1sec bounce to the search
-    suspend fun performSearch(query: String) {
+    suspend fun performSearch(query: String, delay: Long = 1000) {
         cancelAndInitSearchScope()
         _searchQuery = query
-
-        if (query.length < 3) return
-
         _teamSearchResults.value = MyResponse.Loading
 
         withContext(searchScope.coroutineContext) {

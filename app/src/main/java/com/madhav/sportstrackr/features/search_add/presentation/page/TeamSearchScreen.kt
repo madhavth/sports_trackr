@@ -62,7 +62,8 @@ fun TeamSearchScreen(
             .fillMaxSize()
             .padding(it)) {
             SearchView(hint = "search here", onSearch = {
-                teamSearchViewModel.performSearch(it)
+                query ->
+                teamSearchViewModel.performSearch(query)
             })
 
             // alert dialog view
@@ -129,7 +130,7 @@ fun TeamSearchScreen(
                     data.isEmpty() && teamSearchViewModel.searchQuery.isNotEmpty()
                 },
                 onErrorRetry = {
-                    teamSearchViewModel.performSearch(teamSearchViewModel.searchQuery)
+                    teamSearchViewModel.performSearch(teamSearchViewModel.searchQuery, 0)
                 },
                 loadingAnim = com.madhav.sportstrackr.R.raw.searching
             )
