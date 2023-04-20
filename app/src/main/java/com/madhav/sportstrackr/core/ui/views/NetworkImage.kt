@@ -18,7 +18,6 @@ crossFade: Boolean = false
         .crossfade(crossFade)
 //        .placeholder(R.drawable.ic_launcher_background)
         .error(R.drawable.ic_placeholder)
-        .scale(Scale.FILL)
         .build(),
 
         contentDescription = desc?: url, modifier = modifier)
