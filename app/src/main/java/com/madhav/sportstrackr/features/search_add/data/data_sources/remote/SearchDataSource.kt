@@ -17,5 +17,6 @@ class SearchDataSource @Inject constructor(
         .getAllPlayers(teamName, playerName)
 
     suspend fun getAllCountries(): CountriesModel= searchTeamAPI.getAllCountries()
+
     suspend fun getAllLeagues(sport: String, country: String) : LeaguesModel = searchTeamAPI.getAllLeagues(sport, country)
 }

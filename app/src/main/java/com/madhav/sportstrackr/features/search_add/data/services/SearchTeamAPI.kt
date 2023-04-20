@@ -23,5 +23,5 @@ interface SearchTeamAPI {
     suspend fun getAllCountries(): CountriesModel
 
     @GET("all_leagues.php")
-    fun getAllLeagues(@Query("s") sport: String,@Query("c") country: String): LeaguesModel
+    suspend fun getAllLeagues(@Query("s") sport: String,@Query("c") country: String): LeaguesModel
 }

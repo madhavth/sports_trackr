@@ -20,6 +20,7 @@ fun LeagueSearchScreen(modifier: Modifier = Modifier,
 
     GeneralSearchScreen(
         listState = leaguesListState.value,
+        appBarTitle = "Search by league",
         successView = {
                       LeagueItem(league = it)
         },

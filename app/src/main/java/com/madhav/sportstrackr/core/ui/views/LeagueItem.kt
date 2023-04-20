@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.core.ui.views
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +22,11 @@ fun LeagueItem(league: League, modifier: Modifier = Modifier) {
             .padding(8.dp)
             .clip(
                 RoundedCornerShape(16.dp),
+            )
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f),
+                shape = RoundedCornerShape(16.dp)
             )
             .clickable {
 
