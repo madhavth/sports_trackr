@@ -28,22 +28,34 @@ fun FavoriteAvatarList(
     onAddClicked: () -> Unit = {},
     selectedTeamId: String? = null
 ) {
-    Surface(modifier = Modifier.fillMaxWidth()
+    Surface(
+        modifier = Modifier.fillMaxWidth()
         // add gradient background
-        .background(
-            brush = Brush.linearGradient(
-                colors = listOf(
-                    Color.Black,
-                    Color.White
-                ),
-                start = Offset(0f, 0f),
-                end = Offset(1f, 1f)
-            )
-        )
+//        .background(
+//            brush = Brush.linearGradient(
+//                colors = listOf(
+//                    Color.Black,
+//                    Color.White
+//                ),
+//                start = Offset(0f, 0f),
+//                end = Offset(1f, 1f)
+//            )
+//        )
     ) {
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
+                .background(Color.LightGray.copy(0.8f))
+//                .background(
+//                    brush = Brush.linearGradient(
+//                        colors = listOf(
+//                            Color.Green,
+//                            Color.White
+//                        ),
+//                        start = Offset(0f, 0f),
+//                        end = Offset(1f, 1f)
+//                    )
+//                )
                 .padding(8.dp)
         ) {
 
