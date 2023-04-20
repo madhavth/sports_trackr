@@ -35,7 +35,7 @@ fun PastFutureEventScreen(
                     style = TextStyle(
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
+                        textAlign = TextAlign.Start,
                         textDecoration = TextDecoration.Underline
                     ),
                     modifier = Modifier
@@ -75,7 +75,7 @@ fun PastFutureEventScreen(
                     style = TextStyle(
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
+                        textAlign = TextAlign.Start,
                         textDecoration = TextDecoration.Underline
                     ),
                     modifier = Modifier
