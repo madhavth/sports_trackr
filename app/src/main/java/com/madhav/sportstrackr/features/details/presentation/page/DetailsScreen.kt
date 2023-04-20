@@ -78,13 +78,18 @@ fun DetailsScreen(
 
             NetworkResponseView(state = detailsState.value,
                 successView = { data ->
-                    val isFavorite =
+                    var favorite: Boolean
+
+                    favorite = if(isLoggedIn) {
                         favoriteViewModel.isFavoriteTeam(data.idTeam)
-                            .collectAsState(initial = false)
+                            .collectAsState(initial = false).value
+                    } else {
+                        false
+                    }
 
                     LeagueTeamDetailsLoadedScreen(
                         team = data,
-                        isFavorite = isFavorite.value,
+                        isFavorite = favorite,
                         onFavoriteToggle = {
                             favoriteViewModel.toggleFavorite(!it, data)
                         },
