@@ -47,18 +47,18 @@ fun TeamOverView(
                 Text(text = leagueTeam.strCountry)
             }
 
-            Column(modifier = Modifier.weight(0.2f),
-            horizontalAlignment = Alignment.End
-                ) {
-                if(isLoggedIn)
-                FavoriteButton(isFavorite = isFavorite, onToggleFavorite = {
-                    onToggleFavorite(!isFavorite)
-                })
-                AsyncImage(
-                    model = leagueTeam.teamBadge,
-                    contentDescription = leagueTeam.teamBadge,
-                    modifier = Modifier
-                        .padding(8.dp)
+            Column(
+                modifier = Modifier.weight(0.2f),
+                horizontalAlignment = Alignment.End
+            ) {
+                if (isLoggedIn)
+                    FavoriteButton(isFavorite = isFavorite, onToggleFavorite = {
+                        onToggleFavorite(!isFavorite)
+                    })
+                NetworkImage(
+                    url = leagueTeam.teamBadge,
+                    modifier = Modifier.padding(8.dp),
+                    desc = leagueTeam.teamBadge
                 )
             }
         }
@@ -97,6 +97,6 @@ fun SportsTeamSectionPreview() {
             strManager = "",
             strRSS = ""
         ),
-        isLoggedIn =  true
+        isLoggedIn = true
     )
 }

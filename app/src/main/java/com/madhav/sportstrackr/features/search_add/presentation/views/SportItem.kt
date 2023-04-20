@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
+import com.madhav.sportstrackr.core.ui.views.NetworkImage
 import com.madhav.sportstrackr.features.search_add.domain.entities.Sport
 
 @Composable
@@ -36,19 +37,20 @@ fun SportItemView(
             modifier = modifier
                 .fillMaxWidth()
                 .clickable { onClick(sport) }
-            .padding(vertical = 8.dp, horizontal = 16.dp),
+                .padding(vertical = 8.dp, horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AsyncImage(
-                model = sport.imgUrl,
-                contentDescription = sport.name,
-                modifier = Modifier.size(48.dp)
+            NetworkImage(
+                url = sport.imgUrl, modifier = Modifier.size(48.dp),
+                desc = sport.name
             )
             Spacer(modifier = Modifier.width(16.dp))
             Text(text = sport.name, fontWeight = FontWeight.Bold)
-            Spacer(modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f))
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            )
 
             Icon(
                 imageVector = Icons.Filled.ArrowForward,

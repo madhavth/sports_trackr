@@ -28,6 +28,7 @@ import coil.request.ImageRequest
 import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.core.helpers.DateHelper
 import com.madhav.sportstrackr.core.helpers.PermissionHelper
+import com.madhav.sportstrackr.core.ui.views.NetworkImage
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 import com.madhav.sportstrackr.features.events.presentation.view_models.EventViewModel
 import kotlinx.coroutines.launch
@@ -91,12 +92,13 @@ fun UpcomingEventView(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            AsyncImage(model = ImageRequest.Builder(LocalContext.current)
-                .data(upComingEvent.bannerImage)
-                .crossfade(true).build(),
-                contentDescription = upComingEvent.bannerImage,
-            modifier = Modifier.fillMaxWidth().height(200.dp)
-                )
+            NetworkImage(
+                url = upComingEvent.bannerImage,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                desc = upComingEvent.bannerImage
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
             Row(
@@ -105,7 +107,7 @@ fun UpcomingEventView(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text =  DateHelper.formatDateTime(upComingEvent.date),
+                    text = DateHelper.formatDateTime(upComingEvent.date),
                     style = MaterialTheme.typography.body2.copy(
                         fontWeight = FontWeight.SemiBold,
                     ),
@@ -118,7 +120,7 @@ fun UpcomingEventView(
                         scope.launch {
                             scaffoldState.snackbarHostState.showSnackbar(
                                 context.resources.getString(R.string.event_added_calendar),
-                                actionLabel =context.resources.getString(R.string.ok),
+                                actionLabel = context.resources.getString(R.string.ok),
                             )
                         }
                     },

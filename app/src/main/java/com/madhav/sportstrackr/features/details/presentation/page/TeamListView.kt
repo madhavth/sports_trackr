@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.madhav.sportstrackr.core.ui.views.FavoriteButton
+import com.madhav.sportstrackr.core.ui.views.NetworkImage
 import com.madhav.sportstrackr.core.ui.views.SearchIcon
 import com.madhav.sportstrackr.features.favorite.domain.entities.FavoriteTeam
 
@@ -82,11 +83,10 @@ fun TeamRow(
                 )
                 FavoriteButton(isFavorite = isFavorite, onToggleFavorite = onToggleFavorite)
             }
-            AsyncImage(
-                model = team.thumbUrl, contentDescription = team.name,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)
+            NetworkImage(
+                url = team.thumbUrl,
+                desc = team.name,
+                modifier = Modifier.fillMaxWidth().height(100.dp)
             )
             Text(team.name)
             Text(team.sports)

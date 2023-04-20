@@ -57,10 +57,7 @@ fun CircleAvatar(
             }
         }
         is ImageType.Network -> {
-            AsyncImage(
-                modifier = imageModifier,
-                model = image.value, contentDescription = "profile image",
-            )
+            NetworkImage(url = image.value, modifier = imageModifier, desc = "profile image")
         }
         is ImageType.Local -> {
             Image(painter = painterResource(id =

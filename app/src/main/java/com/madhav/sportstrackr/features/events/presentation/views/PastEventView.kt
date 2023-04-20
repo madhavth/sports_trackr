@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.madhav.sportstrackr.core.data.models.TeamScore
+import com.madhav.sportstrackr.core.ui.views.NetworkImage
 import com.madhav.sportstrackr.features.events.domain.entities.PastEvent
 
 @Composable
@@ -76,14 +77,10 @@ fun PastEventView(event: PastEvent, modifier: Modifier = Modifier) {
             }
             Spacer(modifier = Modifier.height(8.dp))
 
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(event.bannerImage)
-                    .crossfade(true).build(),
-                contentDescription = event.bannerImage,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
+            NetworkImage(
+                url = event.bannerImage,
+                modifier = Modifier.fillMaxWidth().height(200.dp),
+                desc = event.bannerImage
             )
 
             Spacer(modifier = Modifier.height(8.dp))
