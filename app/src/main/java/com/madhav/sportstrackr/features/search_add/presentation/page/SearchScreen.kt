@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.madhav.sportstrackr.core.constants.MyConstants
 import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.core.ui.viewmodels.MainViewModel
+import com.madhav.sportstrackr.features.search_add.presentation.view_models.LeagueSearchViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.SportsSearchViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.TeamSearchViewModel
 
@@ -32,8 +33,7 @@ fun SearchScreen(modifier: Modifier = Modifier) {
                 teamsState = teamsState.value, teamSearchViewModel,
                 showAddAlertDialog = showAlertDialog.value,
                 mainViewModel = mainViewModel,
-                navigateRequest = {
-                    route ->
+                navigateRequest = { route ->
                     navController.navigate(route)
                 }
             )
@@ -50,9 +50,25 @@ fun SearchScreen(modifier: Modifier = Modifier) {
         }
 
         composable(MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH) {
+            CountriesSearchScreen(onCountrySelected = {
+            },
+                onBackPressed = {
+                    navController.navigateUp()
+                }
+            )
         }
 
         composable(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH) {
+            val country = navController.previousBackStackEntry?.arguments?.getString("country")
+            val sports = navController.previousBackStackEntry?.arguments?.getString("sports")
+
+            LeagueSearchScreen(
+                onBackPressed = {
+                    navController.navigateUp()
+                },
+                country = country,
+                sports = sports
+            )
 
         }
     }

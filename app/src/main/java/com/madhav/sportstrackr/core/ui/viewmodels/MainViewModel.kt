@@ -11,7 +11,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    private val _selectedIndex = MutableStateFlow(0)
+    private val _selectedIndex = MutableStateFlow(2)
     val selectedIndex: StateFlow<Int> = _selectedIndex
 
     private val _addAlertDialog = MutableStateFlow(false)

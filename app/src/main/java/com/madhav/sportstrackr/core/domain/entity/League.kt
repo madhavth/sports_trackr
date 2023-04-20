@@ -1,6 +1,7 @@
 package com.madhav.sportstrackr.core.domain.entity
 
-data class LeagueInfo(
+data class League(
     val name: String,
-    val country: String
+    val sport: String,
+    val country: String?,
 )

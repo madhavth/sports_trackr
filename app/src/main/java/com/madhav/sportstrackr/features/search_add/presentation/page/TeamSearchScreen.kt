@@ -86,20 +86,26 @@ fun TeamSearchScreen(
                             }
 
                             Button(onClick = {
-                                navigateRequest(MyConstants.SEARCH_ROUTE.SPORT_SEARCH)
-                                mainViewModel.hideAddAlertDialog()
+                                navigateToScreen(navigateRequest, mainViewModel,
+                                    MyConstants.SEARCH_ROUTE.SPORT_SEARCH
+                                )
                             }) {
                                 Text("by sport name")
                             }
 
                             Button(onClick = {
-                                mainViewModel.hideAddAlertDialog()
+                                navigateToScreen(navigateRequest, mainViewModel,
+                                    MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH
+                                )
+
                             }) {
                                 Text("by country name")
                             }
 
                             Button(onClick = {
-
+                                navigateToScreen(navigateRequest, mainViewModel,
+                                MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH
+                                    )
                             })
                             {
                                 Text("by league name")
@@ -137,6 +143,15 @@ fun TeamSearchScreen(
             )
         }
     }
+}
+
+private fun navigateToScreen(
+    navigateRequest: (String) -> Unit,
+    mainViewModel: MainViewModel,
+    screen: String
+) {
+    navigateRequest(screen)
+    mainViewModel.hideAddAlertDialog()
 }
 
 @Preview(showSystemUi = true, showBackground = true)

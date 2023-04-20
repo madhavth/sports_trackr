@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.features.search_add.data.data_sources.remote
 
+import com.madhav.sportstrackr.core.data.models.LeaguesModel
 import com.madhav.sportstrackr.core.data.models.PlayersModel
 import com.madhav.sportstrackr.features.search_add.data.models.CountriesModel
 import com.madhav.sportstrackr.features.search_add.data.services.SearchTeamAPI
@@ -16,4 +17,5 @@ class SearchDataSource @Inject constructor(
         .getAllPlayers(teamName, playerName)
 
     suspend fun getAllCountries(): CountriesModel= searchTeamAPI.getAllCountries()
+    suspend fun getAllLeagues(sport: String, country: String) : LeaguesModel = searchTeamAPI.getAllLeagues(sport, country)
 }

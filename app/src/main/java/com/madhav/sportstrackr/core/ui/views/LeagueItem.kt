@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.core.ui.views
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -10,15 +11,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.madhav.sportstrackr.core.data.models.League
+import com.madhav.sportstrackr.core.domain.entity.League
 
 @Composable
-fun LeagueItem(league: League, modifier: Modifier=Modifier) {
-    Card(modifier = modifier.fillMaxWidth()
-        .padding(8.dp)
-        .clip(RoundedCornerShape(16.dp),
+fun LeagueItem(league: League, modifier: Modifier = Modifier) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clip(
+                RoundedCornerShape(16.dp),
             )
-    , elevation = 8.dp) {
+            .clickable {
+
+            }
+        , elevation = 8.dp
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -26,7 +34,11 @@ fun LeagueItem(league: League, modifier: Modifier=Modifier) {
         ) {
             Text(text = league.name, style = MaterialTheme.typography.h6)
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = league.country, style = MaterialTheme.typography.body2)
+            if (league.country != null) {
+                Text(text = league.country, style = MaterialTheme.typography.body2)
+                Spacer(modifier = Modifier.height(4.dp))
+            }
+            Text(text = league.sport, style = MaterialTheme.typography.body2)
         }
     }
 }
@@ -34,5 +46,8 @@ fun LeagueItem(league: League, modifier: Modifier=Modifier) {
 @Preview
 @Composable
 fun LeagueItemPreview() {
-    LeagueItem(league = League(name = "Premier League", country = "England"))
+    LeagueItem(league = League(name = "Premier League", country = "England",
+    sport = "Soccer"
+        )
+    )
 }
