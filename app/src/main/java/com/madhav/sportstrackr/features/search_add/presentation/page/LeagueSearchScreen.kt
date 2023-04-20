@@ -27,6 +27,7 @@ fun LeagueSearchScreen(modifier: Modifier = Modifier,
                       onPressed = onLeagueClicked
                           )
         },
+        onBackPressed = onBackPressed,
         checkEmptyCondition = {
             it.isEmpty() && leagueSearchViewModel.searchQuery.isNotEmpty()
         },

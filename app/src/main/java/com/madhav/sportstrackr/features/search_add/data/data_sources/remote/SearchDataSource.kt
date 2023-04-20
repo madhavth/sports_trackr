@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.features.search_add.data.data_sources.remote
 
+import com.madhav.sportstrackr.core.data.models.LeagueModel
 import com.madhav.sportstrackr.core.data.models.LeaguesModel
 import com.madhav.sportstrackr.core.data.models.PlayersModel
 import com.madhav.sportstrackr.core.data.models.TeamDetailsModel
@@ -19,7 +20,13 @@ class SearchDataSource @Inject constructor(
 
     suspend fun getAllCountries(): CountriesModel= searchTeamAPI.getAllCountries()
 
-    suspend fun getAllLeagues(sport: String, country: String) : LeaguesModel = searchTeamAPI.getAllLeagues(sport, country)
+    suspend fun getAllLeagues(sport: String, country: String) : List<LeagueModel>? {
+        if(sport.isBlank() && country.isBlank()) {
+            return searchTeamAPI.getEveryLeague().leagues
+        }
+
+        return searchTeamAPI.getAllLeagues(sport, country).countries
+    }
 
     suspend fun getLeagueTeams(leagueName: String): TeamDetailsModel = searchTeamAPI.getLeagueTeams(leagueName)
 }

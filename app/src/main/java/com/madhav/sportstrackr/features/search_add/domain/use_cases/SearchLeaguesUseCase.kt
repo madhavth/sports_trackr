@@ -9,7 +9,7 @@ class SearchLeaguesUseCase @Inject constructor(
     private val searchRepository: SearchRepository
 ) {
     suspend fun execute(sport: String, country:String): List<League> {
-        return searchRepository.searchLeagues(sport, country).leagues?.map {
+        return searchRepository.searchLeagues(sport, country)?.map {
            it. toDomain()
         } ?: listOf()
     }

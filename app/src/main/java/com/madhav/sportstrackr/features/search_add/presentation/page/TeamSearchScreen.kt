@@ -87,7 +87,7 @@ fun TeamSearchScreen(
 
                             Button(onClick = {
                                 navigateToScreen(navigateRequest, mainViewModel,
-                                    MyConstants.SEARCH_ROUTE.SPORT_SEARCH
+                                    MyConstants.SEARCH_ROUTE.SPORT_SEARCH + "/ "
                                 )
                             }) {
                                 Text("by sport name")
@@ -95,7 +95,7 @@ fun TeamSearchScreen(
 
                             Button(onClick = {
                                 navigateToScreen(navigateRequest, mainViewModel,
-                                    MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH
+                                    MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH + "/ "
                                 )
 
                             }) {
@@ -104,7 +104,7 @@ fun TeamSearchScreen(
 
                             Button(onClick = {
                                 navigateToScreen(navigateRequest, mainViewModel,
-                                MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH
+                                MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/ / "
                                     )
                             })
                             {

@@ -69,17 +69,10 @@ fun SearchScreen(modifier: Modifier = Modifier) {
                 navController.navigateUp()
             },
                 onClicked = { sport ->
-                    if (country == null) {
+                    if (country == null || country.isBlank()) {
                         navController.navigate(MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH + "/${sport.name}")
                     } else {
-                        navController.navigate(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/${country}/${sport.name}") {
-                            navArgument("country") {
-                                defaultValue = country
-                            }
-                            navArgument("sports") {
-                                defaultValue = sport.name
-                            }
-                        }
+                        navController.navigate(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/${country}/${sport.name}")
                     }
                 }
             )
@@ -89,17 +82,10 @@ fun SearchScreen(modifier: Modifier = Modifier) {
             val sports = it.arguments?.getString("sports")
 
             CountriesSearchScreen(onCountrySelected = { country ->
-                if (sports == null) {
-                    navController.navigate(MyConstants.SEARCH_ROUTE.SPORT_SEARCH)
+                if (sports == null || sports.isBlank()) {
+                    navController.navigate(MyConstants.SEARCH_ROUTE.SPORT_SEARCH + "/${country.name}")
                 } else {
-                    navController.navigate(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/${country.name}/${sports}") {
-                        navArgument("country") {
-                            defaultValue = country
-                        }
-                        navArgument("sports") {
-                            defaultValue = sports
-                        }
-                    }
+                    navController.navigate(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/${country.name}/${sports}")
                 }
             },
                 onBackPressed = {

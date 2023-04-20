@@ -1,5 +1,6 @@
 package com.madhav.sportstrackr.features.search_add.data.services
 
+import com.madhav.sportstrackr.core.data.models.LeagueTeamsModel
 import com.madhav.sportstrackr.core.data.models.LeaguesModel
 import com.madhav.sportstrackr.core.data.models.PlayersModel
 import com.madhav.sportstrackr.core.data.models.TeamDetailsModel
@@ -22,8 +23,11 @@ interface SearchTeamAPI {
     @GET("all_countries.php")
     suspend fun getAllCountries(): CountriesModel
 
+    @GET("search_all_leagues.php")
+    suspend fun getAllLeagues(@Query("s") sport: String,@Query("c") country: String): LeagueTeamsModel
+
     @GET("all_leagues.php")
-    suspend fun getAllLeagues(@Query("s") sport: String,@Query("c") country: String): LeaguesModel
+    suspend fun getEveryLeague(): LeaguesModel
 
     @GET("search_all_teams.php")
     suspend fun getLeagueTeams(@Query("l") leagueName: String): TeamDetailsModel
