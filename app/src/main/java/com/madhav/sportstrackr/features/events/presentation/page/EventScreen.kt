@@ -2,7 +2,9 @@ package com.madhav.sportstrackr.features.events.presentation.page
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -45,64 +47,72 @@ fun EventScreen(modifier: Modifier = Modifier) {
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        Row(modifier = Modifier.padding(8.dp)) {
-            Text(
-                text = "MY TEAMS", style = TextStyle(
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            )
-        }
-
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(1.dp)
-                .background(Color.DarkGray)
-        )
-
-        FavoriteAvatarList(
-            favoriteTeams = favoriteTeams.value,
-            onAddClicked =  {
-                mainViewModel.navigateToAddTeam()
-            },
-            onClicked = { team ->
-                scope.launch {
-                    eventViewModel.getTeamSportsEvents(team.id)
-                }
-            },
-            onRemoveClicked = { team ->
-                favoriteViewModel.removeFavorite(team.id)
-            },
-            selectedTeamId = selectedTeamId.value
-        )
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(1.dp)
-                .background(Color.DarkGray)
-        )
-
-        if (favoriteTeams.value == null) {
-            LoadingView()
-        } else {
-            if (favoriteTeams.value!!.isNotEmpty()) {
-                NetworkResponseView(sportsState.value, successView = { data ->
-                    PastFutureEventScreen(
-                        upcomingEvents = data.upcoming,
-                        pastEvents = data.past
+    Scaffold(
+        topBar =  {
+            TopAppBar() {
+                Text(
+                    text = "Schedules", style = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,),
+                        modifier= Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
                     )
-                },
-                    onRetry = {
-                        scope.launch {
-                            eventViewModel.getTeamSportsEvents()
-                        }
-                    }
-                )
-            } else {
-                NoTeamAddedView(modifier = modifier.fillMaxSize()) {
+            }
+        }
+    ) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(it)) {
+
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+                    .background(Color.DarkGray)
+            )
+
+            FavoriteAvatarList(
+                favoriteTeams = favoriteTeams.value,
+                onAddClicked = {
                     mainViewModel.navigateToAddTeam()
+                },
+                onClicked = { team ->
+                    scope.launch {
+                        eventViewModel.getTeamSportsEvents(team.id)
+                    }
+                },
+                onRemoveClicked = { team ->
+                    favoriteViewModel.removeFavorite(team.id)
+                },
+                selectedTeamId = selectedTeamId.value
+            )
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+                    .background(Color.DarkGray)
+            )
+
+            if (favoriteTeams.value == null) {
+                LoadingView()
+            } else {
+                if (favoriteTeams.value!!.isNotEmpty()) {
+                    NetworkResponseView(sportsState.value, successView = { data ->
+                        PastFutureEventScreen(
+                            upcomingEvents = data.upcoming,
+                            pastEvents = data.past
+                        )
+                    },
+                        onRetry = {
+                            scope.launch {
+                                eventViewModel.getTeamSportsEvents()
+                            }
+                        }
+                    )
+                } else {
+                    NoTeamAddedView(modifier = modifier.fillMaxSize()) {
+                        mainViewModel.navigateToAddTeam()
+                    }
                 }
             }
         }

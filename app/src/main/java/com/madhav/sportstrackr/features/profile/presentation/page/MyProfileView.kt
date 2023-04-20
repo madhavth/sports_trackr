@@ -25,7 +25,7 @@ fun MyProfileView(userInfo: MyUserInfo?, modifier: Modifier = Modifier,
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Profile") }
+                title = { Text(text = "PROFILE") }
             )
         }
     ) {
@@ -56,15 +56,7 @@ fun MyProfileView(userInfo: MyUserInfo?, modifier: Modifier = Modifier,
                     .fillMaxWidth()
                     .padding(vertical = 16.dp)
             )
-            Text(
-                text = "First Name: ${userInfo.firstName}",
-                style = MaterialTheme.typography.body1
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Last Name: ${userInfo.lastName}",
-                style = MaterialTheme.typography.body1
-            )
+
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
                 logoutPressed()

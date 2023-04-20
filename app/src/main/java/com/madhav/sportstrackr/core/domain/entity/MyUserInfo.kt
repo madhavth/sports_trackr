@@ -16,8 +16,9 @@ fun GoogleSignInAccount.toMyUserInfo(): MyUserInfo? {
         id == null
         && displayName == null
         && email == null
-    )
+    ) {
         return null
+    }
 
     return MyUserInfo(
         id = id!!,

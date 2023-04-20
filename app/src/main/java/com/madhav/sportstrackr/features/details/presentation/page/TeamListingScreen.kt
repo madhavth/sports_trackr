@@ -41,34 +41,11 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
             } else {
                 if (favoriteTeams.value!!.isNotEmpty()) {
 
-                    Column(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Text(
-                            text = "FAVORITE TEAMS",
-                            style = MaterialTheme.typography.body1.copy(
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
-                        )
+                    FavoriteTeamsScreen(
+                        favoriteTeams = favoriteTeams.value!!, navController = navController,
+                        favoriteViewModel = favoriteViewModel
+                    )
 
-                        TeamListView(
-                            modifier = modifier, teams = favoriteTeams.value!!,
-                            onClick = {
-                                navController.navigate(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/${it.id}") {
-                                    navArgument("arg") {
-                                        defaultValue = it.id
-                                    }
-                                }
-                            },
-                            onToggleFavorite = {
-                                favoriteViewModel.removeFavorite(it)
-                            },
-                            searchIconClicked = {
-                                navController.navigate(MyConstants.DETAILS_ROUTE.PLAYER_SEARCH + "/${it.id}/${it.name}")
-                            }
-                        )
-                    }
                 } else {
                     NoTeamAddedView(modifier = modifier.fillMaxSize()) {
                         mainViewModel.navigateToAddTeam()
@@ -77,13 +54,16 @@ fun TeamListingScreen(modifier: Modifier = Modifier) {
             }
         }
 
-        composable(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/{arg}") {
+        composable(MyConstants.DETAILS_ROUTE.TEAM_DETAILS + "/{arg}/{teamName}") {
             val teamId = it.arguments?.getString("arg")
+            val myTeamName = it.arguments?.getString("teamName")
+
             DetailsScreen(
                 backPressed = {
                     navController.navigateUp()
                 },
                 teamId = teamId,
+                teamName = myTeamName,
                 favoriteViewModel = favoriteViewModel,
                 onClickedSearch = { teamName ->
                     navController.navigate(MyConstants.DETAILS_ROUTE.PLAYER_SEARCH + "/${teamId}/${teamName}")

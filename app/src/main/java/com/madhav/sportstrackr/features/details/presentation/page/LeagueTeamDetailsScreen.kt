@@ -49,37 +49,6 @@ fun LeagueTeamDetailsLoadedScreen(
         SportsTeamSection(name = team.strTeam)
         Spacer(modifier = Modifier.height(16.dp))
 
-        Surface(
-            modifier = Modifier
-                .padding(4.dp)
-                .fillMaxWidth()
-                .clickable {
-                    onClickSearch(team.strTeam)
-                },
-            shape = RoundedCornerShape(4.dp),
-            color = MaterialTheme.colors.primary,
-            contentColor = Color.White
-        ) {
-            Row(
-                horizontalArrangement =
-                Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Text(
-                    "Click to search players",
-                    modifier = Modifier.padding(8.dp)
-                )
-
-                Icon(
-                    Icons.Filled.Search,
-                    contentDescription = "Search",
-                    modifier = Modifier.padding(8.dp)
-                )
-            }
-
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
         LeagueInformationView(leagueName = team.strLeague, country = team.strCountry)
 
         Spacer(modifier = Modifier.height(8.dp))

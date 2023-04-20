@@ -2,7 +2,9 @@ package com.madhav.sportstrackr.features.details.presentation.page
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,45 +24,59 @@ fun PlayerSearchScreen(
     teamName: String?,
     performSearch: (String) -> Unit = {}
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            BackButton(backPressed = backPressed)
+    Scaffold(
+        topBar = {
+            TopAppBar() {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    BackButton(backPressed = backPressed)
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "$teamName Players",
-                    style = MaterialTheme.typography.h6.copy(
-                        fontWeight = FontWeight.Bold
-                    )
-                )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "$teamName Players",
+                            style = MaterialTheme.typography.h6.copy(
+                                fontWeight = FontWeight.Bold
+                            )
+                        )
+                    }
+                }
+
             }
         }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
+            SearchView(hint = "search here", onSearch = {
+                query ->
+                performSearch(query)
+            })
 
-        SearchView(hint = "search here", onSearch = {
-            performSearch(it)
-        })
+            LazyNetworkResponseView(
+                state = playersList,
+                successView = {
+                    info ->
+                    PlayerInfoCardView(playerInfo = info)
+                },
+                emptyCheckCondition = {
+                    list->
+                    list.isEmpty()
+                },
+                onErrorRetry = {
+                    performSearch("")
+                }
+            )
 
-        LazyNetworkResponseView(
-            state = playersList,
-            successView =  {
-                           PlayerInfoCardView(playerInfo = it)
-            },
-            emptyCheckCondition = {
-                                  it.isEmpty()
-            },
-            onErrorRetry = {
-                performSearch("")
-            }
-        )
+        }
 
     }
-
 }
