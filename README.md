@@ -22,9 +22,12 @@ icons are modern and stylish, while still being easily recognizable.
 ## Screens
 
 ### Upcoming Events/ Past Events
+<img src="/screenshots/upcoming_event.jpg"
+align="left" height="540" width="270" alt="Upcoming Events">
 
-![Upcoming Events](/screenshots/upcoming_event.jpg)
-![Past Events](/screenshots/past_events.jpg)
+<img src="/screenshots/past_events.jpg"
+align="left" height="540" width="270" alt="Past Events">
+
 
 The upcoming events displays a list of upcoming events for the user's favorite teams. The past
 events displays a list of past events for the user's favorite teams.
@@ -33,25 +36,24 @@ Users can click on their favorite team at the top to change the team they are vi
 
 ### Team Details Screen
 
-![Team Details Screen](/images/team_details_screen.png)
+![Team Details Screen](/screenshots/team_details.jpg)
 
-The team details screen displays information about a specific team, including their logo, name,
-country, league, and sport. Users can also view the team's upcoming and past events, as well as add
-the team to their favorites.
+The team details screen displays information about a specific team, including their name, country,
+league, and sport. Users can also see information regarding their social media information
 
 ### Profile Screen
 
-![Profile Screen](/images/profile_screen.png)
+![Profile Screen](/screenshots/profile.jpg)
 
 The profile screen displays the user's profile information, including their name, email, and profile
-picture. Users can edit their profile information, view their favorite teams, and sign out.
+picture.
 
 ## Developer Info
 
-Sports Trackr was developed by [Your Name](https://github.com/yourusername). If you have any
-questions or issues with the app, please feel free to contact me via email at your@email.com.
+Sports Trackr was developed by [madhavth](https://github.com/madhavth). If you have any questions or
+issues with the app, please feel free to contact me via email at madhav.thapa296@gmail.com.
 
 ## APK Download
 
 You can download the latest version of Sports Trackr
-from [here](https://example.com/sportstrackr.apk).
+from [here](https://drive.google.com/file/d/14HSpiLIVLh4dcBpZV37l03t8wx4cg59p/view?usp=share_link).
