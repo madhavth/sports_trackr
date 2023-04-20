@@ -4,12 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.madhav.sportstrackr.core.data.models.MyResponse
-import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
 import com.madhav.sportstrackr.core.ui.views.TeamOverView
 import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.TeamLeaguesSearchViewModel
-import com.madhav.sportstrackr.features.search_add.presentation.view_models.TeamSearchViewModel
 
 @Composable
 fun LeagueTeamSearchScreen(

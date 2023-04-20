@@ -8,6 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.madhav.sportstrackr.core.constants.MyConstants
 import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
@@ -43,8 +44,8 @@ fun SearchScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        composable(MyConstants.SEARCH_ROUTE.LEAGUES_TEAM_SEARCH) {
-            val league = navController.previousBackStackEntry?.arguments?.getString("league")
+        composable(MyConstants.SEARCH_ROUTE.LEAGUES_TEAM_SEARCH + "/{league}") {
+            val league = it.arguments?.getString("league")
             val userState = authViewModel.currentUser.collectAsState()
 
             LeagueTeamSearchScreen(
@@ -77,8 +78,8 @@ fun SearchScreen(modifier: Modifier = Modifier) {
         }
 
         composable(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH) {
-            val country = navController.previousBackStackEntry?.arguments?.getString("country")
-            val sports = navController.previousBackStackEntry?.arguments?.getString("sports")
+            val country = it.arguments?.getString("country")
+            val sports = it.arguments?.getString("sports")
 
             LeagueSearchScreen(
                 onBackPressed = {
@@ -89,6 +90,9 @@ fun SearchScreen(modifier: Modifier = Modifier) {
                 onLeagueClicked = {
                     league ->
                     navController.navigate(MyConstants.SEARCH_ROUTE.LEAGUES_TEAM_SEARCH + "/${league.name}") {
+                        navArgument("league") {
+                            defaultValue = league.name
+                        }
                     }
                 }
             )
