@@ -2,18 +2,18 @@ package com.madhav.sportstrackr.features.search_add.presentation.page
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.core.data.models.MyResponse
-import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
-import com.madhav.sportstrackr.core.ui.viewmodels.AuthViewModel
 import com.madhav.sportstrackr.core.ui.views.BackButton
 import com.madhav.sportstrackr.core.ui.views.LazyNetworkResponseView
+import com.madhav.sportstrackr.core.ui.views.MyTopAppBar
 import com.madhav.sportstrackr.features.search_add.domain.entities.Sport
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.SportsSearchViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.views.SearchView
@@ -30,30 +30,38 @@ fun SportsSearchScreen(
         searchViewModel.getSports()
     })
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        SearchView(hint = "search sports here", onQueryChanged = {
-            searchViewModel.performSearch(it)
-        }, onSearch = {
-            searchViewModel.performSearch(it)
-        })
+    Scaffold(
+        topBar = {
+                 MyTopAppBar(text = "Search by sports",
+                 backPressed = onBackPressed
+                     )
+        },
+        modifier = Modifier) { padding ->
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(padding)) {
+            SearchView(hint = "search sports here", onQueryChanged = {
+                searchViewModel.performSearch(it)
+            }, onSearch = {
+                searchViewModel.performSearch(it)
+            })
 
-        BackButton(backPressed = onBackPressed)
-
-        LazyNetworkResponseView(
-            state = teamsState,
-            modifier = Modifier.fillMaxSize(),
-            successView = { sport ->
-                SportItemView(sport = sport)
-            },
-            emptyDataInfo = "No such sport found",
-            emptyCheckCondition = { data ->
-                data.isEmpty() && searchViewModel.searchQuery.isNotEmpty()
-            },
-            onErrorRetry = {
-                searchViewModel.getSports()
-            },
-            loadingAnim = R.raw.searching
-        )
+            LazyNetworkResponseView(
+                state = teamsState,
+                modifier = Modifier.fillMaxSize(),
+                successView = { sport ->
+                    SportItemView(sport = sport)
+                },
+                emptyDataInfo = "No such sport found",
+                emptyCheckCondition = { data ->
+                    data.isEmpty() && searchViewModel.searchQuery.isNotEmpty()
+                },
+                onErrorRetry = {
+                    searchViewModel.getSports()
+                },
+                loadingAnim = R.raw.searching
+            )
+        }
     }
 }
 
