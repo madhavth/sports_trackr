@@ -37,7 +37,7 @@ class TeamSearchViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-        performSearch("Arsenal")
+//        performSearch("Arsenal")
         }
     }
 

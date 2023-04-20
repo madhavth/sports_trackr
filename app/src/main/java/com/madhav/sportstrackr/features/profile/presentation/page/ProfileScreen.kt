@@ -1,7 +1,5 @@
 package com.madhav.sportstrackr.features.profile.presentation.page
 
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -10,17 +8,15 @@ import com.madhav.sportstrackr.core.ui.views.SignInPromptView
 
 @Composable
 fun ProfileScreen() {
-    val loginViewModel= hiltViewModel<AuthViewModel>()
-    val user = loginViewModel.currentUser.collectAsState().value
+    val authViewModel = hiltViewModel<AuthViewModel>()
+    val user = authViewModel.currentUser.collectAsState().value
+    val userInfo = authViewModel.userInfo.collectAsState(initial = null).value
 
-    if(user != null) {
-        Button(onClick = {
-            loginViewModel.signOut()
-        }) {
-            Text("Sign Out")
-        }
-    }
-    else {
+    if (user != null) {
+        MyProfileView(userInfo, logoutPressed = {
+            authViewModel.signOut()
+        })
+    } else {
         SignInPromptView(info = "Sign in to view your profile")
     }
 }
