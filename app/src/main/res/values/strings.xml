@@ -14,4 +14,7 @@
     <string name="sign_in_to_view_recent_matches">Sign in to add/view your favorite teams next/recent matches</string>
     <string name="no_upcoming_events">No upcoming events</string>
     <string name="no_past_events">No past events</string>
+    <string name="onboarding_page_one">Welcome to Sports Trackr! Track your favorite teams events and stay up-to-date with the latest scores and stats. Let\'s get started!</string>
+    <string name="onboarding_page_two">With Sports Trackr, you can search for players on your favorite teams and get detailed information on each player\'s stats and performance. Start exploring now!</string>
+    <string name="onboarding_page_three">Add your favorite teams to Sports Trackr and never miss a game or event again. Enter the team\'s name to get started. Welcome to the world of sports tracking!</string>
 </resources>

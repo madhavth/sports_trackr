@@ -1,6 +1,7 @@
 package com.madhav.sportstrackr.features.splash.presentation.page
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -12,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -32,7 +35,8 @@ fun SplashScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(48.dp),
+                    .height(48.dp)
+                    .background(Color.Black.copy(0.5f)),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -45,7 +49,9 @@ fun SplashScreen(
                         },
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
-                        Text("Prev")
+                        Text("Prev", style= TextStyle(
+                            color =  Color.White
+                        ))
                     }
                 }
 
