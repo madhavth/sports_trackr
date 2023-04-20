@@ -99,4 +99,4 @@ issues with the app, please feel free to contact me via email at madhav.thapa296
 ## APK Download
 
 You can download the latest version of Sports Trackr
-from [here](https://drive.google.com/file/d/14HSpiLIVLh4dcBpZV37l03t8wx4cg59p/view?usp=share_link).
+from [here](https://drive.google.com/drive/folders/112BSXwke1HhpiPK5bjDk3wmXiHhdGelY?usp=share_link).
