@@ -21,12 +21,13 @@ import com.madhav.sportstrackr.features.search_add.presentation.views.SportItemV
 @Composable
 fun SportsSearchScreen(
     teamsState: MyResponse<List<Sport>>, modifier: Modifier = Modifier,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
+    onClicked: (Sport) -> Unit
 ) {
     val searchViewModel = hiltViewModel<SportsSearchViewModel>()
     GeneralSearchScreen(listState = teamsState,
         successView = { sport ->
-            SportItemView(sport = sport)
+            SportItemView(sport = sport, onClick= onClicked)
         },
         onBackPressed = onBackPressed,
         appBarTitle = "Search by sports",
@@ -63,6 +64,7 @@ fun SportsSearchScreenPreview() {
                 ),
             )
         ),
-        onBackPressed = {}
+        onBackPressed = {},
+        onClicked =  {}
     )
 }

@@ -58,18 +58,49 @@ fun SearchScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        composable(MyConstants.SEARCH_ROUTE.SPORT_SEARCH) {
+        composable(MyConstants.SEARCH_ROUTE.SPORT_SEARCH + "/{country}") {
+            val country = it.arguments?.getString("country")
+
             val sportsSearchViewModel = hiltViewModel<SportsSearchViewModel>()
             val sportsState = sportsSearchViewModel.sportSearchResult.collectAsState(
                 initial = MyResponse.Loading
             )
             SportsSearchScreen(sportsState.value, onBackPressed = {
                 navController.navigateUp()
-            })
+            },
+                onClicked = { sport ->
+                    if (country == null) {
+                        navController.navigate(MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH + "/${sport.name}")
+                    } else {
+                        navController.navigate(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/${country}/${sport.name}") {
+                            navArgument("country") {
+                                defaultValue = country
+                            }
+                            navArgument("sports") {
+                                defaultValue = sport.name
+                            }
+                        }
+                    }
+                }
+            )
         }
 
-        composable(MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH) {
-            CountriesSearchScreen(onCountrySelected = {
+        composable(MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH + "/{sports}") {
+            val sports = it.arguments?.getString("sports")
+
+            CountriesSearchScreen(onCountrySelected = { country ->
+                if (sports == null) {
+                    navController.navigate(MyConstants.SEARCH_ROUTE.SPORT_SEARCH)
+                } else {
+                    navController.navigate(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/${country.name}/${sports}") {
+                        navArgument("country") {
+                            defaultValue = country
+                        }
+                        navArgument("sports") {
+                            defaultValue = sports
+                        }
+                    }
+                }
             },
                 onBackPressed = {
                     navController.navigateUp()
@@ -77,7 +108,7 @@ fun SearchScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        composable(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH) {
+        composable(MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/{country}/{sports}") {
             val country = it.arguments?.getString("country")
             val sports = it.arguments?.getString("sports")
 
@@ -87,8 +118,7 @@ fun SearchScreen(modifier: Modifier = Modifier) {
                 },
                 country = country,
                 sports = sports,
-                onLeagueClicked = {
-                    league ->
+                onLeagueClicked = { league ->
                     navController.navigate(MyConstants.SEARCH_ROUTE.LEAGUES_TEAM_SEARCH + "/${league.name}") {
                         navArgument("league") {
                             defaultValue = league.name
