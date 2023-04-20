@@ -9,9 +9,12 @@ their favorites, search for teams by name, and view their own user profile.
 ## Libraries Used
 
 - Jetpack Compose: A modern toolkit for building native Android UI.
-- Firebase: A mobile and web application development platform.
 - Retrofit: A type-safe HTTP client for Android and Java.
 - Coil: An image loading library for Android backed by Kotlin Coroutines.
+- Firebase Firestore: Store and sync app data in real-time.
+- Firebase Analytics: Track user engagement and behavior in your app.
+- Firebase Crashlytics: Monitor and report application crashes and errors
+
 
 ## Design
 
