@@ -26,6 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.madhav.sportstrackr.R
+import com.madhav.sportstrackr.core.helpers.DateHelper
 import com.madhav.sportstrackr.core.helpers.PermissionHelper
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 import com.madhav.sportstrackr.features.events.presentation.view_models.EventViewModel
@@ -104,8 +105,10 @@ fun UpcomingEventView(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = upComingEvent.date,
-                    style = MaterialTheme.typography.body2,
+                    text =  DateHelper.formatDateTime(upComingEvent.date),
+                    style = MaterialTheme.typography.body2.copy(
+                        fontWeight = FontWeight.SemiBold,
+                    ),
                 )
 
                 IconButton(

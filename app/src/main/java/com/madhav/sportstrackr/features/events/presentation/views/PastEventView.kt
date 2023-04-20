@@ -98,7 +98,7 @@ fun PastEventView(event: PastEvent, modifier: Modifier = Modifier) {
 }
 
 
-@Preview
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PastEventPreview() {
     PastEventView(

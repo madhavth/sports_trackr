@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat.startActivity
 import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.features.events.domain.entities.UpComingEvent
 import java.text.SimpleDateFormat
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 object DateHelper {
@@ -39,6 +41,23 @@ object DateHelper {
 
         // Start the activity
         startActivity(context, intent, null)
+    }
+
+    fun formatDateTime(dateTimeString: String): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault())
+        val dateTime = dateFormat.parse(dateTimeString)
+        val dateFormatter = SimpleDateFormat("d'${getDaySuffix(dateTime.date)}' MMMM, yyyy", Locale.getDefault())
+        val timeFormatter = SimpleDateFormat("h:mm a", Locale.getDefault())
+        return "${dateFormatter.format(dateTime)} @ ${timeFormatter.format(dateTime)}".toLowerCase().capitalize()
+    }
+
+    fun getDaySuffix(day: Int): String {
+        return when (day) {
+            1, 21, 31 -> "st"
+            2, 22 -> "nd"
+            3, 23 -> "rd"
+            else -> "th"
+        }
     }
 
 }
