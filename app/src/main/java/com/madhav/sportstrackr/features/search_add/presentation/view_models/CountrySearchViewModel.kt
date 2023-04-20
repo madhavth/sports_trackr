@@ -1,49 +1,46 @@
 package com.madhav.sportstrackr.features.search_add.presentation.view_models
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.madhav.sportstrackr.core.data.models.MyResponse
+import com.madhav.sportstrackr.features.search_add.domain.entities.Country
 import com.madhav.sportstrackr.features.search_add.domain.entities.Sport
 import com.madhav.sportstrackr.features.search_add.domain.use_cases.SearchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class SportsSearchViewModel @Inject constructor(
+class CountrySearchViewModel @Inject constructor(
     private val searchUseCases: SearchUseCases
 ) : ViewModel() {
     private var _searchQuery: MutableStateFlow<String> = MutableStateFlow("")
 
     val searchQuery get() = _searchQuery.value
 
-
-    private val _sportsFetchedResults = MutableStateFlow<MyResponse<List<Sport>>>(
+    private val _countriesFetchedResult = MutableStateFlow<MyResponse<List<Country>>>(
         MyResponse.Loading
     )
 
-    private val _sportsSearchResult: MutableStateFlow<MyResponse<List<Sport>>> = MutableStateFlow(
+    private val _sportsSearchResult: MutableStateFlow<MyResponse<List<Country>>> = MutableStateFlow(
         MyResponse.Loading
     )
 
-    val sportSearchResult: StateFlow<MyResponse<List<Sport>>> = _sportsSearchResult
+    val countriesSearchResult: StateFlow<MyResponse<List<Country>>> = _sportsSearchResult
 
 
-    suspend fun getSports() {
-        _sportsFetchedResults.value = MyResponse.Loading
-
-        val result = searchUseCases.sportsUseCase.execute()
-        _sportsFetchedResults.value = MyResponse.Success(result)
+    suspend fun getCountries() {
+        _countriesFetchedResult.value = MyResponse.Loading
+        val result = searchUseCases.searchCountriesUseCase.execute()
+        _countriesFetchedResult.value = MyResponse.Success(result)
         _sportsSearchResult.value = MyResponse.Success(result)
     }
-
 
     fun performSearch(query: String) {
         _searchQuery.value = query
 
-        if (_sportsFetchedResults.value is MyResponse.Success) {
-            val sports = (_sportsFetchedResults.value as MyResponse.Success).data
+        if (_countriesFetchedResult.value is MyResponse.Success) {
+            val sports = (_countriesFetchedResult.value as MyResponse.Success).data
             val filteredSports = sports.filter { it.name.contains(query, true) }
             _sportsSearchResult.value = MyResponse.Success(filteredSports)
         }

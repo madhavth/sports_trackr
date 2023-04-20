@@ -11,7 +11,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.core.data.models.MyResponse
-import com.madhav.sportstrackr.core.ui.views.BackButton
 import com.madhav.sportstrackr.core.ui.views.LazyNetworkResponseView
 import com.madhav.sportstrackr.core.ui.views.MyTopAppBar
 import com.madhav.sportstrackr.features.search_add.domain.entities.Sport
@@ -25,45 +24,24 @@ fun SportsSearchScreen(
     onBackPressed: () -> Unit
 ) {
     val searchViewModel = hiltViewModel<SportsSearchViewModel>()
-
-    LaunchedEffect(key1 = true, block = {
-        searchViewModel.getSports()
-    })
-
-    Scaffold(
-        topBar = {
-                 MyTopAppBar(text = "Search by sports",
-                 backPressed = onBackPressed
-                     )
+    GeneralSearchScreen(listState = teamsState,
+        successView = { sport ->
+            SportItemView(sport = sport)
         },
-        modifier = Modifier) { padding ->
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(padding)) {
-            SearchView(hint = "search sports here", onQueryChanged = {
-                searchViewModel.performSearch(it)
-            }, onSearch = {
-                searchViewModel.performSearch(it)
-            })
-
-            LazyNetworkResponseView(
-                state = teamsState,
-                modifier = Modifier.fillMaxSize(),
-                successView = { sport ->
-                    SportItemView(sport = sport)
-                },
-                emptyDataInfo = "No such sport found",
-                emptyCheckCondition = { data ->
-                    data.isEmpty() && searchViewModel.searchQuery.isNotEmpty()
-                },
-                onErrorRetry = {
-                    searchViewModel.getSports()
-                },
-                loadingAnim = R.raw.searching
-            )
+        onBackPressed = onBackPressed,
+        appBarTitle = "Search by sports",
+        performSearch = {
+            searchViewModel.performSearch(it)
+        },
+        checkEmptyCondition = { data ->
+            data.isEmpty() && searchViewModel.searchQuery.isNotEmpty()
+        },
+        fetchData = {
+            searchViewModel.getSports()
         }
-    }
+    )
 }
+
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
