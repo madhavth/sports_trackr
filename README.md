@@ -21,13 +21,27 @@ icons are modern and stylish, while still being easily recognizable.
 
 ## Screens
 
+### Onboarding Screen
+
+<img src="/screenshots/onboarding_page_1.jpg" height="540" width="270">
+<img src="/screenshots/onboarding_part_2.jpg" height="540" width="270">
+<img src="/screenshots/onboarding_part_3.jpg" height="540" width="270">
+
+
+Gives information about the application
+
+### Sign In View
+<img src="/screenshots/sign_in_view.jpg" height="540" width="270">
+
+This view indicates to use the feature, sign in is required, this is for
+checking favorite events and adding teams. 
+
+
 ### Upcoming Events/ Past Events
-<img src="/screenshots/upcoming_event.jpg"
-align="left" height="540" width="270" alt="Upcoming Events">
+<div><img src="/screenshots/upcoming_event.jpg" height="540" width="270" alt="Upcoming Events">
 
-<img src="/screenshots/past_events.jpg"
-align="left" height="540" width="270" alt="Past Events">
-
+<img src="/screenshots/past_events.jpg" height="540" width="270" alt="Past Events">
+</div>
 
 The upcoming events displays a list of upcoming events for the user's favorite teams. The past
 events displays a list of past events for the user's favorite teams.
@@ -36,17 +50,46 @@ Users can click on their favorite team at the top to change the team they are vi
 
 ### Team Details Screen
 
-![Team Details Screen](/screenshots/team_details.jpg)
+<img src="/screenshots/team_details.jpg" height="540" width="270" alt="Team Details Screen">
 
 The team details screen displays information about a specific team, including their name, country,
 league, and sport. Users can also see information regarding their social media information
 
+
+### Team Player Search Screen
+<img src="/screenshots/team_search_players.jpg" height="540" width="270">
+
+players can be searched by name, and the results will be displayed in a list. Clicking on a player view will expand the view to show more   information about the player.
+
+<img src="/screenshots/team_search_players_expanded.jpg" height="540" width="270">
+
+
+
+### Team Search Screen
+<img src="/screenshots/search_teams.jpg" height="540" width="270">
+
+Search teams by their name
+
+<img src="/screenshots/search_by_country.jpg" height="540" width="270">
+
+Search teams by their country, selecting country will take to selecting league and finally the team
+
+<img src="/screenshots/search_by_league.jpg" height="540" width="270">
+
+Search teams by their league, selecting league will take to selecting team
+
+<img src="/screenshots/search_by_sports.jpg" height="540" width="270">
+
+Search teams by their sport, selecting sport will take to league and finally the team
+
+
 ### Profile Screen
 
-![Profile Screen](/screenshots/profile.jpg)
+<img src="/screenshots/profile.jpg" height="540" width="270" alt="Profile">
 
 The profile screen displays the user's profile information, including their name, email, and profile
 picture.
+
 
 ## Developer Info
 
