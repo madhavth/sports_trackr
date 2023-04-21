@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.util.query
+import com.madhav.sportstrackr.R
 import com.madhav.sportstrackr.core.constants.MyConstants
 import com.madhav.sportstrackr.core.data.models.MyResponse
 import com.madhav.sportstrackr.core.domain.entity.LeagueTeam
@@ -23,6 +24,7 @@ import com.madhav.sportstrackr.core.ui.viewmodels.MainViewModel
 import com.madhav.sportstrackr.core.ui.views.*
 import com.madhav.sportstrackr.features.favorite.presentation.view_models.FavoriteViewModel
 import com.madhav.sportstrackr.features.search_add.presentation.view_models.TeamSearchViewModel
+import com.madhav.sportstrackr.features.search_add.presentation.views.AddByButton
 import com.madhav.sportstrackr.features.search_add.presentation.views.SearchView
 
 @Composable
@@ -79,37 +81,29 @@ fun TeamSearchScreen(
                             verticalArrangement = Arrangement.SpaceEvenly
                         ) {
 
-                            Button(onClick = {
-                                mainViewModel.hideAddAlertDialog()
-                            }) {
-                                Text("by team name")
-                            }
-
-                            Button(onClick = {
-                                navigateToScreen(navigateRequest, mainViewModel,
-                                    MyConstants.SEARCH_ROUTE.SPORT_SEARCH + "/ "
-                                )
-                            }) {
-                                Text("by sport name")
-                            }
-
-                            Button(onClick = {
-                                navigateToScreen(navigateRequest, mainViewModel,
-                                    MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH + "/ "
-                                )
-
-                            }) {
-                                Text("by country name")
-                            }
-
-                            Button(onClick = {
-                                navigateToScreen(navigateRequest, mainViewModel,
-                                MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/ / "
+                            AddByButton(icon = R.drawable.ic_sport,
+                                onClick = {
+                                    navigateToScreen(navigateRequest, mainViewModel,
+                                        MyConstants.SEARCH_ROUTE.SPORT_SEARCH + "/ "
                                     )
-                            })
-                            {
-                                Text("by league name")
-                            }
+                                },
+                                text = "by sport name")
+
+                            AddByButton(icon = R.drawable.ic_country,
+                                onClick = {
+                                    navigateToScreen(navigateRequest, mainViewModel,
+                                        MyConstants.SEARCH_ROUTE.COUNTRY_SEARCH + "/ "
+                                    )
+                                }, text = "by country name")
+
+
+                            AddByButton(icon = R.drawable.ic_league,
+                                onClick = {
+                                    navigateToScreen(navigateRequest, mainViewModel,
+                                        MyConstants.SEARCH_ROUTE.LEAGUE_SEARCH + "/ / "
+                                    )
+                                },
+                                text = "by league name")
 
                         }
                     }
