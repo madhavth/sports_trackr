@@ -51,7 +51,10 @@ fun LeagueTeamDetailsLoadedScreen(
         SportsTeamSection(name = team.strTeam)
         Spacer(modifier = Modifier.height(16.dp))
 
-        LeagueInformationView(leagueName = team.strLeague, country = team.strCountry)
+        LeagueInformationView(leagueName = team.strLeague, country = team.strCountry,
+            manager = team.strManager ?:"",
+            stadium = team.strStadium ?: ""
+            )
 
         Spacer(modifier = Modifier.height(8.dp))
 
