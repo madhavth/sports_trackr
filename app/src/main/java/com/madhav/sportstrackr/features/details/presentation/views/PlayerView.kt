@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,9 +38,10 @@ fun PlayerInfoCardView(playerInfo: PlayerInfo) {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
 
-            Row(modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-                ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(
                     text = playerInfo.playerName, style = MaterialTheme.typography.h5,
                     modifier = Modifier.weight(0.8f)
@@ -48,6 +50,8 @@ fun PlayerInfoCardView(playerInfo: PlayerInfo) {
                     Icon(
                         imageVector = Icons.Filled.Info, contentDescription = "info",
                         modifier = Modifier.weight(0.2f)
+                            .offset(x= 24.dp),
+
                     )
             }
 
